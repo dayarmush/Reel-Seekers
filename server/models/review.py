@@ -1,4 +1,4 @@
-from config import db, SM, IntegrityError
+from config import db, SM, validates
 
 class Review(db.Model, SM):
     __tablename__ = 'reviews'
@@ -13,6 +13,12 @@ class Review(db.Model, SM):
     lake_id = db.Column(db.Integer, db.Foreignkey('lakes.id'), nullable=False)
 
     serialize_rules = ('-user.reviews', '-lake.reviews')
+
+    @validates('rating')
+    def valid_rating(self, key, rating):
+        if 0 <= rating <= 5:
+            return rating
+        raise ValueError('Rating can only be between 0 and 5')
 
     def __repr__(self):
         return f'(Review: {self.id})'

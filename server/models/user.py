@@ -1,4 +1,4 @@
-from config import db, Bcrypt, SM
+from config import db, Bcrypt, SM, validates
 from sqlalchemy.ext.hybrid import hybrid_property
 
 bcrypt = Bcrypt()
@@ -14,12 +14,18 @@ class User(db.Model, SM):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    favorites = db.relationship('Favorite', backref='user')
-    edits = db.relationship('Edit', backref='user')
+    favorites = db.relationship('Favorite', backref='user', cascade='all, delete-orphan')
+    edits = db.relationship('Edit', backref='user', cascade='all, delete-orphan')
     reviews = db.relationship('Review', backref='user')
-    messages = db.relationship('Message', backref='user')
+    messages = db.relationship('Message', backref='user', cascade='all, delete-orphan')
 
     serialize_rules = ('-favorites.user', '-edits.user', '-reviews.user', '-messages.user')
+
+    @validates('username')
+    def valid_username(self, key, username):
+        if len(username) > 5:
+            return username
+        raise ValueError('Username must have 5 letters')
 
     @hybrid_property
     def password_hash(self):
@@ -27,6 +33,9 @@ class User(db.Model, SM):
     
     @password_hash.setter
     def password_hash(self, password):
+        if len(password) <= 4:
+            raise ValueError('Password must have 4 letters')
+        
         hashed_password = bcrypt.generate_password_hash(password.encode('utf-8'))
         self._password_hash = hashed_password.decode('utf-8')
 

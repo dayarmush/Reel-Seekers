@@ -5,5 +5,7 @@ from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from sqlalchemy_serializer import SerializerMixin as SM
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import validates
+import re
 
 db = SQLAlchemy()

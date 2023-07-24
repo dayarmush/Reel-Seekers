@@ -1,10 +1,12 @@
-from config import db, SM, IntegrityError
+from config import db, SM
 
 class Edit(db.Model, SM):
     __tablename__ = 'edits'
 
     id = db.Column(db.Integer, primary_key=True)
     what = db.Column(db.String)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     user_id = db.Column(db.Integer, db.Foreignkey('users.id'))
     fish_id  = db.Column(db.Integer, db.Foreignkey('fish.id'))

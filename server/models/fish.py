@@ -1,4 +1,4 @@
-from config import db, SM, IntegrityError
+from config import db, SM, validates, re
 
 class Fish(db.Model, SM):
     __tablename__ = 'fish'
@@ -12,10 +12,22 @@ class Fish(db.Model, SM):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    lakes = db.relationship('FishLake', backref='fish')
-    edits = db.relationship('Edit', backref='fish')
+    lakes = db.relationship('lake_fish', backref='fish', cascade='all, delete-orphan')
+    edits = db.relationship('Edit', backref='fish', cascade='all, delete-orphan')
 
     serialize_rules = ('-lakes.fish', 'edits.lake')
+
+    @validates('name')
+    def valid_name(self, key, name):
+        if re.search('^[a-zA-Z]+$', name) is not None:
+            return name
+        raise ValueError('Invalid name. Please use only letters from A to Z (both lowercase and uppercase).')
+    
+    @validates('min_length', 'max_length', 'daily_limit')
+    def valid_nums(self, key, value):
+        if isinstance(value, int):
+            return value
+        raise ValueError('Limits must be a number')
 
     def __repr__(self):
         return f'(Fish: {self.name})'
