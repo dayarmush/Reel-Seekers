@@ -11,12 +11,16 @@ class Lake(db.Model, SM):
     state = db.Column(db.String(14))
     zip_code = db.Column(db.Integer(6), nullable=False)
     status = db.Column(db.String(9), nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     favorites = db.relationship('Favorite', backref='lake')
     reviews = db.relationship('Review', backref='lake')
     edits = db.relationship('Edited', backref='lake')
     fish = db.relationship('FishLake', backref='lake')
     messages = db.relationship('Message', backref='lake')
+
+    serialize_rules = ('-favorites.lake', '-reviews.lake', '-edits.lake', '-fish.lake', '-messages.lake')
 
     def __repr__(self):
         return f'(Lake: {self.name})'

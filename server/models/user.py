@@ -11,6 +11,8 @@ class User(db.Model, SM):
     _password_hash = db.Column(db.String, nullable=False)
     Admin = db.Column(db.Boolean, default=False)
     points = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     favorites = db.relationship('Favorite', backref='user')
     edits = db.relationship('Edit', backref='user')
