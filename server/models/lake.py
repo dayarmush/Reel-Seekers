@@ -7,11 +7,10 @@ class Lake(db.Model, SM):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
     address1 = db.Column(db.String, nullable=False, unique=True)
-    address2 = db.Column(db.String)
-    city = db.Column(db.String(20))
-    state = db.Column(db.String(14))
+    city = db.Column(db.String)
+    state = db.Column(db.String)
     zip_code = db.Column(db.String, nullable=False)
-    status = db.Column(db.String(9), nullable=False, default='pending')
+    status = db.Column(db.String, nullable=False, default='pending')
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
@@ -29,11 +28,11 @@ class Lake(db.Model, SM):
             return status
         raise ValueError('Status must be approved or pending')
 
-    @validates('name')
-    def validate_name(self, key, name):
-        if re.search('^[a-zA-Z\s]+$', name) is not None:
-            return name
-        raise ValueError('Invalid name. Please use only letters from A to Z (both lowercase and uppercase).')
+    # @validates('name')
+    # def validate_name(self, key, name):
+    #     if re.search('^[a-zA-Z][a-zA-Z\s\-]+[a-zA-Z]$', name) is not None:
+    #         return name
+    #     raise ValueError('Invalid name. Please use only letters from A to Z (both lowercase and uppercase).')
     
     @validates('zip_code')
     def validate_zip(self, key, zip_code):

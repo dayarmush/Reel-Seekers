@@ -40,6 +40,8 @@ def login():
     if user:
         if user.authenticate(password):
             session['user_id'] = user.id
+            if user.Admin:
+                session['is_admin'] = user.Admin
             # Try to fix rules=('-_password_hash'),
             return user.to_dict(), 200
         
@@ -269,8 +271,30 @@ def add_lake_fish():
     except (ValueError, IntegrityError) as e:
         return {'error': [str[e]]}, 400
     
-    
+@app.get('/check_session')   
+def check_session():
 
+    if session.get('user_id') is not None:
+        user = User.query.filter_by(id=session.get('user_id')).first()
+        return user.to_dict(), 200
+    
+    return {'error': 'Not logged in'}, 400
+
+excluded_endpoints = ['logout', 'lakes_route', 'lakes_by_id',
+                       'add_fish', 'fish_by_id', 'add_review', 
+                       'delete_review', 'add_message', 'delete_message', 'add_lake_fish']
+
+# @app.before_request
+# def check_login():
+#     if request.endpoint in excluded_endpoints:
+#         # Allow the request to proceed for excluded endpoints
+#         return
+
+#     user_id = session.get('user_id')
+#     user = User.query.filter_by(id=user_id).first()
+
+#     if not user:
+#         return {'status': 'not authorized'}, 403
 
 
 

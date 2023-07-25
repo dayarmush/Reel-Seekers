@@ -8,7 +8,7 @@ class User(db.Model, SM):
     __table_args__ = (db.CheckConstraint('LENGTH(username) >= 5'),)
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False, unique=True)
+    username = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String, nullable=False)
     Admin = db.Column(db.Boolean, default=False)
     points = db.Column(db.Integer, default=0)

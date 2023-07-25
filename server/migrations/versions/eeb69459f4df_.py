@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 5a35c0c5e3a9
+Revision ID: eeb69459f4df
 Revises: 
-Create Date: 2023-07-25 11:33:11.609011
+Create Date: 2023-07-25 15:54:45.321986
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5a35c0c5e3a9'
+revision = 'eeb69459f4df'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,28 +24,30 @@ def upgrade():
     sa.Column('min_length', sa.Integer(), nullable=True),
     sa.Column('max_length', sa.Integer(), nullable=True),
     sa.Column('daily_limit', sa.Integer(), nullable=True),
-    sa.Column('status', sa.String(length=9), nullable=False),
+    sa.Column('status', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('lakes',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('address1', sa.String(), nullable=False),
-    sa.Column('address2', sa.String(), nullable=True),
-    sa.Column('city', sa.String(length=20), nullable=True),
-    sa.Column('state', sa.String(length=14), nullable=True),
-    sa.Column('zip_code', sa.Integer(), nullable=False),
-    sa.Column('status', sa.String(length=9), nullable=False),
+    sa.Column('city', sa.String(), nullable=True),
+    sa.Column('state', sa.String(), nullable=True),
+    sa.Column('zip_code', sa.String(), nullable=False),
+    sa.Column('status', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.CheckConstraint('LENGTH(address1) >= 3'),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('address1'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('username', sa.String(length=20), nullable=False),
+    sa.Column('username', sa.String(), nullable=False),
     sa.Column('_password_hash', sa.String(), nullable=False),
     sa.Column('Admin', sa.Boolean(), nullable=True),
     sa.Column('points', sa.Integer(), nullable=True),
