@@ -4,7 +4,8 @@ from sqlalchemy.ext.hybrid import hybrid_property
 bcrypt = Bcrypt()
 
 class User(db.Model, SM):
-    __tablename__ = 'Users'
+    __tablename__ = 'users'
+    __table_args__ = (db.CheckConstraint('LENGTH(username) >= 5'),)
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
@@ -23,7 +24,7 @@ class User(db.Model, SM):
 
     @validates('username')
     def valid_username(self, key, username):
-        if len(username) > 5:
+        if len(username) >= 5:
             return username
         raise ValueError('Username must have 5 letters')
 

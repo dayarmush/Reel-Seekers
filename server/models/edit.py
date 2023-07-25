@@ -8,9 +8,9 @@ class Edit(db.Model, SM):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    user_id = db.Column(db.Integer, db.Foreignkey('users.id'))
-    fish_id  = db.Column(db.Integer, db.Foreignkey('fish.id'))
-    lake_id = db.Column(db.Integer, db.Foreignkey('lakes.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    fish_id  = db.Column(db.Integer, db.ForeignKey('fish.id'))
+    lake_id = db.Column(db.Integer, db.ForeignKey('lakes.id'))
 
     serialize_rules = ('-user.edits', '-fish.edits', '-lakes.edits')
 

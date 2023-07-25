@@ -12,10 +12,16 @@ class Fish(db.Model, SM):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    lakes = db.relationship('lake_fish', backref='fish', cascade='all, delete-orphan')
+    lakes = db.relationship('FishLake', backref='fish', cascade='all, delete-orphan')
     edits = db.relationship('Edit', backref='fish', cascade='all, delete-orphan')
 
     serialize_rules = ('-lakes.fish', 'edits.lake')
+
+    @validates('status')
+    def valid_status(self, key, status):
+        if status == 'pending' or status == 'approved':
+            return status
+        raise ValueError('Status must be approved or pending')
 
     @validates('name')
     def valid_name(self, key, name):
