@@ -67,7 +67,7 @@ def signup():
         return user.to_dict(), 201
     
     except (ValueError, IntegrityError) as e:
-        return {'errors': [str(e)]}, 400
+        return {'error': [str(e)]}, 400
 
 @app.delete('/logout')
 def logout():
@@ -106,6 +106,171 @@ def lakes_route():
         
         except (ValueError, IntegrityError) as e:
             return {'error': [str(e)]}, 400
+
+@app.route('/lakes/<int:id>', methods=['PATCH', 'DELETE'])
+def lakes_by_id(id):
+    lake = Lake.query.filter_by(id=id).first()
+
+    if not lake:
+        return {'error': 'No lake found. Please try again'}, 404
+    
+    if request.method == 'DELETE':
+
+        db.session.delete(lake)
+        db.session.commit()
+
+        return {}, 204
+    
+    if request.method == 'PATCH':
+
+        data = request.get_json()
+
+        try:
+            for key in data:
+                setattr(lake, key, data[key])
+
+            db.session.add(lake)
+            db.session.commit()
+
+            return lake.to_dict(), 200
+        
+        except (ValueError, IntegrityError) as e:
+            return {'error': [str(e)]}, 400
+        
+
+# Maybe add get route for fish
+@app.post('/fish')
+def add_fish():
+    data = request.get_json()
+    
+    try:
+        fish = Fish(
+            name = data.get('name'),
+            min_length = data.get('min_length'),
+            max_length = data.get('max_length'),
+            daily_limit = data.get('daily_limit')
+        )
+
+        db.session.add(fish)
+        db.session.commit()
+
+        return fish.to_dict(), 201
+    
+    except (ValueError, IntegrityError) as e:
+        return {'error': [str(e)]}, 400
+
+@app.route('/fish/<int:id>', methods=['PATCH', 'DELETE'])
+def fish_by_id(id):
+    fish = Fish.query.filter_by(id=id).first()
+
+    if not fish:
+        return {'error': 'No fish found. Please try again'}, 404
+
+    if request.method == 'DELETE':
+        
+        db.session.delete(fish)
+        db.session.commit()
+
+        return {}, 204
+    
+    if request.method == 'PATCH':
+        data = request.get_json()
+
+        try:
+            for key in data:
+                setattr(fish, key, data[key])
+
+            db.session.add(fish)
+            db.session.commit()
+
+            return fish.to_dict(), 200
+        
+        except (ValueError, IntegrityError) as e:
+            return {'error': [str(e)]}, 400
+            
+@app.post('/reviews')
+def add_review():
+    data = request.get_json()
+
+    try:
+        review = Review(
+            rating=data.get('rating'),
+            text=data.get('text'),
+            user_id=data.get('user_id'),
+            lake_id=data.get('lake_id')
+        )
+
+        db.session.add(review)
+        db.session.commit()
+
+        return review.to_dict(), 201
+    
+    except (ValueError, IntegrityError) as e:
+        return {'error': [str(e)]}, 400
+    
+@app.delete('/reviews/<int:id>')
+def delete_review(id):
+    review = Review.query.filter_by(id=id).first()
+
+    if not review:
+        return {'error': 'No review found. Please try again'}, 404
+    
+    db.session.delete(review)
+    db.session.commit()
+
+    return {}, 204
+
+@app.post('/messages')
+def add_message():
+    data = request.get_json()
+
+    try:
+        message = Message(
+            text=data.get('text'),
+            user_id=data.get('user_id'),
+            lake_id=data.get('lake_id')
+        )
+
+        db.session.add(message)
+        db.session.commit()
+
+        return message.to_dict(), 201
+    
+    except (ValueError, IntegrityError) as e:
+        return {'error': [str(e)]}, 400
+
+@app.delete('/messages/<int:id>')
+def delete_message(id):
+    message = Message.query.filter_by(id=id).first()
+
+    if not message:
+        return {'error': "No message found. Please try again"}
+    
+    db.session.delete(message)
+    db.session.commit()
+
+    return {}, 204
+
+@app.post('/lake_fish')
+def add_lake_fish():
+    data = request.get_json()
+
+    try:
+        lf = FishLake(
+            lake_id=data.get('lake_id'),
+            fish_id=data.get('fish_id')
+        )
+
+        db.session.add(lf)
+        db.session.commit()
+
+        return lf.to_dict(), 201
+    
+    except (ValueError, IntegrityError) as e:
+        return {'error': [str[e]]}, 400
+    
+    
+
 
 
 

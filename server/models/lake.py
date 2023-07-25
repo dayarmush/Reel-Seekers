@@ -5,8 +5,8 @@ class Lake(db.Model, SM):
     __table_args__ = (db.CheckConstraint('LENGTH(address1) >= 3'),)
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    address1 = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False, unique=True)
+    address1 = db.Column(db.String, nullable=False, unique=True)
     address2 = db.Column(db.String)
     city = db.Column(db.String(20))
     state = db.Column(db.String(14))
