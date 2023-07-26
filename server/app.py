@@ -280,9 +280,14 @@ def check_session():
     
     return {'error': 'Not logged in'}, 400
 
-excluded_endpoints = ['logout', 'lakes_route', 'lakes_by_id',
-                       'add_fish', 'fish_by_id', 'add_review', 
-                       'delete_review', 'add_message', 'delete_message', 'add_lake_fish']
+@app.get('/api')
+def get_api():
+    key = os.environ.get('API_KEY')
+    return {'key': key}, 200
+
+# excluded_endpoints = ['logout', 'lakes_route', 'lakes_by_id',
+#                        'add_fish', 'fish_by_id', 'add_review', 
+#                        'delete_review', 'add_message', 'delete_message', 'add_lake_fish']
 
 # @app.before_request
 # def check_login():
