@@ -12,7 +12,7 @@ class Edit(db.Model, SM):
     fish_id  = db.Column(db.Integer, db.ForeignKey('fish.id'))
     lake_id = db.Column(db.Integer, db.ForeignKey('lakes.id'))
 
-    serialize_rules = ('-user.edits', '-fish.edits', '-lakes.edits')
+    serialize_rules = ('-user.edits', '-fish.edits', '-lake.edits')
 
     def __repr__(self):
         return f'(Edit: {self.id})'

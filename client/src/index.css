@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.map-container {
-  height: 100vh;
+.map {
+  height: 50vh;
   width: 100%
 }
