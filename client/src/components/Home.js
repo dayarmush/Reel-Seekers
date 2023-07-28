@@ -1,13 +1,14 @@
 import { useLoadScript } from "@react-google-maps/api"
 import SimpleMap from "./Map"
 import '../style/Home.css'
-import { useEffect, useState, useMemo, useRef } from "react"
+import { useEffect, useState } from "react"
+import LakeCard from './LakeCard'
 
 function Home() {
 
   const [lakes, setLakes] = useState([])
   const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [ libraries ] = useState(['places']);
 
@@ -41,6 +42,8 @@ function Home() {
     libraries
   });
 
+  let searchFilter = lakes.filter(lake => lake.name.toLowerCase().includes(search.toLowerCase()))
+
   if (!isLoaded) return <h1>Loading Map...</h1>
   if (isLoading) return <h1>Loading...</h1>
 
@@ -58,6 +61,12 @@ function Home() {
           value={search}
         />
       </label>
+      <div>
+        {!isLoading && searchFilter.map(lake => {
+          return <LakeCard key={lake.id} lake={lake}/>
+        })}
+      </div>
+      {error && <h2>{error}</h2>}
     </div>
   )
   
