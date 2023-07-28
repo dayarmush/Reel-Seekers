@@ -50,7 +50,7 @@ function Home() {
   return (
     <div>
       <div className="map-container">
-        <SimpleMap/>
+        <SimpleMap lakes={lakes}/>
       </div>
       <label>Search Lakes:
         <input 

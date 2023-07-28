@@ -6,7 +6,9 @@ class Lake(db.Model, SM):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
-    address1 = db.Column(db.String, nullable=False, unique=True)
+    address1 = db.Column(db.String, unique=True)
+    lat = db.Column(db.Integer)
+    lng = db.Column(db.Integer)
     city = db.Column(db.String)
     state = db.Column(db.String)
     zip_code = db.Column(db.String, nullable=False)

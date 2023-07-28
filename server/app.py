@@ -86,7 +86,7 @@ def lakes_route():
     if request.method == 'GET':
         lakes = Lake.query.all()
 
-        return [l.to_dict(rules=('-reviews', '-messages', '-favorites', '-edits')) for l in lakes], 200
+        return [l.to_dict(rules=('-reviews', '-messages', '-favorites', '-edits', '-fish')) for l in lakes], 200
     
     if request.method == 'POST':
         data = request.get_json()
