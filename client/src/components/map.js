@@ -5,18 +5,18 @@ import PlacesAutocomplete from './PlacesAutocomplete'
 
 function SimpleMap({ lakes }) {
   
-  let center = useMemo(() => ({lat: 37, lng: -96}), [])
+  let center = useMemo(() => ({lat: 39, lng: -98}), [])
 
   return (
     <div>
       <PlacesAutocomplete />
       <GoogleMap 
-        zoom={5} 
+        zoom={4.5} 
         center={center} 
         mapContainerClassName="map">
-          {lakes && lakes.map(lake => {
-            return <MarkerF position={{lat: lake.lat, lng: lake.lng}} key={lake.id}/>
-          })}
+        {lakes && lakes.map(lake => {
+          return <MarkerF position={{lat: lake.lat, lng: lake.lng}} key={lake.id}/>
+        })}
       </GoogleMap>
     </div>
   )

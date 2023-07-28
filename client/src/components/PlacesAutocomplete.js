@@ -50,7 +50,7 @@ const PlacesAutocomplete = ({ setSelected }) => {
       <List  onSelect={selectHandler}>
         {status === 'OK' && data.map(({place_id, description}) => {
           return <ListItem key={place_id} onClick={() => selectHandler(description)}>{description}</ListItem>
-        }) }
+        })}
       </List>
     </Box>
       
