@@ -20,7 +20,7 @@ class Lake(db.Model, SM):
     fish = db.relationship('FishLake', backref='lake', cascade='all, delete-orphan')
     messages = db.relationship('Message', backref='lake', cascade='all, delete-orphan')
 
-    serialize_rules = ('-favorites.lake', '-reviews.lake', '-edits.lake', '-fish.lake', '-messages.lake')
+    serialize_rules = ('-favorites', '-reviews', '-edits.lake', '-fish.lake', '-messages')
 
     @validates('status')
     def valid_status(self, key, status):
