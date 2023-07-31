@@ -10,7 +10,7 @@ function Home() {
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
-  const [ libraries ] = useState(['places']);
+  const [ libraries ] = useState(['places'])
 
   useEffect(() => {
     fetch('/lakes')
@@ -73,3 +73,56 @@ function Home() {
 }
 
 export default Home;
+
+
+
+// import requests
+// import os
+// from dotenv import load_dotenv
+
+// load_dotenv()
+
+// def get_location(lake_name, api_key):
+//     base_url = "https://maps.googleapis.com/maps/api/geocode/json"
+
+//     params = {
+//         "address": lake_name,
+//         "key": api_key
+//     }
+
+//     response = requests.get(base_url, params=params)
+//     res_json = response.json()
+    
+//     if res_json['status'] == 'OK':
+//         return res_json['results'][0]['geometry']['location']
+
+//     return None
+
+// def get_state(location, api_key):
+//     base_url = "https://maps.googleapis.com/maps/api/geocode/json"
+
+//     params = {
+//         "latlng": f"{location['lat']},{location['lng']}",
+//         "key": api_key
+//     }
+
+//     response = requests.get(base_url, params=params)
+//     res_json = response.json()
+
+//     if res_json['status'] == 'OK':
+//         for result in res_json['results']:
+//             for component in result['address_components']:
+//                 if 'administrative_area_level_1' in component['types']:
+//                     return component['long_name']
+
+//     return "State not found."
+
+// api_key = os.getenv("MAP_API_KEY")
+
+// lake_name = "Lake huron"
+// location = get_location(lake_name, api_key)
+// if location:
+//     state = get_state(location, api_key)
+//     print(f"{lake_name} is in {state}")
+// else:
+//     print(f"Location not found for {lake_name}")

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function Login() {
+function Login({ setUser }) {
 
   const blankForm = {
     'username': '',
@@ -9,7 +9,6 @@ function Login() {
 
   const [form, setForm] = useState(blankForm)
   const [error, setError] = useState('')
-  const [user, setUser] = useState([])
 
   function handleChange(e) {
     let key = e.target.name
