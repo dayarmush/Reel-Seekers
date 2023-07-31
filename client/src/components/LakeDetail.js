@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { GoogleMap, MarkerF } from '@react-google-maps/api'
+import Messages from './Messages'
 
-function LakeDetail() {
+function LakeDetail({ user, isLoaded }) {
 
   const { id } = useParams()
   
   const [error, setError] = useState('')
   const [lake, setLake] = useState([])
-  console.log(lake)
+  console.log(lake.lat)
   useEffect(() => {
     fetch(`/lakes/${id}`)
     .then(r => {
@@ -22,7 +24,6 @@ function LakeDetail() {
     .catch(err => setError('Network Error. Please try again later.'))
   }, [])
 
-
   return (
     <div>
       {error && <h1>{error}</h1>}
@@ -31,6 +32,19 @@ function LakeDetail() {
       <h3>{lake.city}</h3>
       <h4>{lake.state}</h4>
       {lake.address && <h3>{lake.address}</h3>}
+      {isLoaded && 
+        lake.lat &&
+        <GoogleMap 
+          zoom={15} 
+          center={{lat: lake.lat, lng: lake.lng}} 
+          mapContainerClassName="map">
+          <MarkerF position={{lat: lake.lat, lng: lake.lng}} />
+        </GoogleMap>
+      }
+      
+      {lake.messages && 
+        <Messages setLake={setLake} messages={lake.messages} user={user}/>
+      }
     </div>
   )
 }

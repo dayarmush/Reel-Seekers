@@ -1,9 +1,6 @@
 import Login from './Login'
-import { useState } from 'react'
 
-function LoginPage() {
-
-  const [user, setUser] = useState([])
+function LoginPage({ user, setUser }) {
 
   return (
     <div>

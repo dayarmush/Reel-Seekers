@@ -1,16 +1,19 @@
 import { useState } from 'react'
-import { json } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-function Messages({ messages, setLake }) {
+function Messages({ messages, setLake, user }) {
 
   const [text, setText] = useState('')
   const [error, setError] = useState('')
+
+  const { id } = useParams()
 
   function textHandler(e) {
     setText(e.target.value)
   }
 
   function sendMessage() {
+    if (!user.username) return setError('Please sign in.')
     fetch('/messages', {
       method: 'POST',
       headers: {
@@ -18,7 +21,8 @@ function Messages({ messages, setLake }) {
       },
       body: JSON.stringify({
         text: text,
-        user_id: user.id
+        user_id: user.id,
+        lake_id: id
       })
     })
     .then(r => {
@@ -39,7 +43,6 @@ function Messages({ messages, setLake }) {
 
   return (
     <div>
-      {error && <h2>{error}</h2>}
       {messages.map(message => {
         return <div key={message.id}>
           <h6>{message.created_at}</h6>
@@ -55,6 +58,7 @@ function Messages({ messages, setLake }) {
         onChange={textHandler}
       />
       <button onClick={sendMessage}>Send</button>
+      {error && <h2>{error}</h2>}
     </div>
   )
 }

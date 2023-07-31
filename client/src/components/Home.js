@@ -4,13 +4,12 @@ import '../style/Home.css'
 import { useEffect, useState } from "react"
 import LakeCard from './LakeCard'
 
-function Home() {
+function Home({ isLoaded }) {
 
   const [lakes, setLakes] = useState([])
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
-  const [ libraries ] = useState(['places'])
 
   useEffect(() => {
     fetch('/lakes')
@@ -34,13 +33,6 @@ function Home() {
       setIsLoading(false)
     })
   }, [])
-
-  let key = process.env.REACT_APP_API_KEY
-
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: key,
-    libraries
-  });
 
   let searchFilter = lakes.filter(lake => lake.name.toLowerCase().includes(search.toLowerCase()))
 
