@@ -12,10 +12,10 @@ class Fish(db.Model, SM):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    lakes = db.relationship('FishLake', backref='fish', cascade='all, delete-orphan')
-    edits = db.relationship('Edit', backref='fish', cascade='all, delete-orphan')
+    lake_fish = db.relationship('FishLake', backref='fish', cascade='all, delete-orphan')
+    # edits = db.relationship('Edit', backref='fish', cascade='all, delete-orphan')
 
-    serialize_rules = ('-lakes.fish', '-edits.fish')
+    serialize_rules = ('-lake_fish.fish',)
 
     @validates('status')
     def valid_status(self, key, status):

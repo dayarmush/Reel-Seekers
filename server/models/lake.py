@@ -18,11 +18,11 @@ class Lake(db.Model, SM):
 
     favorites = db.relationship('Favorite', backref='lake', cascade='all, delete-orphan')
     reviews = db.relationship('Review', backref='lake')
-    edits = db.relationship('Edit', backref='lake', cascade='all, delete-orphan')
-    fish = db.relationship('FishLake', backref='lake', cascade='all, delete-orphan')
+    # edits = db.relationship('Edit', backref='lake', cascade='all, delete-orphan')
+    lake_fish = db.relationship('FishLake', backref='lake', cascade='all, delete-orphan')
     messages = db.relationship('Message', backref='lake', cascade='all, delete-orphan')
 
-    serialize_rules = ('-favorites', '-reviews', '-edits.lake', '-fish.lake', '-messages')
+    serialize_rules = ('-favorites.lake', '-reviews.lake', '-lake_fish.lake', '-messages.lake')
 
     @validates('status')
     def valid_status(self, key, status):

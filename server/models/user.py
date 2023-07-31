@@ -16,11 +16,11 @@ class User(db.Model, SM):
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     favorites = db.relationship('Favorite', backref='user', cascade='all, delete-orphan')
-    edits = db.relationship('Edit', backref='user', cascade='all, delete-orphan')
+    # edits = db.relationship('Edit', backref='user', cascade='all, delete-orphan')
     reviews = db.relationship('Review', backref='user')
     messages = db.relationship('Message', backref='user', cascade='all, delete-orphan')
 
-    serialize_rules = ('-favorites.user', '-edits.user', '-reviews.user', '-messages.user')
+    serialize_rules = ('-favorites.user', '-favorites.lake', '-reviews.user', '-reviews.lake', '-messages.user', '-messages.lake')
 
     @validates('username')
     def valid_username(self, key, username):

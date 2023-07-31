@@ -1,8 +1,8 @@
 """create db tables
 
-Revision ID: f05c0ff8dcbb
+Revision ID: dc14364bd9b4
 Revises: 
-Create Date: 2023-07-28 12:40:09.420618
+Create Date: 2023-07-31 10:19:01.454278
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f05c0ff8dcbb'
+revision = 'dc14364bd9b4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -58,19 +58,6 @@ def upgrade():
     sa.CheckConstraint('LENGTH(username) >= 5'),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('username')
-    )
-    op.create_table('edits',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('what', sa.String(), nullable=True),
-    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('fish_id', sa.Integer(), nullable=True),
-    sa.Column('lake_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['fish_id'], ['fish.id'], ),
-    sa.ForeignKeyConstraint(['lake_id'], ['lakes.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('favorites',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -122,7 +109,6 @@ def downgrade():
     op.drop_table('messages')
     op.drop_table('fish_lakes')
     op.drop_table('favorites')
-    op.drop_table('edits')
     op.drop_table('users')
     op.drop_table('lakes')
     op.drop_table('fish')

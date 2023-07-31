@@ -1,7 +1,7 @@
 from config import session, db
 from app import app
 from models.favorite import Favorite
-from models.edit import Edit
+# from models.edit import Edit
 from models.fish import Fish
 from models.lake import Lake
 from models.message import Message
@@ -196,21 +196,21 @@ def create_favorites():
         fave_list.append(fave)
     return fave_list
 
-def create_edit():
-    edits_list = []
+# def create_edit():
+#     edits_list = []
 
-    for i in range(30):
-        edit = Edit(
-            what=fake.sentence(),
-            user_id=randint(1, 20)
-        )
-        if i % 2 == 0:
-            edit.fish_id = randint(1, 200)
-        else:
-            edit.lake_id = randint(1, 100)
+#     for i in range(30):
+#         edit = Edit(
+#             what=fake.sentence(),
+#             user_id=randint(1, 20)
+#         )
+#         if i % 2 == 0:
+#             edit.fish_id = randint(1, 200)
+#         else:
+#             edit.lake_id = randint(1, 100)
         
-        edits_list.append(edit)
-    return edits_list
+#         edits_list.append(edit)
+#     return edits_list
 
 def create_fish_lakes():
     fish_lakes = []
@@ -233,7 +233,7 @@ if __name__ == '__main__':
         Lake.query.delete()
         Favorite.query.delete()
         Message.query.delete()
-        Edit.query.delete()
+        # Edit.query.delete()
         FishLake.query.delete()
 
 
@@ -244,7 +244,7 @@ if __name__ == '__main__':
         lakes = create_lakes()
         fish = create_fish()
         messages = create_messages()
-        edits = create_edit()
+        # edits = create_edit()
         fish_lake = create_fish_lakes()
 
         print('adding to db...')
@@ -254,6 +254,6 @@ if __name__ == '__main__':
         db.session.add_all(lakes)
         db.session.add_all(reviews)
         db.session.add_all(messages)
-        db.session.add_all(edits)
+        # db.session.add_all(edits)
         db.session.add_all(fish_lake)
         db.session.commit()

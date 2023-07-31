@@ -1,6 +1,6 @@
 from config import Flask, session, db, request, render_template, Migrate, IntegrityError
 from models.favorite import Favorite
-from models.edit import Edit
+# from models.edit import Edit
 from models.fish import Fish
 from models.lake import Lake
 from models.message import Message
@@ -86,7 +86,7 @@ def lakes_route():
     if request.method == 'GET':
         lakes = Lake.query.all()
 
-        return [l.to_dict(rules=('-reviews', '-messages', '-favorites', '-edits', '-fish')) for l in lakes], 200
+        return [l.to_dict() for l in lakes], 200
     
     if request.method == 'POST':
         data = request.get_json()
@@ -109,12 +109,15 @@ def lakes_route():
         except (ValueError, IntegrityError) as e:
             return {'error': [str(e)]}, 400
 
-@app.route('/lakes/<int:id>', methods=['PATCH', 'DELETE'])
+@app.route('/lakes/<int:id>', methods=['PATCH', 'DELETE', 'GET'])
 def lakes_by_id(id):
     lake = Lake.query.filter_by(id=id).first()
 
     if not lake:
         return {'error': 'No lake found. Please try again'}, 404
+    
+    if request.method == 'GET':
+        return lake.to_dict(), 200
     
     if request.method == 'DELETE':
 

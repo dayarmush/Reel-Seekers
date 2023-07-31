@@ -7,7 +7,7 @@ class FishLake(db.Model, SM):
     lake_id = db.Column(db.Integer, db.ForeignKey('lakes.id'), nullable=False)
     fish_id = db.Column(db.Integer, db.ForeignKey('fish.id'), nullable=False)
 
-    serialize_rules = ('-fish.lakes', '-lake.fish')
+    serialize_rules = ('-fish.lake_fish', '-lake.lake_fish')
 
     def __repr__(self):
         return f'(fish_lake {self.id})'
