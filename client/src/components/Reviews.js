@@ -9,7 +9,6 @@ function Reviews({ reviews, setLake, lakeId, user }) {
   })
   
   function handleChange(e) {
-    console.log(typeof(rating))
     const key = e.target.name
     const value = e.target.value
 

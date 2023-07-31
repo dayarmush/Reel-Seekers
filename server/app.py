@@ -249,7 +249,7 @@ def delete_message(id):
     message = Message.query.filter_by(id=id).first()
 
     if not message:
-        return {'error': "No message found. Please try again"}
+        return {'error': "No message found. Please try again"}, 404
     
     db.session.delete(message)
     db.session.commit()
@@ -283,10 +283,35 @@ def check_session():
     
     return {'error': 'Not logged in'}, 400
 
-@app.get('/api')
-def get_api():
-    key = os.environ.get('API_KEY')
-    return {'key': key}, 200
+@app.post('/favorites')
+def add_favorite():
+    data = request.get_json()
+
+    try:
+        newFave = Favorite(
+            user_id=data.get('user_id'),
+            lake_id=data.get('lake_id')
+        )
+
+        db.session.add(newFave)
+        db.session.commit()
+
+        return newFave.to_dict(), 200
+    
+    except (ValueError, IntegrityError) as e:
+        return {'error': [str(e)]}, 400
+    
+@app.delete('/favorites/<int:id>')
+def remove_favorite(id):
+    fave = Favorite.query.filter_by(id=id).first()
+
+    if not fave:
+        return {'error': 'No fave found. Please try again.'}, 404
+    
+    db.session.delete(fave)
+    db.session.commit()
+
+    return {}, 204
 
 # excluded_endpoints = ['logout', 'lakes_route', 'lakes_by_id',
 #                        'add_fish', 'fish_by_id', 'add_review', 

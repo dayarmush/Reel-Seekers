@@ -11,7 +11,7 @@ function App() {
 
   const [user, setUser] = useState([])
   const [ libraries ] = useState(['places'])
-
+  console.log(user)
   useEffect(() => {
     fetch('/check_session')
     .then(r => {
@@ -38,7 +38,7 @@ function App() {
 
           <Route path='/login' element={<LoginPage user={user} setUser={setUser} />}/>
 
-          <Route path='/lake/:id' element={<LakeDetail user={user} isLoaded={isLoaded}/>}/>
+          <Route path='/lake/:id' element={<LakeDetail user={user} isLoaded={isLoaded} setUser={setUser}/>}/>
         </Routes>
       </div>
     </>
