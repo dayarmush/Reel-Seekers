@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { GoogleMap, MarkerF } from '@react-google-maps/api'
 import Messages from './Messages'
+import Reviews from "./Reviews"
 
 function LakeDetail({ user, isLoaded }) {
 
@@ -43,7 +44,21 @@ function LakeDetail({ user, isLoaded }) {
       }
       
       {lake.messages && 
-        <Messages setLake={setLake} messages={lake.messages} user={user}/>
+        <Messages 
+          setLake={setLake} 
+          messages={lake.messages} 
+          user={user} 
+          lakeId={lake.id}
+        />
+      }
+
+      {lake.reviews && 
+        <Reviews
+          user={user}
+          lakeId={lake.id}
+          setLake={setLake}
+          reviews={lake.reviews}
+        />
       }
     </div>
   )

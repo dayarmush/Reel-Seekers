@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-function Messages({ messages, setLake, user }) {
+function Messages({ messages, setLake, user, lakeId }) {
 
   const [text, setText] = useState('')
   const [error, setError] = useState('')
-
-  const { id } = useParams()
 
   function textHandler(e) {
     setText(e.target.value)
@@ -22,7 +20,7 @@ function Messages({ messages, setLake, user }) {
       body: JSON.stringify({
         text: text,
         user_id: user.id,
-        lake_id: id
+        lake_id: lakeId
       })
     })
     .then(r => {
@@ -39,6 +37,7 @@ function Messages({ messages, setLake, user }) {
         .then(err => setError(err.error))
       }
     })
+    .catch(err => setError('Network error. Please try again later.'))
   }
 
   return (
