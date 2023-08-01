@@ -8,7 +8,7 @@ function AddFavorite({ user, lakeId, setUser }) {
   let fave
 
   function handleAdd() {
-    if (!user) return setError('Please sign in.')
+    if (!user.id) return setError('Please sign in.')
     fetch('/favorites', {
       method: 'POST',
       headers: {
@@ -36,12 +36,12 @@ function AddFavorite({ user, lakeId, setUser }) {
     .catch(err => setError('Network Error. Please try again later'))
   }
 
-  if (user.username) {
+  if (user.id) {
     fave = user.favorites.filter(fave => fave.lake_id === lakeId)
   }
 
   function handleRemove() {
-    if (!user) return setError('Please sign in.')
+    if (!user.id) return setError('Please sign in.')
     fetch(`/favorites/${fave[0].id}`, {
       method: 'DELETE',
     })
@@ -60,7 +60,7 @@ function AddFavorite({ user, lakeId, setUser }) {
     .catch(err => setError('Network Error. Please try again later.'))
   }
 
-  if (user.username) {
+  if (user.id) {
     added = user.favorites.filter(fave => {
       return fave.lake_id === lakeId
     })
@@ -68,9 +68,9 @@ function AddFavorite({ user, lakeId, setUser }) {
 
   return (
     <>
-      <button onClick={added.length > 0 ? handleRemove : handleAdd}>
+      {user.id && <button onClick={added.length > 0 ? handleRemove : handleAdd}>
         {added.length > 0 ? 'Remove From favorites' : 'Add to Favorites'}
-      </button>
+      </button>}
       {error && <h2>{error}</h2>}
     </>
     

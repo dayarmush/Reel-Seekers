@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
 
 function Messages({ messages, setLake, user, lakeId }) {
 
@@ -11,7 +10,7 @@ function Messages({ messages, setLake, user, lakeId }) {
   }
 
   function sendMessage() {
-    if (!user.username) return setError('Please sign in.')
+    if (!user.id) return setError('Please sign in.')
     fetch('/messages', {
       method: 'POST',
       headers: {
@@ -49,14 +48,18 @@ function Messages({ messages, setLake, user, lakeId }) {
           <p>{message.text}</p>
         </div>
       })}
-      <input
-        placeholder="Write a Message"
-        type="text"
-        name='message'
-        value={text}
-        onChange={textHandler}
-      />
-      <button onClick={sendMessage}>Send</button>
+      {user.id &&
+        <div>
+          <input
+            placeholder="Write a Message"
+            type="text"
+            name='message'
+            value={text}
+            onChange={textHandler}
+          />
+          <button onClick={sendMessage}>Send</button>
+        </div>
+      }
       {error && <h2>{error}</h2>}
     </div>
   )

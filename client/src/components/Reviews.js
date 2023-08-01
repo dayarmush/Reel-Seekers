@@ -57,23 +57,28 @@ function Reviews({ reviews, setLake, lakeId, user }) {
           <h6>{review.user.username}</h6>
         </div>
       })}
-      <input
-        placeholder='Rating'
-        type='number'
-        min='0'
-        max='5'
-        name='rating'
-        value={newReview.rating}
-        onChange={handleChange}
-      />
-      <input
-        placeholder='Review'
-        type='text'
-        name='text'
-        value={newReview.text}
-        onChange={handleChange}
-      />
-      <button onClick={handlePost}>Post</button>
+      {user.id && 
+        <div>
+          <input
+            placeholder='Rating'
+            type='number'
+            min='0'
+            max='5'
+            name='rating'
+            value={newReview.rating}
+            onChange={handleChange}
+          />
+          <input
+            placeholder='Review'
+            type='text'
+            name='text'
+            value={newReview.text}
+            onChange={handleChange}
+          />
+          <button onClick={handlePost}>Post</button>
+        </div>
+      }
+      
       {error && <h2>{error}</h2>}
     </div>
   )
