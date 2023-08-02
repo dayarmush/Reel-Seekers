@@ -50,6 +50,7 @@ function Reviews({ reviews, setLake, lakeId, user }) {
 
   return (
     <div>
+      <h2>Reviews:</h2>
       {reviews.map(review => {
         return <div key={review.id}>
           <h2>Rating: {review.rating}</h2>

@@ -76,6 +76,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
         <Fish
           fishes={lake.lake_fish}
           lakeId={lake.id}
+          user={user}
         />
       }
     </div>

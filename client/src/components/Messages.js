@@ -41,6 +41,7 @@ function Messages({ messages, setLake, user, lakeId }) {
 
   return (
     <div>
+      <h2>Messages:</h2>
       {messages.map(message => {
         return <div key={message.id}>
           <h6>{message.created_at}</h6>

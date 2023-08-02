@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
-function Fish({ fishes, lakeId }) {
+function Fish({ fishes, lakeId, user }) {
 
   const navigate = useNavigate()
   
 
   return (
     <div>
+      <h2>Fish:</h2>
       {fishes.map(fish => {
         if (fish.fish) {
           return <div key={fish.fish.id}>
@@ -18,7 +19,7 @@ function Fish({ fishes, lakeId }) {
         }
         return null
       })}
-      <button onClick={() => navigate(`/new/fish/${lakeId}`)}>Add Fish</button>
+      {user.id && <button onClick={() => navigate(`/new/fish/${lakeId}`)}>Add Fish</button>}
     </div>
   )
 
