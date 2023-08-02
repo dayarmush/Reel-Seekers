@@ -100,13 +100,14 @@ states_list = [
     "Wisconsin", "Wyoming"
 ]
 
+status_list = ['pending', 'approved']
 
 def create_users():
     users = []
 
     for i in range(20):
         user = User(
-            username=fake.name(),  
+            username=fake.name()
         )
         user.password_hash=fake.phone_number()
         users.append(user)
@@ -142,7 +143,8 @@ def create_lakes():
            lng=longitude_list[i],
            city=fake.city(),
            state=rc(states_list),
-           zip_code=fake.postcode()
+           zip_code=fake.postcode(),
+           status=rc(status_list)
         )
         lakes_list.append(lake)
     return lakes_list
@@ -155,7 +157,8 @@ def create_fish():
             name=fish_list[i],
             min_length=randint(5, 20),
             max_length=randint(20, 30),
-            daily_limit=randint(10, 30)
+            daily_limit=randint(10, 30),
+            status=rc(status_list)
         )
         list_fish.append(fish)
     return list_fish

@@ -41,7 +41,7 @@ function Home({ isLoaded }) {
   return (
     <div>
       <div className="map-container">
-        <SimpleMap lakes={lakes}/>
+        <SimpleMap lakes={searchFilter}/>
       </div>
       <label>Search Lakes:
         <input 
@@ -53,7 +53,8 @@ function Home({ isLoaded }) {
         />
       </label>
       <div>
-        {!isLoading && searchFilter.map(lake => {
+        {!isLoading && 
+        searchFilter.filter(lake => lake.status === 'approved').map(lake => {
           return <LakeCard key={lake.id} lake={lake}/>
         })}
       </div>
