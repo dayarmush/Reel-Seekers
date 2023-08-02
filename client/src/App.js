@@ -1,12 +1,15 @@
 import './App.css';
 import Home from './components/Home';
-import { Route , Routes } from 'react-router-dom'
 import NavBar from './components/NavBar';
-import LoginPage from './components/LoginPage';
-import LakeDetail from './components/LakeDetail'
-import { useEffect, useState } from 'react';
-import { useLoadScript } from "@react-google-maps/api"
+import Signup from './components/Signup';
 import NewFish from './components/NewFish';
+import { useEffect, useState } from 'react';
+import LoginPage from './components/LoginPage';
+import LakeDetail from './components/LakeDetail';
+import { Route , Routes } from 'react-router-dom';
+import { useLoadScript } from "@react-google-maps/api";
+
+
 
 function App() {
 
@@ -47,7 +50,7 @@ function App() {
           />
 
           <Route 
-            path='/login' 
+            path='/user/' 
             element={
               <LoginPage 
                 user={user} 
@@ -74,6 +77,15 @@ function App() {
             element={
               <NewFish 
                 setLake={setLake}
+              />
+            }
+          />
+
+          <Route
+            path='/new/user'
+            element={
+              <Signup 
+                setUser={setUser}
               />
             }
           />

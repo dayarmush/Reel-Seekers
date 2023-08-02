@@ -4,7 +4,7 @@ function NavBar() {
     return (
         <div>
             <NavLink to='/'>Home</NavLink>
-            <NavLink to='/login'>👤</NavLink>
+            <NavLink to='/user/'>👤</NavLink>
         </div>
     )
 
