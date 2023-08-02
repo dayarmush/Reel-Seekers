@@ -1,9 +1,25 @@
 import Login from './Login'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function LoginPage({ user, setUser }) {
 
   const navigate = useNavigate()
+  const [error, setError] = useState('')
+
+  const handleLogout = () => {
+    fetch('/logout', {
+      method: 'DELETE'
+    })
+    .then(r => {
+      if (r.ok) {
+        setUser([])
+      } else {
+        r.json()
+        .then(err => setError(err.error))
+      }
+    })
+  }
 
   return (
     <div>
@@ -16,7 +32,13 @@ function LoginPage({ user, setUser }) {
           </p>
         </div>
       }
-      {user.id && <h2>Welcome: {user.username}</h2>}
+      {user.id &&
+        <div>
+          <h2>Welcome: {user.username}</h2>
+          <button onClick={handleLogout}>Sign out</button>
+        </div>
+      }
+      {error && <h2>{error}</h2>}
     </div>
     
   )
