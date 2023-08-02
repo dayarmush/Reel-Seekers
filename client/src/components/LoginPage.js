@@ -1,5 +1,6 @@
 import Login from './Login'
 import { useState } from 'react'
+import LakeCard from './LakeCard'
 import { useNavigate } from 'react-router-dom'
 
 function LoginPage({ user, setUser }) {
@@ -37,6 +38,15 @@ function LoginPage({ user, setUser }) {
           <h2>Welcome: {user.username}</h2>
           <button onClick={handleLogout}>Sign out</button>
         </div>
+      }
+      {user.id && 
+        <div>
+          <h2>Favorite Lakes:</h2>
+          {user.favorites.map(fave => {
+            return <LakeCard key={fave.lake.id} lake={fave.lake}/>
+          })}
+        </div>
+        
       }
       {error && <h2>{error}</h2>}
     </div>
