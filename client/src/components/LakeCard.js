@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom'
 import '../style/LakeCard.css'
+import { Link } from 'react-router-dom'
 
-function LakeCard({ lake }) {
+function LakeCard({ lake, handleApprove }) {
 
   return (
-    <Link to={`/lake/${lake.id}`}>
-      <div >
+    <div >
+      <Link to={`/lake/${lake.id}`}>
         <h2>{lake.name}</h2>
         <h3>{lake.state}</h3>
-      </div>
-    </Link>
+      </Link>
+      {lake.status === 'pending' && 
+        <button onClick={() => handleApprove(lake.id)}>Approve</button>
+      }
+    </div>
   )
 }
 

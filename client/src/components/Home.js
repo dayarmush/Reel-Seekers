@@ -1,41 +1,15 @@
-import SimpleMap from "./Map"
 import '../style/Home.css'
-import { useEffect, useState } from "react"
+import SimpleMap from "./Map"
+import { useState } from "react"
 import LakeCard from './LakeCard'
 
-function Home({ isLoaded, lakes, setLakes }) {
+function Home({ isLoaded, lakes, error }) {
 
-  const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    fetch('/lakes')
-    .then(r => {
-      if (r.ok) {
-        r.json()
-        .then(data => {
-          setLakes(data)
-          setIsLoading(false)
-        })
-      } else {
-        r.json()
-        .then(err => {
-          setError(err.error)
-          setIsLoading(false)
-        })
-      }
-    })
-    .catch(err => {
-      setError('Network Error.', 'Please try again later.')
-      setIsLoading(false)
-    })
-  }, [])
 
   let searchFilter = lakes.filter(lake => lake.name.toLowerCase().includes(search.toLowerCase()))
 
   if (!isLoaded) return <h1>Loading Map...</h1>
-  if (isLoading) return <h1>Loading...</h1>
 
   return (
     <div>
@@ -52,9 +26,9 @@ function Home({ isLoaded, lakes, setLakes }) {
         />
       </label>
       <div>
-        {!isLoading && 
+        {
         searchFilter.filter(lake => lake.status === 'approved').map(lake => {
-          return <LakeCard key={lake.id} lake={lake}/>
+          return <LakeCard key={lake.id} lake={lake} />
         })}
       </div>
       {error && <h2>{error}</h2>}

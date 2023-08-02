@@ -16,6 +16,7 @@ function App() {
   const [user, setUser] = useState([])
   const [lake, setLake] = useState([])
   const [lakes, setLakes] = useState([])
+  const [error, setError] = useState('')
   const [ libraries ] = useState(['places'])
   console.log(lake, user)
   useEffect(() => {
@@ -25,6 +26,26 @@ function App() {
         r.json()
         .then(data => setUser(data))
       } 
+    })
+  }, [])
+
+  useEffect(() => {
+    fetch('/lakes')
+    .then(r => {
+      if (r.ok) {
+        r.json()
+        .then(data => {
+          setLakes(data)
+        })
+      } else {
+        r.json()
+        .then(err => {
+          setError(err.error)
+        })
+      }
+    })
+    .catch(err => {
+      setError('Network Error.', 'Please try again later.')
     })
   }, [])
 
@@ -47,7 +68,7 @@ function App() {
               <Home 
                 isLoaded={isLoaded}
                 lakes={lakes}
-                setLakes={setLakes}
+                error={error}
               />
             }
           />

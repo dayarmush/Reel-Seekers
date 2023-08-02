@@ -1,11 +1,13 @@
 import Login from './Login'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import LakeCard from './LakeCard'
 import { useNavigate } from 'react-router-dom'
 
 function LoginPage({ user, setUser, lakes }) {
 
   const navigate = useNavigate()
+
+  const [pendingLakes, setPendingLakes] = useState([])
   const [error, setError] = useState('')
 
   const handleLogout = () => {
@@ -22,7 +24,38 @@ function LoginPage({ user, setUser, lakes }) {
     })
   }
 
-  const pendingLakes = lakes.filter(lake => lake.status === 'pending').map(lake => <LakeCard key={lake.id} lake={lake}/>)
+  const handleApprove = (id) => {
+    fetch(`/lakes/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        status: 'approved'
+      })
+    })
+    .then(r => {
+      if (r.ok) {
+        r.json()
+        .then(data => {
+          setPendingLakes(pre => {
+            pre.filter(lake => lake.id !== data.id)
+          })
+        })
+      } else {
+        r.json()
+        .then(err => setError(err.error))
+      }
+    })
+  }
+
+  useEffect(() => {
+    setPendingLakes(lakes.filter(lake => {
+      return lake.status === 'pending'
+    }).map(lake => { 
+      return <LakeCard key={lake.id} lake={lake} handleApprove={handleApprove}/>
+    }))
+  }, [lakes, setPendingLakes])
 
   return (
     <div>
