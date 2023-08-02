@@ -20,7 +20,10 @@ class User(db.Model, SM):
     reviews = db.relationship('Review', backref='user')
     messages = db.relationship('Message', backref='user', cascade='all, delete-orphan')
 
-    serialize_rules = ('-favorites.user', '-favorites.lake', '-reviews.user', '-reviews.lake', '-messages.user', '-messages.lake')
+    serialize_rules = ('-favorites.user', '-favorites.lake.user', '-favorites.lake.messages',
+                        '-favorites.lake.favorites', '-favorites.lake.reviews', 
+                        '-favorites.lake.lake_fish', '-reviews.user', '-reviews.lake', 
+                        '-messages.user', '-messages.lake')
 
     @validates('username')
     def valid_username(self, key, username):
