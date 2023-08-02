@@ -1,5 +1,5 @@
-import usePlacesAutocomplete, { getGeocode, getLatLng, getDetails } from 'use-places-autocomplete';
-import { Input, Box, List, ListItem, ListIcon } from "@chakra-ui/react";
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import { Input, Box, List, ListItem } from "@chakra-ui/react";
 import axios from 'axios'
 
 const PlacesAutocomplete = ({ setSelected }) => {
@@ -47,7 +47,8 @@ const PlacesAutocomplete = ({ setSelected }) => {
         placeholder='Search an Address' 
         className='address-input'
       />
-      <List  onSelect={selectHandler}>
+      {/* remove function from list components */}
+      <List onSelect={selectHandler}>
         {status === 'OK' && data.map(({place_id, description}) => {
           return <ListItem key={place_id} onClick={() => selectHandler(description)}>{description}</ListItem>
         })}

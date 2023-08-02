@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { GoogleMap, MarkerF } from '@react-google-maps/api'
 import PlacesAutocomplete from './PlacesAutocomplete'
 // import { getGeocode, getLatLng } from 'use-places-autocomplete';

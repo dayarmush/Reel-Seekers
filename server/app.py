@@ -164,6 +164,15 @@ def add_fish():
     except (ValueError, IntegrityError) as e:
         return {'error': [str(e)]}, 400
 
+@app.route('/fish_by_name/<string:name>')
+def fish_by_name(name):
+    fish = Fish.query.filter(db.func.lower(Fish.name) == name.lower()).first()
+
+    if not fish:
+        return {'error': 'No fish found. Please try again'}, 404
+    
+    return fish.to_dict(), 200
+
 @app.route('/fish/<int:id>', methods=['PATCH', 'DELETE'])
 def fish_by_id(id):
     fish = Fish.query.filter_by(id=id).first()
@@ -272,7 +281,7 @@ def add_lake_fish():
         return lf.to_dict(), 201
     
     except (ValueError, IntegrityError) as e:
-        return {'error': [str[e]]}, 400
+        return {'error': [str(e)]}, 400
     
 @app.get('/check_session')   
 def check_session():

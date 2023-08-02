@@ -67,6 +67,7 @@ function Reviews({ reviews, setLake, lakeId, user }) {
             name='rating'
             value={newReview.rating}
             onChange={handleChange}
+            required
           />
           <input
             placeholder='Review'

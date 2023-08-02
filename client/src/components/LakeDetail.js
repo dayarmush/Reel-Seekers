@@ -4,13 +4,12 @@ import { GoogleMap, MarkerF } from '@react-google-maps/api'
 import Messages from './Messages'
 import Reviews from "./Reviews"
 import AddFavorite from "./AddFavorite"
+import Fish from "./Fish"
 
-function LakeDetail({ user, isLoaded, setUser }) {
+function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
 
   const { id } = useParams()
-  
   const [error, setError] = useState('')
-  const [lake, setLake] = useState([])
 
   useEffect(() => {
     fetch(`/lakes/${id}`)
@@ -34,7 +33,6 @@ function LakeDetail({ user, isLoaded, setUser }) {
       return total
     })
   }
-  
   
   return (
     <div>
@@ -71,6 +69,13 @@ function LakeDetail({ user, isLoaded, setUser }) {
           lakeId={lake.id}
           setLake={setLake}
           reviews={lake.reviews}
+        />
+      }
+      
+      {lake.lake_fish && 
+        <Fish
+          fishes={lake.lake_fish}
+          lakeId={lake.id}
         />
       }
     </div>

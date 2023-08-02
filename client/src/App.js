@@ -6,12 +6,14 @@ import LoginPage from './components/LoginPage';
 import LakeDetail from './components/LakeDetail'
 import { useEffect, useState } from 'react';
 import { useLoadScript } from "@react-google-maps/api"
+import NewFish from './components/NewFish';
 
 function App() {
 
   const [user, setUser] = useState([])
+  const [lake, setLake] = useState([])
   const [ libraries ] = useState(['places'])
-  console.log(user)
+
   useEffect(() => {
     fetch('/check_session')
     .then(r => {
@@ -34,11 +36,48 @@ function App() {
       <NavBar/>
       <div>
         <Routes>
-          <Route exact path='/' element={<Home isLoaded={isLoaded}/>}/>
+          
+          <Route 
+            exact path='/' 
+            element={
+              <Home 
+                isLoaded={isLoaded}
+              />
+            }
+          />
 
-          <Route path='/login' element={<LoginPage user={user} setUser={setUser} />}/>
+          <Route 
+            path='/login' 
+            element={
+              <LoginPage 
+                user={user} 
+                setUser={setUser} 
+              />
+            }
+          />
 
-          <Route path='/lake/:id' element={<LakeDetail user={user} isLoaded={isLoaded} setUser={setUser}/>}/>
+          <Route 
+            path='/lake/:id' 
+            element={
+              <LakeDetail 
+                user={user} 
+                isLoaded={isLoaded} 
+                setUser={setUser} 
+                lake={lake} 
+                setLake={setLake}
+              />
+            }
+          />
+
+          <Route 
+            path='/new/fish/:lakeId' 
+            element={
+              <NewFish 
+                setLake={setLake}
+              />
+            }
+          />
+
         </Routes>
       </div>
     </>

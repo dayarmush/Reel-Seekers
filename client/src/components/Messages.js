@@ -56,6 +56,7 @@ function Messages({ messages, setLake, user, lakeId }) {
             name='message'
             value={text}
             onChange={textHandler}
+            required
           />
           <button onClick={sendMessage}>Send</button>
         </div>

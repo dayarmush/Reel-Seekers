@@ -1,4 +1,3 @@
-import { useLoadScript } from "@react-google-maps/api"
 import SimpleMap from "./Map"
 import '../style/Home.css'
 import { useEffect, useState } from "react"
@@ -21,8 +20,8 @@ function Home({ isLoaded }) {
           setIsLoading(false)
         })
       } else {
-        r.json().
-        then(err => {
+        r.json()
+        .then(err => {
           setError(err.error)
           setIsLoading(false)
         })
