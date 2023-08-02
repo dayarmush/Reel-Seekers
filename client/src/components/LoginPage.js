@@ -3,7 +3,7 @@ import { useState } from 'react'
 import LakeCard from './LakeCard'
 import { useNavigate } from 'react-router-dom'
 
-function LoginPage({ user, setUser }) {
+function LoginPage({ user, setUser, lakes }) {
 
   const navigate = useNavigate()
   const [error, setError] = useState('')
@@ -21,6 +21,8 @@ function LoginPage({ user, setUser }) {
       }
     })
   }
+
+  const pendingLakes = lakes.filter(lake => lake.status === 'pending').map(lake => <LakeCard key={lake.id} lake={lake}/>)
 
   return (
     <div>
@@ -46,7 +48,12 @@ function LoginPage({ user, setUser }) {
             return <LakeCard key={fave.lake.id} lake={fave.lake}/>
           })}
         </div>
-        
+      }
+      {user.Admin && 
+        <div>
+          <h1>Pending Lakes:</h1>
+          {pendingLakes}
+        </div>
       }
       {error && <h2>{error}</h2>}
     </div>

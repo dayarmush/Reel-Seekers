@@ -3,9 +3,8 @@ import '../style/Home.css'
 import { useEffect, useState } from "react"
 import LakeCard from './LakeCard'
 
-function Home({ isLoaded }) {
+function Home({ isLoaded, lakes, setLakes }) {
 
-  const [lakes, setLakes] = useState([])
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')

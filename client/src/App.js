@@ -15,6 +15,7 @@ function App() {
 
   const [user, setUser] = useState([])
   const [lake, setLake] = useState([])
+  const [lakes, setLakes] = useState([])
   const [ libraries ] = useState(['places'])
   console.log(lake, user)
   useEffect(() => {
@@ -45,6 +46,8 @@ function App() {
             element={
               <Home 
                 isLoaded={isLoaded}
+                lakes={lakes}
+                setLakes={setLakes}
               />
             }
           />
@@ -54,7 +57,8 @@ function App() {
             element={
               <LoginPage 
                 user={user} 
-                setUser={setUser} 
+                setUser={setUser}
+                lakes={lakes}
               />
             }
           />
