@@ -17,7 +17,7 @@ class Lake(db.Model, SM):
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     favorites = db.relationship('Favorite', backref='lake', cascade='all, delete-orphan')
-    reviews = db.relationship('Review', backref='lake')
+    reviews = db.relationship('Review', backref='lake', cascade='all, delete-orphan')
     # edits = db.relationship('Edit', backref='lake', cascade='all, delete-orphan')
     lake_fish = db.relationship('FishLake', backref='lake', cascade='all, delete-orphan')
     messages = db.relationship('Message', backref='lake', cascade='all, delete-orphan')

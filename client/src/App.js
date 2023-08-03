@@ -79,6 +79,7 @@ function App() {
                 user={user} 
                 setUser={setUser}
                 lakes={lakes}
+                setLakes={setLakes}
               />
             }
           />

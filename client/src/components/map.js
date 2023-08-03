@@ -13,6 +13,10 @@ function SimpleMap({ lakes }) {
     setSelectedMarker(marker);
   }
 
+  const pendingFilter = lakes.filter(lake => {
+    return lake.status !== 'pending'
+  })
+
   return (
     <div>
       <PlacesAutocomplete />
@@ -20,7 +24,7 @@ function SimpleMap({ lakes }) {
         zoom={4.5} 
         center={center} 
         mapContainerClassName="map">
-        {lakes && lakes.map(lake => {
+        {lakes && pendingFilter.map(lake => {
           return <MarkerF 
             position={{lat: lake.lat, lng: lake.lng}} 
             key={lake.id} 
