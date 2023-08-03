@@ -1,9 +1,13 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import PlacesAutocomplete from "./PlacesAutocomplete"
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
 
-function AddLake({ isLoaded }) {
+function NewLake({ isLoaded, lakes, setLakes }) {
 
+  const navigate = useNavigate()
+
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     address1: '',
@@ -28,14 +32,15 @@ function AddLake({ isLoaded }) {
       const results = await getGeocode({ address });
       if (results && results.length > 0) {
         // get the lat lng out of result
+        console.log(results)
         const { lat, lng } = await getLatLng(results[0]);
         setFormData({
-          address1: results[0].address_components[0].long_name + ' ' + results[0].address_components[1].short_name,
+          address1: results[0].address_components[0].long_name + ' ' + results[0].address_components[1].long_name,
           lat: lat,
           lng: lng,
           city: results[0].address_components[3].long_name,
-          state: results[0].address_components[5].long_name,
-          zip_code: results[0].address_components[7].long_name
+          state: results[0].address_components.length >= 5 ? results[0].address_components[5].long_name : '',
+          zip_code: results[0].address_components.length >= 7 ? results[0].address_components[7].short_name : '',
         });
       }
     } catch (error) {
@@ -47,6 +52,12 @@ function AddLake({ isLoaded }) {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    const alreadyExists = lakes.filter(lake => {
+      return lake.lat === formData.lat && lake.lng === formData.lng
+    })
+
+    if (alreadyExists[0]) return setError('Lake Already Exists. (May Be Pending)')
+
     fetch('/lakes', {
       method: 'POST',
       headers: {
@@ -57,13 +68,20 @@ function AddLake({ isLoaded }) {
     .then(r => {
       if (r.ok) {
         r.json()
-        .then(data => console.log(data))
+        .then(data => {
+          setLakes(pre => [...pre, data])
+          setError('Thanks For Contributing')
+        })
       } else {
         r.json()
-        .then(err => console.log(err.error))
+        .then(err => setError(err.error))
       }
     })
     .catch(err => console.error('Network Error. Please try again later.'))
+
+    return setTimeout(() => {
+      navigate('/user')
+    }, 1000)
   }
 
   return (
@@ -71,7 +89,7 @@ function AddLake({ isLoaded }) {
       {isLoaded &&
         <PlacesAutocomplete from={'lake'} func={autoFill}/>
       }
-
+      {error && <h1>{error}</h1>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input 
@@ -89,9 +107,9 @@ function AddLake({ isLoaded }) {
           type="text" 
           id="address1" 
           name="address1" 
-          value={formData.address1} 
+          value={formData.address1}
+          onChange={handleChange} 
           required
-          readOnly
         />
         <br />
 
@@ -101,7 +119,7 @@ function AddLake({ isLoaded }) {
           id="city" 
           name="city" 
           value={formData.city}
-          readOnly
+          onChange={handleChange} 
         />
         <br />
 
@@ -111,7 +129,7 @@ function AddLake({ isLoaded }) {
           id="state" 
           name="state" 
           value={formData.state}
-          readOnly
+          onChange={handleChange} 
         />
         <br />
 
@@ -120,9 +138,8 @@ function AddLake({ isLoaded }) {
           type="text" 
           id="zip_code"
           name="zip_code"
-          value={formData.zip_code}  
-          required
-          readOnly
+          value={formData.zip_code}
+          onChange={handleChange} 
         />
         <br />
 
@@ -132,4 +149,4 @@ function AddLake({ isLoaded }) {
   )
 }
 
-export default AddLake
+export default NewLake

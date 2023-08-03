@@ -53,7 +53,11 @@ const PlacesAutocomplete = ({ from, func }) => {
           data.map(({place_id, description}) => {
             return <ListItem 
                     key={place_id} 
-                    onClick={from === 'lake' ? () => { return func(description), clearSuggestions()} : () => selectHandler(description)}>
+                    onClick={from === 'lake' ? () => { 
+                      return func(description), 
+                            clearSuggestions(), 
+                            setValue(description, false)} : 
+                      () => selectHandler(description)}>
                       {description}
                     </ListItem>
           })

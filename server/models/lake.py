@@ -1,5 +1,5 @@
 from config import db, SM, validates, re
-
+# change zip code to be nullable
 class Lake(db.Model, SM):
     __tablename__ = 'lakes'
     __table_args__ = (db.CheckConstraint('LENGTH(address1) >= 3'),)

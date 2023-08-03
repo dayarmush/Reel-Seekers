@@ -3,7 +3,7 @@ import Home from './components/Home';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import NewFish from './components/NewFish';
-import AddLake from './components/AddLake';
+import NewLake from './components/NewLake';
 import { useEffect, useState } from 'react';
 import LoginPage from './components/LoginPage';
 import LakeDetail from './components/LakeDetail';
@@ -117,7 +117,9 @@ function App() {
           <Route
             path='/new/lake'
             element={
-              <AddLake
+              <NewLake
+                lakes={lakes}
+                setLakes={setLakes}
                 isLoaded={isLoaded}
               />
             }
