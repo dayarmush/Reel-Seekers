@@ -4,12 +4,16 @@ import Messages from './Messages'
 import AddFavorite from "./AddFavorite"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import DirectionsHandler from "./Directions"
 import { GoogleMap, MarkerF } from '@react-google-maps/api'
+import PlacesAutocomplete from "./PlacesAutocomplete"
 
 function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
 
   const { id } = useParams()
   const [error, setError] = useState('')
+  const [hasOrigin, setHasOrigin] = useState(false)
+  const [searchCenter, setSearchCenter] = useState({})
 
   useEffect(() => {
     fetch(`/lakes/${id}`)
@@ -33,17 +37,30 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
       return total
     })
   }
+
+  function getDirections() {
+    if (searchCenter.lat) {
+      return setHasOrigin(pre => !pre)
+    } else {
+      return setError('Please enter a starting destination')
+    }
+  }
   
   return (
     <div>
       {error && <h1>{error}</h1>}
-
       <h2>{lake.name}</h2>
       <h3>{lake.city}</h3>
       <h4>{lake.state}</h4>
       {lake.reviews && <h4>{total ? (total / lake.reviews.length).toFixed(1) : 0}</h4>}
       {lake.address && <h3>{lake.address}</h3>}
       <AddFavorite lakeId={lake.id} user={user} setUser={setUser}/>
+      {isLoaded &&
+        <div>
+          <PlacesAutocomplete setSearchCenter={setSearchCenter}/>
+          <button onClick={getDirections}>Get Directions</button>
+        </div>
+      }
       {isLoaded && 
         lake.lat &&
         <GoogleMap 
@@ -51,6 +68,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
           center={{lat: lake.lat, lng: lake.lng}} 
           mapContainerClassName="map">
           <MarkerF position={{lat: lake.lat, lng: lake.lng}} />
+          {hasOrigin && <DirectionsHandler center={searchCenter} selectedMarker={lake} />}
         </GoogleMap>
       }
       

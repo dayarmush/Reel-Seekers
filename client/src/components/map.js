@@ -1,18 +1,22 @@
 import { useMemo, useState } from 'react'
-import DirectionsHandler from './Directions';
+import DirectionsHandler from './Directions'
+import { useNavigate } from 'react-router-dom'
 import PlacesAutocomplete from './PlacesAutocomplete'
 import { GoogleMap, MarkerF } from '@react-google-maps/api'
 
 function SimpleMap({ lakes }) {
 
-  const [selectedMarker, setSelectedMarker] = useState([])
-  const [hasDirections, setHasDirections] = useState(false)
+  const [searchCenter, setSearchCenter] = useState({})
+  // const [selectedMarker, setSelectedMarker] = useState([])
+  // const [hasDirections, setHasDirections] = useState(false)
   
+  const navigate = useNavigate()
   let center = useMemo(() => ({lat: 39, lng: -98}), [])
 
   function markerClick(marker) {
-    setHasDirections(true)
-    setSelectedMarker(marker);
+    navigate(`lake/${marker.id}`)
+    // setHasDirections(true)
+    // setSelectedMarker(marker);
   }
 
   const pendingFilter = lakes.filter(lake => {
@@ -21,10 +25,10 @@ function SimpleMap({ lakes }) {
 
   return (
     <div>
-      <PlacesAutocomplete />
+      <PlacesAutocomplete setSearchCenter={setSearchCenter}/>
       <GoogleMap 
-        zoom={4.5} 
-        center={center} 
+        zoom={searchCenter.lat ? 6 : 4.5} 
+        center={searchCenter.lat ? searchCenter : center} 
         mapContainerClassName="map">
         {lakes && pendingFilter.map(lake => {
           return <MarkerF 
@@ -32,7 +36,7 @@ function SimpleMap({ lakes }) {
             key={lake.id} 
             onClick={() => markerClick(lake)}/>
         })}
-        {hasDirections && <DirectionsHandler center={center} selectedMarker={selectedMarker} />}
+        {hasDirections && <DirectionsHandler center={searchCenter.lat ? searchCenter : center} selectedMarker={selectedMarker} />}
       </GoogleMap>
     </div>
   )
