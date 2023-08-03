@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 function Fish({ fishes, lakeId, user }) {
 
   const navigate = useNavigate()
+  const fishArray = Object.values(fishes);
 
   return (
     <div>
       <h2>Fish:</h2>
-      {fishes.map(fish => {
+      {fishArray && fishArray.map(fish => {
         if (fish.fish) {
           return <div key={fish.fish.id}>
             <h2>{fish.fish.name}</h2>

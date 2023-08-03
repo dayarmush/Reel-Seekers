@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom"
 
-function NavBar() {
+function NavBar({ setSearchCenter }) {
     return (
         <div>
-            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/' onClick={() => setSearchCenter({})}>Home</NavLink>
             <NavLink to='/user/'>👤</NavLink>
         </div>
     )

@@ -6,6 +6,7 @@ class Fish(db.Model, SM):
     # add a season
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
+    wiki = db.Column(db.String)
     min_length = db.Column(db.Integer)
     max_length = db.Column(db.Integer)
     daily_limit = db.Column(db.Integer)

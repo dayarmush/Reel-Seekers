@@ -51,15 +51,18 @@ function Messages({ messages, setLake, user, lakeId }) {
       })}
       {user.id &&
         <div>
-          <input
-            placeholder="Write a Message"
-            type="text"
-            name='message'
-            value={text}
-            onChange={textHandler}
-            required
-          />
-          <button onClick={sendMessage}>Send</button>
+          <form onSubmit={sendMessage}>
+            <input
+              placeholder="Write a Message"
+              type="text"
+              name='message'
+              value={text}
+              onChange={textHandler}
+              required
+            />
+            <button type='submit'>Send</button>
+          </form>
+          
         </div>
       }
       {error && <h2>{error}</h2>}

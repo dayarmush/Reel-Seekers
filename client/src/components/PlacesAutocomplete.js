@@ -12,12 +12,10 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
   } = usePlacesAutocomplete()
 
   const selectHandler = async (address) => {
-    console.log(address)
     setValue(address, false)
     clearSuggestions()
     // turn address into lat lng 
     const results = await getGeocode({address})
-    console.log(results)
     // get the lat lng out of result
     const {lat, lng} = await getLatLng(results[0])
     // set the selected to lat lng

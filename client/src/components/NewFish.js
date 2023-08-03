@@ -8,7 +8,8 @@ function NewFish({ setLake }) {
     'name': '',
     'min_length': 0,
     'max_length': 0,
-    'daily_limit': 0
+    'daily_limit': 0,
+    'wiki':''
   }
 
   const navigate = useNavigate()
@@ -20,7 +21,7 @@ function NewFish({ setLake }) {
   const [hasForm, setHasForm] = useState(false)
   const [searchResults, setSearchResults] = useState([])
 
-  let fishKey = process.env.REACT_APP_FISH_API_KEY
+  const fishKey = process.env.REACT_APP_FISH_API_KEY
 
   // Search api for for input fish
   function apiSearch() {
@@ -45,9 +46,9 @@ function NewFish({ setLake }) {
   }
 
   // set the selected fish name as name on form
-  function setSelected(e) {
+  function setSelected(result) { 
     setForm(pre => {
-      return {...pre, 'name': e.target.textContent}
+      return {...pre, 'name': result.name, 'wiki': result.url}
     })
     setHasForm(pre => !pre)
   }
@@ -65,6 +66,18 @@ function NewFish({ setLake }) {
   // if yes create connection else make new fish and then create connection
   function handleSubmit(e) {
     e.preventDefault()
+
+    const min_length = Number(form.min_length);
+    const max_length = Number(form.max_length);
+
+    // Check if both fields are blank
+    if ((!form.min_length && !form.max_length)) {
+      setError(null);
+    } else if (min_length >= max_length) {
+      setError('Minimum must be less than Maximum');
+      return;
+    }
+
     fetch(`/fish_by_name/${form.name}`)
     .then(r => {
       if (r.ok) {
@@ -89,7 +102,8 @@ function NewFish({ setLake }) {
         'name': form.name,
         'min_length': Number(form.min_length),
         'max_length': Number(form.max_length),
-        'daily_limit': Number(form.daily_limit)
+        'daily_limit': Number(form.daily_limit),
+        'wiki': form.wiki
 
       })
     })
@@ -124,7 +138,7 @@ function NewFish({ setLake }) {
         r.json()
         .then(data => {
           setLake(pre => {
-            const newFish = [...pre.lake_fish, data]
+            const newFish = {...pre.lake_fish, data}
             return {...pre, lake_fish: newFish}
           })
           setError('Thanks for Contributing')
@@ -156,7 +170,7 @@ function NewFish({ setLake }) {
             <List>
               {!error && 
                 searchResults.map(result => {
-                  return <ListItem key={result.id} onClick={setSelected}>{result.name}</ListItem>
+                  return <ListItem key={result.id} onClick={() => setSelected(result)}>{result.name}</ListItem>
                 })
               }
             </List>

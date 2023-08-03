@@ -2,6 +2,7 @@ import '../style/Home.css'
 import SimpleMap from "./Map"
 import { useState } from "react"
 import LakeCard from './LakeCard'
+import PlacesAutocomplete from './PlacesAutocomplete'
 
 function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
 
@@ -14,6 +15,7 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
   return (
     <div>
       <div className="map-container">
+        {!searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
         <SimpleMap lakes={searchFilter} searchCenter={searchCenter} setSearchCenter={setSearchCenter}/>
       </div>
       <label>Search Lakes:
@@ -28,7 +30,7 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
       <div>
         {
         searchFilter.filter(lake => lake.status === 'approved').map(lake => {
-          return <LakeCard key={lake.id} lake={lake} />
+          return <LakeCard key={lake.id} lake={lake} setSearchCenter={setSearchCenter}/>
         })}
       </div>
       {error && <h2>{error}</h2>}

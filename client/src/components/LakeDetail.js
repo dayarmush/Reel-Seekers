@@ -14,7 +14,6 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
   const [error, setError] = useState('')
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
-  const [lakeSearch, setLakeSearch] = useState({})
 
   useEffect(() => {
     fetch(`/lakes/${id}`)
@@ -48,17 +47,17 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
       {lake.reviews && <h4>{total ? (total / lake.reviews.length).toFixed(1) : 0}</h4>}
       {lake.address && <h3>{lake.address}</h3>}
       <AddFavorite lakeId={lake.id} user={user} setUser={setUser}/>
-      {isLoaded && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
+      {isLoaded && !searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
       {isLoaded && 
         lake.lat &&
-        <GoogleMap 
-          zoom={15} 
+        <GoogleMap
+          zoom={15}
           center={{lat: lake.lat, lng: lake.lng}} 
           mapContainerClassName="map">
           <MarkerF position={{lat: lake.lat, lng: lake.lng}} />
           {searchCenter.lat &&
-           <DirectionsHandler 
-            center={searchCenter.lat ? searchCenter : lakeSearch} 
+           <DirectionsHandler
+            center={searchCenter}
             selectedMarker={lake}
             setDistance={setDistance}
             setDuration={setDuration}
@@ -68,7 +67,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
       }
 
       {distance && <p>Distance: {distance}</p>}
-      {duration && <p>Approximate Duration: {duration}</p>}
+      {duration && <p>Approximate Trip Length: {duration}</p>}
       
       {lake.messages && 
         <Messages 
