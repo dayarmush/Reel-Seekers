@@ -6,10 +6,12 @@ import { GoogleMap, MarkerF } from '@react-google-maps/api'
 function SimpleMap({ lakes }) {
 
   const [selectedMarker, setSelectedMarker] = useState([])
+  const [hasDirections, setHasDirections] = useState(false)
   
   let center = useMemo(() => ({lat: 39, lng: -98}), [])
 
   function markerClick(marker) {
+    setHasDirections(true)
     setSelectedMarker(marker);
   }
 
@@ -30,7 +32,7 @@ function SimpleMap({ lakes }) {
             key={lake.id} 
             onClick={() => markerClick(lake)}/>
         })}
-        <DirectionsHandler center={center} selectedMarker={selectedMarker} />
+        {hasDirections && <DirectionsHandler center={center} selectedMarker={selectedMarker} />}
       </GoogleMap>
     </div>
   )

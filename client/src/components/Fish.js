@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 function Fish({ fishes, lakeId, user }) {
 
   const navigate = useNavigate()
-  
 
   return (
     <div>
@@ -22,7 +21,6 @@ function Fish({ fishes, lakeId, user }) {
       {user.id && <button onClick={() => navigate(`/new/fish/${lakeId}`)}>Add Fish</button>}
     </div>
   )
-
 }
 
 export default Fish

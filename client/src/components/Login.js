@@ -7,8 +7,8 @@ function Login({ setUser }) {
     'password': ''
   }
 
-  const [form, setForm] = useState(blankForm)
   const [error, setError] = useState('')
+  const [form, setForm] = useState(blankForm)
 
   function handleChange(e) {
     let key = e.target.name
@@ -19,7 +19,9 @@ function Login({ setUser }) {
     })
   }
 
-  function handleLogin() {
+  function handleLogin(e) {
+    e.preventDefault()
+
     fetch('/login', {
       method: 'POST',
       headers: {
@@ -41,25 +43,29 @@ function Login({ setUser }) {
 
   return (
     <div>
-      <label>Username:
-        <input 
-          placeholder="Username"
-          type="text"
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-        />
-      </label>
-      <label>Password:
-        <input
-          placeholder="Password"
-          type="text"
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-        />
-      </label>
-      <button onClick={handleLogin}>Login</button>
+      <form onSubmit={handleLogin}>
+        <label>Username:
+          <input 
+            placeholder="Username"
+            type="text"
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>Password:
+          <input
+            placeholder="Password"
+            type="text"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <button type='submit'>Login</button>
+      </form>
       {error && <p>{error}</p>}
     </div>
   )

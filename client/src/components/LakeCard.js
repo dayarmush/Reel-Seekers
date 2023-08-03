@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import '../style/LakeCard.css'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function LakeCard({ lake, setLakes }) {
@@ -47,7 +47,8 @@ function LakeCard({ lake, setLakes }) {
           return pre.filter(lake => lake.id !== id)
         })
       } else {
-        console.log('not ok')
+        r.json()
+        .then(err => setError(err.error))
       }
     })
   }

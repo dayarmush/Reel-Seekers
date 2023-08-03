@@ -1,10 +1,10 @@
+import Fish from "./Fish"
+import Reviews from "./Reviews"
+import Messages from './Messages'
+import AddFavorite from "./AddFavorite"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { GoogleMap, MarkerF } from '@react-google-maps/api'
-import Messages from './Messages'
-import Reviews from "./Reviews"
-import AddFavorite from "./AddFavorite"
-import Fish from "./Fish"
 
 function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
 

@@ -46,7 +46,6 @@ function AddFavorite({ user, lakeId, setUser }) {
       method: 'DELETE',
     })
     .then(r => {
-      console.log(r)
       if (r.ok) {
           setUser(pre => {
             const newFavorites = [...pre.favorites.filter(fave => fave.lake_id !== lakeId)]

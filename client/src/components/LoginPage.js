@@ -1,5 +1,5 @@
 import Login from './Login'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import LakeCard from './LakeCard'
 import { useNavigate } from 'react-router-dom'
 

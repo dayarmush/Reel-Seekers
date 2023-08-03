@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { DirectionsService, DirectionsRenderer } from '@react-google-maps/api'; // Replace with the correct import statement for your map library
+import { DirectionsRenderer } from '@react-google-maps/api'; // Replace with the correct import statement for your map library
 
 function DirectionsHandler({ center, selectedMarker }) {
+  
   const [directions, setDirections] = useState(null);
 
   useEffect(() => {
-    if (!selectedMarker) return; // No selected marker, so don't fetch directions
-
+     // No selected marker, don't fetch directions
+    if (!selectedMarker) return;
     // Fetch directions from the center to the selected marker
     const directionsService = new window.google.maps.DirectionsService();
     directionsService.route(
@@ -31,7 +32,7 @@ function DirectionsHandler({ center, selectedMarker }) {
   const customRouteStyles = {
     polylineOptions: {
       strokeColor: '#1E90FF', // Change the color here to make the line darker
-      strokeWeight: 7, // You can adjust the line thickness as well
+      strokeWeight: 7, // adjust the line thickness
     },
   };
 
