@@ -2,6 +2,7 @@ import '../style/Home.css'
 import SimpleMap from "./Map"
 import { useState } from "react"
 import LakeCard from './LakeCard'
+import DirectionsExample from './Directions'
 
 function Home({ isLoaded, lakes, error }) {
 
