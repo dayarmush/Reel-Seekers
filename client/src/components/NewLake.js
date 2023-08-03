@@ -8,6 +8,7 @@ function NewLake({ isLoaded, lakes, setLakes }) {
   const navigate = useNavigate()
 
   const [error, setError] = useState('')
+  const [hasForm, setHasForm] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     address1: '',
@@ -32,7 +33,6 @@ function NewLake({ isLoaded, lakes, setLakes }) {
       const results = await getGeocode({ address });
       if (results && results.length > 0) {
         // get the lat lng out of result
-        console.log(results)
         const { lat, lng } = await getLatLng(results[0]);
         setFormData({
           address1: results[0].address_components[0].long_name + ' ' + results[0].address_components[1].long_name,
@@ -42,6 +42,7 @@ function NewLake({ isLoaded, lakes, setLakes }) {
           state: results[0].address_components.length >= 5 ? results[0].address_components[5].long_name : '',
           zip_code: results[0].address_components.length >= 7 ? results[0].address_components[7].short_name : '',
         });
+        setHasForm(pre => !pre)
       }
     } catch (error) {
       console.log('Error getting geocode:', error);
@@ -87,64 +88,67 @@ function NewLake({ isLoaded, lakes, setLakes }) {
   return (
     <div>
       {isLoaded &&
+        !hasForm &&
         <PlacesAutocomplete from={'lake'} func={autoFill}/>
       }
       {error && <h1>{error}</h1>}
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input 
-          type="text" 
-          id="name" 
-          name="name" 
-          value={formData.name} 
-          onChange={handleChange} 
-          required 
-        />
-        <br />
+      {hasForm && 
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="name">Name:</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            value={formData.name} 
+            onChange={handleChange} 
+            required 
+          />
+          <br />
 
-        <label htmlFor="address1">Address:</label>
-        <input 
-          type="text" 
-          id="address1" 
-          name="address1" 
-          value={formData.address1}
-          onChange={handleChange} 
-          required
-        />
-        <br />
+          <label htmlFor="address1">Address:</label>
+          <input 
+            type="text" 
+            id="address1" 
+            name="address1" 
+            value={formData.address1}
+            onChange={handleChange} 
+            required
+          />
+          <br />
 
-        <label htmlFor="city">City:</label>
-        <input 
-          type="text" 
-          id="city" 
-          name="city" 
-          value={formData.city}
-          onChange={handleChange} 
-        />
-        <br />
+          <label htmlFor="city">City:</label>
+          <input 
+            type="text" 
+            id="city" 
+            name="city" 
+            value={formData.city}
+            onChange={handleChange} 
+          />
+          <br />
 
-        <label htmlFor="state">State:</label>
-        <input 
-          type="text" 
-          id="state" 
-          name="state" 
-          value={formData.state}
-          onChange={handleChange} 
-        />
-        <br />
+          <label htmlFor="state">State:</label>
+          <input 
+            type="text" 
+            id="state" 
+            name="state" 
+            value={formData.state}
+            onChange={handleChange} 
+          />
+          <br />
 
-        <label htmlFor="zip_code">Zip Code:</label>
-        <input 
-          type="text" 
-          id="zip_code"
-          name="zip_code"
-          value={formData.zip_code}
-          onChange={handleChange} 
-        />
-        <br />
+          <label htmlFor="zip_code">Zip Code:</label>
+          <input 
+            type="text" 
+            id="zip_code"
+            name="zip_code"
+            value={formData.zip_code}
+            onChange={handleChange} 
+          />
+          <br />
 
-        <button type="submit">Submit</button>
-      </form>
+          <button type="submit">Submit</button>
+        </form>
+      }
     </div>
   )
 }
