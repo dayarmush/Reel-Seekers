@@ -3,7 +3,7 @@ import SimpleMap from "./Map"
 import { useState } from "react"
 import LakeCard from './LakeCard'
 
-function Home({ isLoaded, lakes, error }) {
+function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
 
   const [search, setSearch] = useState('')
 
@@ -14,7 +14,7 @@ function Home({ isLoaded, lakes, error }) {
   return (
     <div>
       <div className="map-container">
-        <SimpleMap lakes={searchFilter}/>
+        <SimpleMap lakes={searchFilter} searchCenter={searchCenter} setSearchCenter={setSearchCenter}/>
       </div>
       <label>Search Lakes:
         <input 

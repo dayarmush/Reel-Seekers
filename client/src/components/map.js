@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react'
-import DirectionsHandler from './Directions'
+// import DirectionsHandler from './Directions'
 import { useNavigate } from 'react-router-dom'
 import PlacesAutocomplete from './PlacesAutocomplete'
 import { GoogleMap, MarkerF } from '@react-google-maps/api'
 
-function SimpleMap({ lakes }) {
+function SimpleMap({ lakes, searchCenter, setSearchCenter }) {
 
-  const [searchCenter, setSearchCenter] = useState({})
+  // const [searchCenter, setSearchCenter] = useState({})
   // const [selectedMarker, setSelectedMarker] = useState([])
   // const [hasDirections, setHasDirections] = useState(false)
   
@@ -36,7 +36,7 @@ function SimpleMap({ lakes }) {
             key={lake.id} 
             onClick={() => markerClick(lake)}/>
         })}
-        {hasDirections && <DirectionsHandler center={searchCenter.lat ? searchCenter : center} selectedMarker={selectedMarker} />}
+        {/* {hasDirections && <DirectionsHandler center={searchCenter.lat ? searchCenter : center} selectedMarker={selectedMarker} />} */}
       </GoogleMap>
     </div>
   )

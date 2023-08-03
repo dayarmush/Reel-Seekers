@@ -1,6 +1,5 @@
-import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { Input, Box, List, ListItem } from "@chakra-ui/react";
-import axios from 'axios'
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 
 const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
   const {
@@ -23,20 +22,6 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
     const {lat, lng} = await getLatLng(results[0])
     // set the selected to lat lng
     setSearchCenter({lat, lng})
-
-    // try {
-    //   // get lat lng out of address
-    //   const response = await axios.get(
-    //     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.REACT_APP_API_KEY}`
-    //   );
-    //   console.log(response)
-    //   // this is the adress
-    //   const formattedAddress = response.data.results[0]?.formatted_address;
-    //   console.log('Reverse Geocoded Address:', formattedAddress);
-    //   // store the formatted address in state or use it as needed.
-    // } catch (error) {
-    //   console.log('Error getting reverse geocode:', error);
-    // }
   }
 
   return (

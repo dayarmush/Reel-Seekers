@@ -16,6 +16,7 @@ function App() {
   const [lake, setLake] = useState([])
   const [lakes, setLakes] = useState([])
   const [error, setError] = useState('')
+  const [searchCenter, setSearchCenter] = useState({})
   const [ libraries ] = useState(['places'])
 
   useEffect(() => {
@@ -64,10 +65,12 @@ function App() {
           <Route 
             exact path='/' 
             element={
-              <Home 
-                isLoaded={isLoaded}
+              <Home
                 lakes={lakes}
                 error={error}
+                isLoaded={isLoaded}
+                searchCenter={searchCenter}
+                setSearchCenter={setSearchCenter}
               />
             }
           />
@@ -76,9 +79,9 @@ function App() {
             path='/user/' 
             element={
               <LoginPage 
-                user={user} 
-                setUser={setUser}
+                user={user}
                 lakes={lakes}
+                setUser={setUser}
                 setLakes={setLakes}
               />
             }
@@ -89,10 +92,12 @@ function App() {
             element={
               <LakeDetail 
                 user={user} 
-                isLoaded={isLoaded} 
+                lake={lake}
                 setUser={setUser} 
-                lake={lake} 
                 setLake={setLake}
+                isLoaded={isLoaded}
+                searchCenter={searchCenter}
+                setSearchCenter={setSearchCenter}
               />
             }
           />

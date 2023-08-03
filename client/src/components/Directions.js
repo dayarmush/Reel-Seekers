@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { DirectionsRenderer } from '@react-google-maps/api'; // Replace with the correct import statement for your map library
+import { DirectionsRenderer } from '@react-google-maps/api'; 
 
-function DirectionsHandler({ center, selectedMarker }) {
+function DirectionsHandler({ center, selectedMarker, setDuration, setDistance }) {
   
   const [directions, setDirections] = useState(null);
 
@@ -22,12 +22,16 @@ function DirectionsHandler({ center, selectedMarker }) {
       (result, status) => {
         if (status === 'OK') {
           setDirections(result);
+          // Get distance and duration from result body
+          const { distance, duration } = result.routes[0].legs[0];
+          setDistance(distance.text);
+          setDuration(duration.text);
         } else {
           console.error('Error fetching directions:', status);
         }
       }
     );
-  }, [center, selectedMarker]);
+  }, [center, selectedMarker, setDistance, setDuration]);
 
   const customRouteStyles = {
     polylineOptions: {
@@ -36,7 +40,7 @@ function DirectionsHandler({ center, selectedMarker }) {
     },
   };
 
-  return directions ? <DirectionsRenderer directions={directions} options={customRouteStyles} /> : null;
+  return directions ? <DirectionsRenderer directions={directions} options={customRouteStyles} /> : null
 }
 
 export default DirectionsHandler;

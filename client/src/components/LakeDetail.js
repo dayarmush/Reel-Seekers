@@ -5,15 +5,16 @@ import AddFavorite from "./AddFavorite"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import DirectionsHandler from "./Directions"
-import { GoogleMap, MarkerF } from '@react-google-maps/api'
 import PlacesAutocomplete from "./PlacesAutocomplete"
+import { GoogleMap, MarkerF } from '@react-google-maps/api'
 
-function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
+function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setSearchCenter }) {
 
   const { id } = useParams()
   const [error, setError] = useState('')
-  const [hasOrigin, setHasOrigin] = useState(false)
-  const [searchCenter, setSearchCenter] = useState({})
+  const [distance, setDistance] = useState('');
+  const [duration, setDuration] = useState('');
+  const [lakeSearch, setLakeSearch] = useState({})
 
   useEffect(() => {
     fetch(`/lakes/${id}`)
@@ -27,7 +28,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
       }
     })
     .catch(err => setError('Network Error. Please try again later.'))
-  }, [id])
+  }, [id, setLake])
 
   let total = 0;
 
@@ -38,14 +39,6 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
     })
   }
 
-  function getDirections() {
-    if (searchCenter.lat) {
-      return setHasOrigin(pre => !pre)
-    } else {
-      return setError('Please enter a starting destination')
-    }
-  }
-  
   return (
     <div>
       {error && <h1>{error}</h1>}
@@ -55,12 +48,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
       {lake.reviews && <h4>{total ? (total / lake.reviews.length).toFixed(1) : 0}</h4>}
       {lake.address && <h3>{lake.address}</h3>}
       <AddFavorite lakeId={lake.id} user={user} setUser={setUser}/>
-      {isLoaded &&
-        <div>
-          <PlacesAutocomplete setSearchCenter={setSearchCenter}/>
-          <button onClick={getDirections}>Get Directions</button>
-        </div>
-      }
+      {isLoaded && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
       {isLoaded && 
         lake.lat &&
         <GoogleMap 
@@ -68,9 +56,19 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake }) {
           center={{lat: lake.lat, lng: lake.lng}} 
           mapContainerClassName="map">
           <MarkerF position={{lat: lake.lat, lng: lake.lng}} />
-          {hasOrigin && <DirectionsHandler center={searchCenter} selectedMarker={lake} />}
+          {searchCenter.lat &&
+           <DirectionsHandler 
+            center={searchCenter.lat ? searchCenter : lakeSearch} 
+            selectedMarker={lake}
+            setDistance={setDistance}
+            setDuration={setDuration}
+          />
+          }
         </GoogleMap>
       }
+
+      {distance && <p>Distance: {distance}</p>}
+      {duration && <p>Approximate Duration: {duration}</p>}
       
       {lake.messages && 
         <Messages 
