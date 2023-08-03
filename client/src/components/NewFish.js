@@ -9,7 +9,7 @@ function NewFish({ setLake }) {
     'min_length': 0,
     'max_length': 0,
     'daily_limit': 0,
-    'wiki':''
+    'wiki': ''
   }
 
   const navigate = useNavigate()
