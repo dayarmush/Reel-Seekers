@@ -36,11 +36,11 @@ class Lake(db.Model, SM):
     #         return name
     #     raise ValueError('Invalid name. Please use only letters from A to Z (both lowercase and uppercase).')
     
-    @validates('zip_code')
-    def validate_zip(self, key, zip_code):
-        if len(str(zip_code)) == 5:
-            return zip_code
-        raise ValueError('Invalid Zip Code')
+    # @validates('zip_code')
+    # def validate_zip(self, key, zip_code):
+    #     if len(zip_code) == 5:
+    #         return zip_code
+    #     raise ValueError('Invalid Zip Code')
 
     def __repr__(self):
         return f'(Lake: {self.name})'

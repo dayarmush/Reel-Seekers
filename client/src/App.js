@@ -3,13 +3,12 @@ import Home from './components/Home';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import NewFish from './components/NewFish';
+import AddLake from './components/AddLake';
 import { useEffect, useState } from 'react';
 import LoginPage from './components/LoginPage';
 import LakeDetail from './components/LakeDetail';
-import { Route , Routes } from 'react-router-dom';
 import { useLoadScript } from "@react-google-maps/api";
-
-
+import { Navigate, Route , Routes } from 'react-router-dom';
 
 function App() {
 
@@ -18,7 +17,7 @@ function App() {
   const [lakes, setLakes] = useState([])
   const [error, setError] = useState('')
   const [ libraries ] = useState(['places'])
-  console.log(lake, user)
+
   useEffect(() => {
     fetch('/check_session')
     .then(r => {
@@ -112,6 +111,22 @@ function App() {
               <Signup 
                 setUser={setUser}
               />
+            }
+          />
+
+          <Route
+            path='/new/lake'
+            element={
+              <AddLake
+                isLoaded={isLoaded}
+              />
+            }
+          />
+
+          <Route
+            path='*'
+            element={
+              <Navigate to='/'/>
             }
           />
 

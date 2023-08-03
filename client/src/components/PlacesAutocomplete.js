@@ -2,7 +2,7 @@ import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocom
 import { Input, Box, List, ListItem } from "@chakra-ui/react";
 import axios from 'axios'
 
-const PlacesAutocomplete = ({ setSelected }) => {
+const PlacesAutocomplete = ({ from, func }) => {
   const {
     ready,
     value,
@@ -44,14 +44,20 @@ const PlacesAutocomplete = ({ setSelected }) => {
         value={value}
         onChange={(e => setValue(e.target.value))} 
         disabled={!ready} 
-        placeholder='Search an Address' 
+        placeholder='Search For Lake' 
         className='address-input'
       />
       {/* remove function from list components */}
-      <List onSelect={selectHandler}>
-        {status === 'OK' && data.map(({place_id, description}) => {
-          return <ListItem key={place_id} onClick={() => selectHandler(description)}>{description}</ListItem>
-        })}
+      <List>
+        {status === 'OK' && 
+          data.map(({place_id, description}) => {
+            return <ListItem 
+                    key={place_id} 
+                    onClick={from === 'lake' ? () => { return func(description), clearSuggestions()} : () => selectHandler(description)}>
+                      {description}
+                    </ListItem>
+          })
+        }
       </List>
     </Box>
       

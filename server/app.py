@@ -91,15 +91,16 @@ def lakes_route():
     
     if request.method == 'POST':
         data = request.get_json()
-
+        print(data)
         try:
             lake = Lake(
                 name = data.get('name'),
                 address1 = data.get('address1'),
-                address2 = data.get('address2'),
+                lat=data.get('lat'),
+                lng=data.get('lng'),
                 city = data.get('city'),
                 state = data.get('state'),
-                zip_code = data.get('zip')
+                zip_code = data.get('zip_code')
             )
 
             db.session.add(lake)

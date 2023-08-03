@@ -71,6 +71,9 @@ function LoginPage({ user, setUser, lakes }) {
       {user.id &&
         <div>
           <h2>Welcome: {user.username}</h2>
+          <p>To Contribute:
+            <button onClick={() => navigate('/new/lake')}>Add Lake</button>
+          </p>
           <button onClick={handleLogout}>Sign out</button>
         </div>
       }
