@@ -105,7 +105,8 @@ function App() {
           <Route 
             path='/new/fish/:lakeId' 
             element={
-              <NewFish 
+              <NewFish
+                lake={lake}
                 setLake={setLake}
               />
             }

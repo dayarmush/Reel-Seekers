@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, List, ListItem } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 
-function NewFish({ setLake }) {
+function NewFish({ setLake, lake }) {
 
   const blankForm = {
     'name': '',
@@ -62,10 +62,17 @@ function NewFish({ setLake }) {
     })
   }
 
+  const fishArray = Object.values(lake.lake_fish)
+  const hasFish = fishArray.some(fish => {
+      return fish.fish.name.toLowerCase() === form.name.toLowerCase()
+    })
+
   // on submit check if name in db 
   // if yes create connection else make new fish and then create connection
   function handleSubmit(e) {
     e.preventDefault()
+
+    if (hasFish) return setError('Fish already added')
 
     const min_length = Number(form.min_length);
     const max_length = Number(form.max_length);
