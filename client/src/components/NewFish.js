@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, List, ListItem } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
-
+// on reload lake state disappears
 function NewFish({ setLake, lake }) {
 
   const blankForm = {
@@ -14,7 +14,6 @@ function NewFish({ setLake, lake }) {
 
   const navigate = useNavigate()
   const { lakeId } = useParams()
-
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
   const [form, setForm] = useState(blankForm)
@@ -22,6 +21,22 @@ function NewFish({ setLake, lake }) {
   const [searchResults, setSearchResults] = useState([])
 
   const fishKey = process.env.REACT_APP_FISH_API_KEY
+
+  useEffect(() => {
+    if (!lake.id) {
+      fetch(`/lakes/${lakeId}`)
+      .then(r => {
+        if (r.ok) {
+          r.json()
+          .then(data => setLake(data))
+        } else {
+          r.json()
+          .then(err => setError(err.error))
+        }
+      })
+      .catch(err => setError('Network Error. Please try again later.'))
+    } 
+  }, [lakeId, setLake])
 
   // Search api for for input fish
   function apiSearch() {
@@ -62,15 +77,17 @@ function NewFish({ setLake, lake }) {
     })
   }
 
-  const fishArray = Object.values(lake.lake_fish)
-  const hasFish = fishArray.some(fish => {
-      return fish.fish.name.toLowerCase() === form.name.toLowerCase()
-    })
-
   // on submit check if name in db 
   // if yes create connection else make new fish and then create connection
   function handleSubmit(e) {
     e.preventDefault()
+
+    const fishArray = Object.values(lake.lake_fish)
+    const hasFish = fishArray.some(fish => {
+      if (fish.fish) {
+        return fish.fish.name.toLowerCase() === form.name.toLowerCase()
+      }
+    })
 
     if (hasFish) return setError('Fish already added')
 

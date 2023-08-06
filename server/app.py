@@ -286,6 +286,18 @@ def add_lake_fish():
     except (ValueError, IntegrityError) as e:
         return {'error': [str(e)]}, 400
     
+@app.delete('/lake_fish/<int:id>')
+def delete_lake_fish(id):
+    connection = FishLake.query.filter_by(id=id).first()
+
+    if not connection:
+        return {'error': 'No connection found'}, 404
+    
+    db.session.delete(connection)
+    db.session.commit()
+
+    return {}, 204
+
 @app.get('/check_session')   
 def check_session():
 

@@ -100,7 +100,7 @@ states_list = [
     "Wisconsin", "Wyoming"
 ]
 
-status_list = ['pending', 'approved']
+status_list = ['pending', 'approved', 'approved']
 
 def create_users():
     users = []

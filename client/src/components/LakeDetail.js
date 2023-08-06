@@ -37,7 +37,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
       return total
     })
   }
-
+  
   return (
     <div>
       {error && <h1>{error}</h1>}
@@ -89,9 +89,10 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
       
       {lake.lake_fish && 
         <Fish
-          fishes={lake.lake_fish}
-          lakeId={lake.id}
           user={user}
+          lakeId={lake.id}
+          setLake={setLake}
+          fishes={lake.lake_fish}
         />
       }
     </div>
