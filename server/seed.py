@@ -220,7 +220,7 @@ def create_fish_lakes():
 
     for i in range(100):
         fish_lake = FishLake(
-            fish_id=randint(1, 200),
+            fish_id=randint(1, 100),
             lake_id=randint(1, 100)
         )
         fish_lakes.append(fish_lake)

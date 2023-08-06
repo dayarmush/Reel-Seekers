@@ -83,6 +83,7 @@ function App() {
                 lakes={lakes}
                 setUser={setUser}
                 setLakes={setLakes}
+                setSearchCenter={setSearchCenter}
               />
             }
           />

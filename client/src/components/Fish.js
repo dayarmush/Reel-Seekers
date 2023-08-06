@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 // filter for pending and approved
 // only admin can see the pending
+// the pending and approved should be on the lake_fish table
+// fix the approved .then()
 
 function Fish({ fishes, lakeId, user, setLake }) {
 
@@ -11,39 +13,74 @@ function Fish({ fishes, lakeId, user, setLake }) {
   const [error, setError] = useState('')
 
   function handleApprove(id) {
-    console.log(id)
+    fetch(`/fish/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'status': 'approved'
+      })
+    })
+    .then(r => {
+      if (r.ok) {
+        r.json()
+        .then(data => {
+          setLake(pre => {
+            const fish = pre.lake_fish.map(fish => {
+              if (fish.fish_id === id) {
+                return data.lake_fish
+              } else {
+                return fish
+              }
+            })
+            console.log(fish)
+            return {...pre, lake_fish: fish}
+          })
+        })
+      } else {
+        r.json()
+        .then(err => setError(err.error))
+      }
+    })
+    .catch(err => setError('Network Error. Please try again later.'))
   }
 
   function handleDelete(id) {
-    fetch(`/fish/${id}`, {
+    const conn = [...fishes].find(fish => {
+      return fish.fish_id === id
+    })
+
+    fetch(`/lake_fish/${conn.id}`, {
       method: 'DELETE',
     })
     .then(r => {
       if (r.ok) {
-        // setLake(pre => {
-        //   const fish = pre.lake_fish.filter(fish => {
-        //     return fish.fish.id !== id
-        //   })
-        //   return {...pre, lake_fish: fish}
-        // })
+        setLake(pre => {
+          const fish = pre.lake_fish.filter(fish => {
+            return fish.fish_id !== id
+          })
+          return {...pre, lake_fish: fish}
+        })
         console.log('ok')
       } else {
         r.json()
         .then(err => setError(err.error))
       }
     })
+    .catch(err => setError('Network Error. Please try again later.'))
   }
 
   const approvedFish = fishArray.filter(fish => {
     if (fish.fish) {
       return fish.fish.status === 'approved'
-    }
+    }return null
   })
 
   const pendingFish = fishArray.filter(fish => {
     if (fish.fish) {
       return fish.fish.status === 'pending'
-    }
+    } return null
   })
 
   return (
@@ -58,6 +95,7 @@ function Fish({ fishes, lakeId, user, setLake }) {
             <h4>Limit: {fish.fish.daily_limit}</h4>
           </div>
         }
+        return null
       })}
       {user.Admin && pendingFish[0] && <h2>Pending Fish:</h2>}
       {user.Admin && 
@@ -72,8 +110,10 @@ function Fish({ fishes, lakeId, user, setLake }) {
               <button onClick={() => handleDelete(fish.fish.id)}>Delete</button>
             </div>
           }
+          return null
         })
       }
+      {error && <h2>{error}</h2>}
       {user.id && <button onClick={() => navigate(`/new/fish/${lakeId}`)}>Add Fish</button>}
     </div>
   )
