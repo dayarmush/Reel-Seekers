@@ -13,26 +13,31 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
   if (!isLoaded) return <h1>Loading Map...</h1>
 
   return (
-    <div>
+    <div className='home-container'>
       <div className="map-container">
         {!searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
         <SimpleMap lakes={searchFilter} searchCenter={searchCenter} setSearchCenter={setSearchCenter}/>
       </div>
-      <label>Search Lakes:
+
+      <div className='input-container'>
+        {/* <label>Search Lakes: */}
         <input 
-          placeholder="Enter Lake"
+          placeholder="🔎   Search Lakes"
           type="text"
           name="search"
-          onChange={(e) => setSearch(e.target.value)}
           value={search}
+          className='search-input'
+          onChange={(e) => setSearch(e.target.value)}
         />
-      </label>
+        {/* </label> */}
+      </div>
+  
       <div>
-        {
-        searchFilter.filter(lake => lake.status === 'approved').map(lake => {
+        {searchFilter.filter(lake => lake.status === 'approved').map(lake => {
           return <LakeCard key={lake.id} lake={lake} setSearchCenter={setSearchCenter}/>
         })}
       </div>
+      
       {error && <h2>{error}</h2>}
     </div>
   )
