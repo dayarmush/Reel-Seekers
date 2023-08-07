@@ -1,3 +1,4 @@
+import '../style/Map.css'
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { GoogleMap, MarkerF } from '@react-google-maps/api'
@@ -16,9 +17,9 @@ function SimpleMap({ lakes, searchCenter }) {
   })
 
   return (
-    <div>
+    <div className='map-container'>
       <GoogleMap 
-        zoom={searchCenter.lat ? 6 : 4.5} 
+        zoom={searchCenter.lat ? 6 : 5} 
         center={searchCenter.lat ? searchCenter : center} 
         mapContainerClassName="map">
         {lakes && pendingFilter.map(lake => {

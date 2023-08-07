@@ -1,0 +1,13 @@
+.map-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .map {
+    align-self: center;
+    height: 50vh;
+    width: 80%;
+    border-radius: 20px;
+  }
+  

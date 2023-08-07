@@ -16,20 +16,25 @@
   
   /* Styles for the Input component */
   .address-input {
-    width: 400px; /* Adjust the width to your desired size */
+    width: 20%; /* Adjust the width to your desired size */
     padding: 10px;
-    border: 3px solid #ccc;
+    border: 3px solid #b9b9b9;
     border-radius: 20px;
     font-size: 16px;
-    margin: 5px;
+    margin-top: 8px;
   }
+
+  .address-input:focus {
+    outline: none;
+    border-color: #fff;
+  }  
   
   /* Styles for the List component */
   .address-list {
     list-style: none;
     padding: 0;
-    margin-top: 5vh;
-    width: 50%; /* Make the list items fill the available width */
+    margin-top: 50px;
+    width: 41rem; /* Make the list items fill the available width */
     position: absolute;
     z-index: 1; /* Set a higher z-index to make sure the results display above other content */
     background-color: #fff; /* Set the background color to white */
@@ -40,10 +45,9 @@
   
   /* Styles for the ListItem component */
   .list-item {
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 8px;
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     cursor: pointer;
     background-color: #fff; /* Add a background color for better readability */
   }
@@ -52,10 +56,3 @@
   .list-item:hover {
     background-color: #f7f7f7;
   }
-  
-  /* Style for disabled Input */
-  .Input:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  
