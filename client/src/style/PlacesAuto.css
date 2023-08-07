@@ -1,0 +1,61 @@
+/* Styles for the Box component */
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+}
+
+.search-container {
+    position: relative; /* Set the container as the reference for absolute positioning */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the contents horizontally */
+    margin: 10px;
+  }
+  
+  /* Styles for the Input component */
+  .address-input {
+    width: 400px; /* Adjust the width to your desired size */
+    padding: 10px;
+    border: 3px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    margin: 5px;
+  }
+  
+  /* Styles for the List component */
+  .address-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 5vh;
+    width: 50%; /* Make the list items fill the available width */
+    position: absolute;
+    z-index: 1; /* Set a higher z-index to make sure the results display above other content */
+    background-color: #fff; /* Set the background color to white */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+    border-radius: 5px; /* Add some border-radius for a nicer appearance */
+    padding: 0 10px;
+  }
+  
+  /* Styles for the ListItem component */
+  .list-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    background-color: #fff; /* Add a background color for better readability */
+  }
+  
+  /* Styles for the ListItem hover effect */
+  .list-item:hover {
+    background-color: #f7f7f7;
+  }
+  
+  /* Style for disabled Input */
+  .Input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  

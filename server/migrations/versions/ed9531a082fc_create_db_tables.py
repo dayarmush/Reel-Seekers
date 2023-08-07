@@ -1,8 +1,8 @@
 """create db tables
 
-Revision ID: 4eeacfa0fba2
+Revision ID: ed9531a082fc
 Revises: 
-Create Date: 2023-08-03 16:33:58.140007
+Create Date: 2023-08-07 09:28:35.989520
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4eeacfa0fba2'
+revision = 'ed9531a082fc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,7 +25,6 @@ def upgrade():
     sa.Column('min_length', sa.Integer(), nullable=True),
     sa.Column('max_length', sa.Integer(), nullable=True),
     sa.Column('daily_limit', sa.Integer(), nullable=True),
-    sa.Column('status', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -72,6 +71,7 @@ def upgrade():
     )
     op.create_table('fish_lakes',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('status', sa.String(), nullable=False),
     sa.Column('lake_id', sa.Integer(), nullable=False),
     sa.Column('fish_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['fish_id'], ['fish.id'], ),

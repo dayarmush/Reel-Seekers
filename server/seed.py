@@ -158,7 +158,6 @@ def create_fish():
             min_length=randint(5, 20),
             max_length=randint(20, 30),
             daily_limit=randint(10, 30),
-            status=rc(status_list)
         )
         list_fish.append(fish)
     return list_fish
@@ -221,7 +220,8 @@ def create_fish_lakes():
     for i in range(100):
         fish_lake = FishLake(
             fish_id=randint(1, 100),
-            lake_id=randint(1, 100)
+            lake_id=randint(1, 100),
+            status=rc(status_list)
         )
         fish_lakes.append(fish_lake)
     return fish_lakes

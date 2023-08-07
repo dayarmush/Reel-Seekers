@@ -10,7 +10,6 @@ class Fish(db.Model, SM):
     min_length = db.Column(db.Integer)
     max_length = db.Column(db.Integer)
     daily_limit = db.Column(db.Integer)
-    status = db.Column(db.String, nullable=False, default='pending')
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
@@ -18,12 +17,7 @@ class Fish(db.Model, SM):
     # edits = db.relationship('Edit', backref='fish', cascade='all, delete-orphan')
 
     serialize_rules = ('-lake_fish.fish',)
-    #validate to make sure max is more then min
-    @validates('status')
-    def valid_status(self, key, status):
-        if status == 'pending' or status == 'approved':
-            return status
-        raise ValueError('Status must be approved or pending')
+    # validate to make sure max is more then min
 
     @validates('name')
     def valid_name(self, key, name):

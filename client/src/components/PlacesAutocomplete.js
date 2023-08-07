@@ -1,3 +1,4 @@
+import '../style/PlacesAuto.css'
 import { Input, Box, List, ListItem } from "@chakra-ui/react";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 
@@ -23,7 +24,7 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
   }
 
   return (
-    <Box>
+    <Box className='box'>
       <Input
         value={value}
         onChange={(e => setValue(e.target.value))} 
@@ -32,7 +33,7 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
         className='address-input'
       />
       {/* remove function from list components */}
-      <List>
+      <List className='address-list'>
         {status === 'OK' && 
           data.map(({place_id, description}) => {
             return (
@@ -42,14 +43,14 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
                 return func(description), 
                         clearSuggestions(), 
                         setValue(description, false)} : 
-                        () => selectHandler(description)}>
+                        () => selectHandler(description)}
+                        className='list-item'>
                         {description}
               </ListItem>
           )})
         }
       </List>
     </Box>
-      
   )
 }
 
