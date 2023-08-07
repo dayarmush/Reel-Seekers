@@ -13,13 +13,17 @@ function Fish({ fishes, lakeId, user, setLake }) {
   const [error, setError] = useState('')
 
   function handleApprove(id) {
-    fetch(`/fish/${id}`, {
+    const conn = [...fishes].find(fish => {
+      return fish.fish_id === id
+    })
+
+    fetch(`/lake_fish/${conn.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        'status': 'approved'
+        status: 'approved'
       })
     })
     .then(r => {
@@ -27,15 +31,14 @@ function Fish({ fishes, lakeId, user, setLake }) {
         r.json()
         .then(data => {
           setLake(pre => {
-            const fish = pre.lake_fish.map(fish => {
-              if (fish.fish_id === id) {
-                return data.lake_fish
+            const updatedFish = pre.lake_fish.map(fish => {
+              if (fish.id === conn.id) {
+                return data
               } else {
                 return fish
               }
             })
-            console.log(fish)
-            return {...pre, lake_fish: fish}
+            return {...pre, lake_fish: updatedFish}
           })
         })
       } else {
@@ -43,7 +46,6 @@ function Fish({ fishes, lakeId, user, setLake }) {
         .then(err => setError(err.error))
       }
     })
-    .catch(err => setError('Network Error. Please try again later.'))
   }
 
   function handleDelete(id) {
@@ -62,7 +64,6 @@ function Fish({ fishes, lakeId, user, setLake }) {
           })
           return {...pre, lake_fish: fish}
         })
-        console.log('ok')
       } else {
         r.json()
         .then(err => setError(err.error))
@@ -73,13 +74,13 @@ function Fish({ fishes, lakeId, user, setLake }) {
 
   const approvedFish = fishArray.filter(fish => {
     if (fish.fish) {
-      return fish.fish.status === 'approved'
+      return fish.status === 'approved'
     }return null
   })
 
   const pendingFish = fishArray.filter(fish => {
     if (fish.fish) {
-      return fish.fish.status === 'pending'
+      return fish.status === 'pending'
     } return null
   })
 

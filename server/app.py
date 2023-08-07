@@ -286,17 +286,33 @@ def add_lake_fish():
     except (ValueError, IntegrityError) as e:
         return {'error': [str(e)]}, 400
     
-@app.delete('/lake_fish/<int:id>')
+@app.route('/lake_fish/<int:id>', methods=['DELETE', 'PATCH'])
 def delete_lake_fish(id):
     connection = FishLake.query.filter_by(id=id).first()
 
     if not connection:
         return {'error': 'No connection found'}, 404
     
-    db.session.delete(connection)
-    db.session.commit()
+    if request.method == 'DELETE':
+        db.session.delete(connection)
+        db.session.commit()
 
-    return {}, 204
+        return {}, 204
+    
+    if request.method == 'PATCH':
+        status = request.get_json()['status']
+
+        if not status:
+            return {'error': 'Cannot update status'}, 400
+        
+        connection.status = status
+
+        db.session.add(connection)
+        db.session.commit()
+
+        return connection.to_dict(), 200
+
+
 
 @app.get('/check_session')   
 def check_session():
