@@ -42,7 +42,7 @@ function Messages({ messages, setLake, user, lakeId }) {
 
   return (
     <div className='message-board'>
-      <h2>Messages:</h2>
+      <h2>Messages</h2>
       {messages.map(message => {
         return <div key={message.id} className={`message ${message.user.id === user.id ? 'sent' : 'received'}`}>
           <h3>{message.user.username}</h3>

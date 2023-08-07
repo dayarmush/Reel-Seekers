@@ -80,6 +80,17 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
           />
         </div>
       }
+      
+      {lake.lake_fish && 
+        <div className="fish-container">
+          <Fish
+            user={user}
+            lakeId={lake.id}
+            setLake={setLake}
+            fishes={lake.lake_fish}
+          />
+        </div>
+      }
 
       {lake.reviews && 
         <Reviews
@@ -90,14 +101,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
         />
       }
       
-      {lake.lake_fish && 
-        <Fish
-          user={user}
-          lakeId={lake.id}
-          setLake={setLake}
-          fishes={lake.lake_fish}
-        />
-      }
+      
     </div>
   )
 }

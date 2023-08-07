@@ -57,23 +57,26 @@
   }
 
   .lake-map-container {
-    width: 80%;
+    min-width: 70%;
+    border-top: 3px solid orange;
   }
 
-  .lake-map {
-    margin-top: 4rem;
-    width: 100%;
-    height: 50vh;
-    border-radius: 20px;
-  }
+.lake-map {
+  margin-top: 4rem;
+  width: 70%;
+  max-width: 80%;
+  height: 50vh;
+  border-radius: 20px;
+}
 
 .map-container p{
     margin: 2px;
     font-size: 30px;
+    padding-left: 2rem;
 }
 
 .message-container {
     position: absolute;
-    right: 2rem;
+    right: 1px;
     top: 16.5rem
 }
