@@ -1,4 +1,5 @@
 import Fish from "./Fish"
+import '../style/LakeDetail.css'
 import Reviews from "./Reviews"
 import Messages from './Messages'
 import AddFavorite from "./AddFavorite"
@@ -29,53 +30,55 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
     .catch(err => setError('Network Error. Please try again later.'))
   }, [id, setLake])
 
-  let total = 0;
-
-  if (lake.reviews) {
-    lake.reviews.map(rev => {
-      total += rev.rating
-      return total
-    })
-  }
-  
   return (
-    <div>
+    <div className="lake-details">
       {error && <h1>{error}</h1>}
       <h2>{lake.name}</h2>
+      {lake.address1 && <h3>{lake.address1}</h3>}
       <h3>{lake.city}</h3>
       <h4>{lake.state}</h4>
-      {lake.reviews && <h4>{total ? (total / lake.reviews.length).toFixed(1) : 0}</h4>}
-      {lake.address && <h3>{lake.address}</h3>}
-      <AddFavorite lakeId={lake.id} user={user} setUser={setUser}/>
-      {isLoaded && !searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
-      {isLoaded && 
-        lake.lat &&
-        <GoogleMap
-          zoom={15}
-          center={{lat: lake.lat, lng: lake.lng}} 
-          mapContainerClassName="map">
-          <MarkerF position={{lat: lake.lat, lng: lake.lng}} />
-          {searchCenter.lat &&
-           <DirectionsHandler
-            center={searchCenter}
-            selectedMarker={lake}
-            setDistance={setDistance}
-            setDuration={setDuration}
-          />
-          }
-        </GoogleMap>
-      }
 
-      {distance && <p>Distance: {distance}</p>}
-      {duration && <p>Approximate Trip Length: {duration}</p>}
+      <div className="favorite-container">
+        <AddFavorite lakeId={lake.id} user={user} setUser={setUser}/>
+      </div>
+
+      <div className="details-container">
+        <div className="search-container">
+          {isLoaded && !searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
+        </div>
+      </div>
+
+      <div className="lake-map-container">
+        {isLoaded && 
+          lake.lat &&
+          <GoogleMap
+            zoom={15}
+            center={{lat: lake.lat, lng: lake.lng}} 
+            mapContainerClassName="lake-map">
+            <MarkerF position={{lat: lake.lat, lng: lake.lng}} />
+            {searchCenter.lat &&
+            <DirectionsHandler
+              center={searchCenter}
+              selectedMarker={lake}
+              setDistance={setDistance}
+              setDuration={setDuration}
+            />
+            }
+          </GoogleMap>
+        }
+        {distance && <p>Distance: {distance}</p>}
+        {duration && <p>Approximate Trip Length: {duration}</p>}
+      </div>
       
-      {lake.messages && 
-        <Messages 
-          setLake={setLake} 
-          messages={lake.messages} 
-          user={user} 
-          lakeId={lake.id}
-        />
+      {lake.messages &&
+        <div className="message-container">
+          <Messages 
+            setLake={setLake} 
+            messages={lake.messages} 
+            user={user} 
+            lakeId={lake.id}
+          />
+        </div>
       }
 
       {lake.reviews && 

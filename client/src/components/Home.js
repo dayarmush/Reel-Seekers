@@ -14,10 +14,8 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
 
   return (
     <div className='home-container'>
-      <div className="map-container">
-        {!searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
-        <SimpleMap lakes={searchFilter} searchCenter={searchCenter} setSearchCenter={setSearchCenter}/>
-      </div>
+      {!searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
+      <SimpleMap lakes={searchFilter} searchCenter={searchCenter} setSearchCenter={setSearchCenter}/>
 
       <div className='input-container'>
         {/* <label>Search Lakes: */}

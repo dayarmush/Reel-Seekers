@@ -1,0 +1,77 @@
+.message-board {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color: #f0f0f0; /* Set the background color for the entire message board */
+    border-radius: 10px;
+    /* padding: 5px 20px; */
+    border: 5px solid #ccc;
+    width: 500px;
+    height: 51.8rem;
+    max-height: 51.8rem;
+}
+
+.message-board h2 {
+    font-size: 40px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    color: #6b6565;
+    margin-top: 0;
+    padding-top: 0;
+}
+  
+.messages {
+    display: flex;
+    flex-direction: column;
+}
+  
+.message {    
+    color: #000000; /* Set the text color for all messages */
+    padding: 0px 15px;
+    padding-bottom: 8px;
+    margin-bottom: 0px;
+    border-bottom: 1px solid #ccc;
+    max-width: 100%; /* Set a maximum width for the messages */
+}
+  
+.message h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+  
+.message p {
+    font-size: 20px;
+    margin: 0;
+}
+  
+.message-form {
+    margin-top: auto;
+    padding-top: 0%;
+    border-top: 5px solid #ccc;
+}
+  
+.message-form input {
+    width: 80%;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0px 0px 5px;
+    margin-bottom: 8px;
+    margin-left: 9px;
+}
+  
+  .message-form button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+    cursor: pointer;
+  }
+  
+  .message-form button:hover {
+    background-color: #0056b3;
+  }
+  

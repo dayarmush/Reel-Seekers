@@ -1,3 +1,4 @@
+import '../style/AddFavorite.css'
 import { useState } from "react"
 
 // stretch goal useContext for setUser
@@ -66,12 +67,12 @@ function AddFavorite({ user, lakeId, setUser }) {
   }
 
   return (
-    <>
+    <div className="favorite-button-container">
       {user.id && <button onClick={added.length > 0 ? handleRemove : handleAdd}>
         {added.length > 0 ? 'Remove From favorites' : 'Add to Favorites'}
       </button>}
       {error && <h2>{error}</h2>}
-    </>
+    </div>
     
   )
 }

@@ -1,3 +1,4 @@
+import '../style/Messages.css'
 import { useState } from 'react'
 
 function Messages({ messages, setLake, user, lakeId }) {
@@ -40,17 +41,16 @@ function Messages({ messages, setLake, user, lakeId }) {
   }
 
   return (
-    <div>
+    <div className='message-board'>
       <h2>Messages:</h2>
       {messages.map(message => {
-        return <div key={message.id}>
-          <h6>{message.created_at}</h6>
+        return <div key={message.id} className={`message ${message.user.id === user.id ? 'sent' : 'received'}`}>
           <h3>{message.user.username}</h3>
           <p>{message.text}</p>
         </div>
       })}
       {user.id &&
-        <div>
+        <div className='message-form'>
           <form onSubmit={sendMessage}>
             <input
               placeholder="Write a Message"
@@ -62,7 +62,6 @@ function Messages({ messages, setLake, user, lakeId }) {
             />
             <button type='submit'>Send</button>
           </form>
-          
         </div>
       }
       {error && <h2>{error}</h2>}

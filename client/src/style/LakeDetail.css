@@ -1,0 +1,79 @@
+.lake-details {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .lake-details h2 {
+    font-size: 5rem;
+    margin: 0;
+    color: #333;
+    align-self: center;
+  }
+  
+  .lake-details h3 {
+    font-size: 3rem;
+    margin: 0;
+    color: #555;
+    align-self: center;
+  }
+  
+  .lake-details h4 {
+    padding-top: 2px;
+    font-size: 2rem;
+    margin: 0;
+    color: #777;
+    align-self: center;
+    margin-bottom: 5px;
+  }
+
+  .favorite-container {
+    top: 1.5rem; /* Adjust the top position as per your desired vertical distance */
+    right: 15px;
+    position: absolute;
+  }
+  
+  .lake-details h1 {
+    font-size: 48px;
+    margin: 0;
+    color: #ff0000;
+    align-self: center;
+  }
+
+  .details-container {
+    position: relative;
+    margin-bottom: 5px;
+  }
+  
+  .search-container {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 35rem; /* Adjust the right value as per your desired position */
+    width: 100%;
+  }
+
+  .lake-map-container {
+    width: 80%;
+  }
+
+  .lake-map {
+    margin-top: 4rem;
+    width: 100%;
+    height: 50vh;
+    border-radius: 20px;
+  }
+
+.map-container p{
+    margin: 2px;
+    font-size: 30px;
+}
+
+.message-container {
+    position: absolute;
+    right: 2rem;
+    top: 16.5rem
+}
