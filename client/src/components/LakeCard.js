@@ -53,11 +53,21 @@ function LakeCard({ lake, setLakes, setSearchCenter }) {
     })
   }
 
+  let total = 0;
+
+  if (lake.reviews) {
+    lake.reviews.map(rev => {
+      total += rev.rating
+      return total
+    })
+  }
+
   return (
-    <div >
+    <div className='lake-card'>
       <Link to={`/lake/${lake.id}`} onClick={() => setSearchCenter({})}>
         <h2>{lake.name}</h2>
         <h3>{lake.state}</h3>
+        {lake.reviews && <h4>Ave Rating: {total ? (total / lake.reviews.length).toFixed(1) : 0}</h4>}
       </Link>
       {lake.status === 'pending' && 
         <div>

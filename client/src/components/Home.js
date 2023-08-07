@@ -31,8 +31,8 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
         />
         {/* </label> */}
       </div>
-  
-      <div>
+
+      <div className='card-container'>
         {searchFilter.filter(lake => lake.status === 'approved').map(lake => {
           return <LakeCard key={lake.id} lake={lake} setSearchCenter={setSearchCenter}/>
         })}

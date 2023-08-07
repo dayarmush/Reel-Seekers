@@ -1,0 +1,56 @@
+/* Styling for the lake card container */
+.lake-card {
+    flex-basis: calc(20% - 200px); /* Adjust the width as per your design, considering 4 cards in a row */
+    flex-grow: 0; /* Prevent cards from growing */
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 250px;
+  }
+  
+  /* Styling for the lake name */
+  .lake-card h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+  }
+  
+  /* Styling for the lake state */
+  .lake-card h3 {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #666;
+  }
+
+  .lake-card h4 {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  /* Styling for the link */
+  .lake-card a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  /* Styling for the buttons */
+  .lake-card button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  /* Styling for the error message */
+  .lake-card p {
+    color: #ff0000;
+    font-size: 14px;
+  }
+  

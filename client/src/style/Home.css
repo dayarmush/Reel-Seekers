@@ -15,6 +15,14 @@
     border: 3px solid #b9b9b9;
     border-radius: 20px;
     font-size: 16px;
-    margin-top: 10px;
+    margin-top: 15px;
     align-self: center;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-top: 10px;
+    margin-left: 3.1rem;
 }
