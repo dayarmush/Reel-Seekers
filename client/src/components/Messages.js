@@ -10,7 +10,8 @@ function Messages({ messages, setLake, user, lakeId }) {
     setText(e.target.value)
   }
 
-  function sendMessage() {
+  function sendMessage(e) {
+    e.preventDefault()
     if (!user.id) return setError('Please sign in.')
     fetch('/messages', {
       method: 'POST',
@@ -27,6 +28,7 @@ function Messages({ messages, setLake, user, lakeId }) {
       if (r.ok) {
         r.json()
         .then(data => {
+          setText('')
           setLake(pre => {
             const newMessages = [...pre.messages, data]
             return {...pre, messages: newMessages}

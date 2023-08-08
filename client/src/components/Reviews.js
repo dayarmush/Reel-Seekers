@@ -36,6 +36,10 @@ function Reviews({ reviews, setLake, lakeId, user }) {
       if (r.ok) {
         r.json()
         .then(data => {
+          setNewReview({
+            text: '',
+            rating: 0
+          })
           setLake(pre => {
             const newReviews = [...pre.reviews, data]
             return {...pre, reviews: newReviews}
