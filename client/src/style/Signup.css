@@ -1,7 +1,7 @@
 /* Style for the form container */
-.login-form-container {
+.signup-form-container {
     max-width: 500px;
-    margin: 350px auto 30px auto;
+    margin: 400px auto 30px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -9,13 +9,14 @@
   }
   
   /* Style for form labels */
-  .login-form-label {
+  .signup-form-label {
     display: block;
     margin-bottom: 5px;
+    padding-left: 40%;
   }
   
   /* Style for form inputs */
-  .login-form-input {
+  .signup-form-input {
     width: 94%;
     padding: 10px;
     margin-bottom: 10px;
@@ -24,7 +25,7 @@
   }
   
   /* Style for the submit button */
-  .login-form-button {
+  .signup-form-button {
     display: block;
     width: 100%;
     padding: 11px 20px;
@@ -36,7 +37,6 @@
   }
   
   /* Style for error message */
-  .login-form-error {
+  .signup-form-error {
     color: red;
   }
-  

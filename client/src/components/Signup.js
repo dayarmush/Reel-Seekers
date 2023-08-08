@@ -1,3 +1,4 @@
+import '../style/Signup.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -44,10 +45,11 @@ function Signup({ setUser }) {
   }
 
   return(
-    <div>
+    <div className='signup-form-container'>
       <form onSubmit={handleSignup}>
-        <label>Username:
+        <label className='signup-form-label'>Username:</label>
           <input
+            className='signup-form-input'
             placeholder='Username'
             type='text'
             name='username'
@@ -55,9 +57,9 @@ function Signup({ setUser }) {
             onChange={handleChange}
             required
           />
-        </label>
-        <label>Password:
+        <label className='signup-form-label'>Password:</label>
           <input
+            className='signup-form-input'
             placeholder='Password'
             type='password'
             name='password'
@@ -65,10 +67,9 @@ function Signup({ setUser }) {
             onChange={handleChange}
             required
           />
-        </label>
-        <button type='submit'>Signup</button>
+        <button type='submit' className='signup-form-button'>Signup</button>
       </form>
-      {error && <h2>{error}</h2>}
+      {error && <h2 className='signup-form-error'>{error}</h2>}
     </div>
   )
 }

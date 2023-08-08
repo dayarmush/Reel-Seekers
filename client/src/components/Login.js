@@ -45,9 +45,9 @@ function Login({ setUser }) {
   return (
     <div className='login-form-container'>
       <form onSubmit={handleLogin}>
-        <label className='login-form-label'>Username:
+        <label className='login-form-label'>Username:</label>
           <input 
-          className='login-form-input'
+            className='login-form-input'
             placeholder="Username"
             type="text"
             name="username"
@@ -55,10 +55,9 @@ function Login({ setUser }) {
             onChange={handleChange}
             required
           />
-        </label>
-        <label className='login-form-label'>Password:
+        <label className='login-form-label'>Password:</label>
           <input
-          className='login-form-input'
+            className='login-form-input'
             placeholder="Password"
             type="password"
             name="password"
@@ -66,7 +65,6 @@ function Login({ setUser }) {
             onChange={handleChange}
             required
           />
-        </label>
         <button type='submit' className='login-form-button'>Login</button>
       </form>
       {error && <p className='login-form-error'>{error}</p>}
