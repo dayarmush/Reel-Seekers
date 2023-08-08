@@ -1,3 +1,4 @@
+import '../style/Login.css'
 import Login from './Login'
 import { useState } from 'react'
 import LakeCard from './LakeCard'
@@ -30,9 +31,9 @@ function LoginPage({ user, setUser, lakes, setLakes, setSearchCenter }) {
   })
 
   return (
-    <div>
+    <div className='user-page-container'>
       {!user.username && 
-        <div>
+        <div className='login-container'>
           <Login setUser={setUser}/>
           <p>
             Don't Have an Account?
@@ -41,31 +42,33 @@ function LoginPage({ user, setUser, lakes, setLakes, setSearchCenter }) {
         </div>
       }
       {user.id &&
-        <div>
+        <div className='logged-in-container'>
           <h2>Welcome: {user.username}</h2>
-          <p>To Contribute:
-            <button onClick={() => navigate('/new/lake')}>Add Lake</button>
-          </p>
-          <button onClick={handleLogout}>Sign out</button>
+          <button onClick={() => navigate('/new/lake')}>Add Lake</button>
+          <button onClick={handleLogout} className='sign-out-button'>Sign out</button>
         </div>
       }
       {user.id && 
-        <div>
-          <h2>Favorite Lakes:</h2>
-          {user.favorites.map(fave => {
-            return <LakeCard key={fave.lake.id} lake={fave.lake}/>
-          })}
-        </div>
+        <div className='favorite-lake-container'>
+          <h3>Favorite Lakes:</h3>
+          <div className='favorite-lake-card-container'>
+            {user.favorites.map(fave => {
+              return <LakeCard key={fave.lake.id} lake={fave.lake}/>
+            })}
+          </div>
+        </div>  
       }
+
       {user.Admin && 
-        <div>
+        <div className='pending-lakes-container'>
           <h1>Pending Lakes:</h1>
-          {pendingLakes}
+          <div className='pending-lakes-card-container'>
+            {pendingLakes}
+          </div>
         </div>
       }
       {error && <h2>{error}</h2>}
     </div>
-    
   )
 }
 

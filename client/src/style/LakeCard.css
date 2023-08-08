@@ -9,6 +9,8 @@
     margin: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 250px;
+    display: flex;
+    flex-direction: column;
   }
   
   /* Styling for the lake name */
