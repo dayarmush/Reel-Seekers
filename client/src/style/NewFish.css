@@ -1,0 +1,108 @@
+/* Style for the search container */
+.new-fish-search-container{
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px 15px 5px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for the search input */
+  .new-fish-search-input {
+    width: 81%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  /* Style for the search button */
+  .new-fish-search-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Style for the search results box */
+  .new-fish-search-results-box {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding: 0px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .new-fish-list {
+    padding: 0;
+  }
+  
+  /* Style for the list item */
+  .new-fish-list-item {
+    cursor: pointer;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .new-fish-list-item:last-child {
+    border-bottom: none;
+  }
+  
+  .new-fish-list-item:hover {
+    background-color: #cbcbcb;
+  }
+
+/* Style for the form container */
+.new-fish-form-container {
+    max-width: 600px;
+    margin: 275px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for form labels */
+  .new-fish-form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Style for form inputs */
+  .new-fish-form-input {
+    width: 96%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+/* Style for the submit button */
+.new-fish-form-button {
+    padding: 10px 20px;
+    margin-left: 45%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+  
+/* Style for error message */
+.new-fish-form-error {
+    color: red;
+    padding: 0 0 0 37%;
+    margin: 0%;
+    font-size: 20px;
+}

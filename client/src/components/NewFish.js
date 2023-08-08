@@ -1,3 +1,4 @@
+import '../style/NewFish.css'
 import { useState, useEffect } from "react";
 import { Box, List, ListItem } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -36,7 +37,7 @@ function NewFish({ setLake, lake }) {
       })
       .catch(err => setError('Network Error. Please try again later.'))
     } 
-  }, [lakeId, setLake])
+  }, [lakeId, setLake, lake.id])
 
   // Search api for for input fish
   function apiSearch() {
@@ -87,6 +88,7 @@ function NewFish({ setLake, lake }) {
       if (fish.fish) {
         return fish.fish.name.toLowerCase() === form.name.toLowerCase()
       }
+      return null
     })
 
     if (hasFish) return setError('Fish already added')
@@ -182,53 +184,51 @@ function NewFish({ setLake, lake }) {
   return (
     <div>
       {!hasForm &&
-        <div>
+        <div className="new-fish-search-container">
           <input
+            className="new-fish-search-input"
             placeholder="🎣 Search Fish"
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button onClick={apiSearch}>Search</button>
-          <Box>
-            <List>
+          <button className="new-fish-search-button" onClick={apiSearch}>Search</button>
+          <Box className="new-fish-results-box">
+            <List className='new-fish-list'>
               {!error && 
                 searchResults.map(result => {
-                  return <ListItem key={result.id} onClick={() => setSelected(result)}>{result.name}</ListItem>
+                  return <ListItem 
+                    key={result.id} 
+                    onClick={() => setSelected(result)} 
+                    className="new-fish-list-item">
+                      {result.name}
+                    </ListItem>
                 })
               }
             </List>
           </Box>
         </div>
       }
-      <div>
+      <div className={hasForm ? 'new-fish-form-container' : null}>
+        {error && <h6 className='new-fish-form-error'>{error}</h6>}
         {hasForm &&
           <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input type="text" name="name" value={form.name}  readOnly required />
-          </label>
+          <label className='new-fish-form-label'>Name:</label>
+          <input type="text" name="name" value={form.name}  readOnly required className='new-fish-form-input'/>
           <br />
-          <label>
-            Minimum Length:
-            <input type="number" name="min_length" value={form.min_length} onChange={handleChange} />
-          </label>
+          <label className='new-fish-form-label'>Minimum Length:</label>
+          <input type="number" name="min_length" value={form.min_length} onChange={handleChange} className='new-fish-form-input'/>
           <br />
-          <label>
-            Maximum Length:
-            <input type="number" name="max_length" value={form.max_length} onChange={handleChange} />
-          </label>
+          <label className='new-fish-form-label'>Maximum Length:</label>
+          <input type="number" name="max_length" value={form.max_length} onChange={handleChange} className='new-fish-form-input'/>
           <br />
-          <label>
-            Daily Limit:
-            <input type="number" name="daily_limit" value={form.daily_limit} onChange={handleChange} />
-          </label>
+          <label className='new-fish-form-label'>Daily Limit:</label>
+          <input type="number" name="daily_limit" value={form.daily_limit} onChange={handleChange} className='new-fish-form-input'/>
           <br />
-          <button type="submit">Submit</button>
+          <button type="submit" className='new-fish-form-button'>Submit</button>
         </form>
         }
       </div>
-      {error && <h2>{error}</h2>}
     </div>
   )
 }
