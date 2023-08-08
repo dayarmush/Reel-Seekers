@@ -3,7 +3,7 @@
     margin: 10px 0;
 }
 
-.card-container {
+.review-card-container {
     display: flex;
     margin: 0;
     gap: 20px;
@@ -39,20 +39,42 @@
     margin:auto;
 }
   
-  /* Styles for the user input section */
+.review-input-container {
+    display: flex;
+    justify-content: center;
+}
+
 .review-input {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
     align-items: center;
+    padding: 10px;
+    background-color: #ff5733;
+    width: 30%;
+    align-self: center;
+    border-radius: 20px;
+}
+
+.review-input h3 {
+    color: green;
+    padding: 5px;
 }
   
+.review-input input:nth-child(2) {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 2rem;
+}
+
 .review-input input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
-    width: 40rem;
+    width: 33rem;
 }
   
 .review-input button {
@@ -74,4 +96,3 @@
     font-size: 18px;
     margin-top: 10px;
 }
-  

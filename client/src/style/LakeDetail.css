@@ -44,42 +44,42 @@
     align-self: center;
   }
 
-  .details-container {
-    position: relative;
-    margin-bottom: 5px;
-  }
+.center-container {
+  position: relative;
+  margin-bottom: 5px;
+}
   
-  .search-container {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 35rem; /* Adjust the right value as per your desired position */
-    width: 100%;
-  }
+.lake-search-container {
+  display: block;
+  position: absolute;
+  top: 3px;
+  right: 32.5%;
+  width: 100%;
+}
 
 .lake-map-container {
-    min-width: 70%;
-    border-top: 3px solid orange;
+  width: 96%;
+  position: relative;
 }
 
 .lake-map {
   margin-top: 4rem;
-  width: 70%;
+  width: 80%;
   max-width: 80%;
   height: 50vh;
   border-radius: 20px;
 }
 
 .map-container p{
-    margin: 2px;
-    font-size: 30px;
-    padding-left: 2rem;
+  margin: 2px;
+  font-size: 30px;
+  padding-left: 2rem;
 }
 
 .message-container {
-    position: absolute;
-    right: 1px;
-    top: 16.5rem
+  position: absolute;
+  right: 1px;
+  top: 3rem;
 }
 
 div .fish-component-container h2 {
@@ -99,4 +99,10 @@ div .fish-list h2 {
   color: #007bff;
   margin-bottom: 5px;
   border-bottom: 3px solid orange;
+}
+
+.map-messages {
+  border-top: 3px solid orange;
+  display: flex;
+  flex-direction: row;
 }

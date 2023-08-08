@@ -56,8 +56,7 @@ function Reviews({ reviews, setLake, lakeId, user }) {
   return (
     <div className='review-container'>
       <h2>Reviews</h2>
-      <div className='card-container'>
-
+      <div className='review-card-container'>
         {reviews.map(review => {
         return <div className='review-card' key={review.id}>
           <h2>Rating: {review.rating}</h2>
@@ -66,29 +65,31 @@ function Reviews({ reviews, setLake, lakeId, user }) {
         </div>
       })}
       </div>
+      <div className='review-input-container'>
+        {user.id && 
+          <div className='review-input'>
+            <h3>Write a Review</h3>
+            <input
+              type='number'
+              min='0'
+              max='5'
+              name='rating'
+              value={newReview.rating}
+              onChange={handleChange}
+              required
+            />
+            <input
+              placeholder='Review'
+              type='text'
+              name='text'
+              value={newReview.text}
+              onChange={handleChange}
+            />
+            <button onClick={handlePost}>Post</button>
+          </div>
+        }
+      </div>
       
-      {user.id && 
-        <div className='review-input'>
-          <input
-            placeholder='Rating'
-            type='number'
-            min='0'
-            max='5'
-            name='rating'
-            value={newReview.rating}
-            onChange={handleChange}
-            required
-          />
-          <input
-            placeholder='Review'
-            type='text'
-            name='text'
-            value={newReview.text}
-            onChange={handleChange}
-          />
-          <button onClick={handlePost}>Post</button>
-        </div>
-      }
       
       {error && <h2>{error}</h2>}
     </div>

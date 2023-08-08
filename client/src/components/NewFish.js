@@ -184,7 +184,7 @@ function NewFish({ setLake, lake }) {
       {!hasForm &&
         <div>
           <input
-            placeholder="Search Fish"
+            placeholder="🎣 Search Fish"
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}

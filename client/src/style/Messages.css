@@ -2,19 +2,19 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
-    background-color: #ff5733; /* Set the background color for the entire message board */
-    border-radius: 10px;
+    background-color: #F2F2F2; /* Set the background color for the entire message board */
+    border-radius: 20px;
     border: 3px solid #ccc;
-    width: 500px;
-    height: 32.5rem;
-    max-height: 51.8rem;
+    width: 35vh;
+    height: 49vh;
+    max-height: 50vh;
+    min-width: 95%;
 }
 
 .message-board h2 {
     font-size: 40px;
-    padding: 0 17rem 0 0;
-    color: #6b6565;
-    margin-top: 0;
+    color: #001f3fd8;
+    padding-bottom: 3px;
 }
   
 .messages {
@@ -27,7 +27,7 @@
     padding: 0px 15px;
     padding-bottom: 8px;
     margin-bottom: 0px;
-    border-bottom: 3px solid #ccc;
+    border-top: 3px solid #ccc;
     max-width: 100%; 
 }
   
@@ -60,7 +60,7 @@
   
   .message-form button {
     margin-top: 10px;
-    padding: 8px 16px;
+    padding: 8px 10px;
     background-color: #ff5733;
     color: #fff;
     border: none;
