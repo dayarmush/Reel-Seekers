@@ -1,3 +1,4 @@
+import '../style/NewLake.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import PlacesAutocomplete from "./PlacesAutocomplete"
@@ -86,70 +87,79 @@ function NewLake({ isLoaded, lakes, setLakes }) {
   }
 
   return (
-    <div>
+    <div className='new-lake-container'>
       {isLoaded &&
         !hasForm &&
         <PlacesAutocomplete from={'lake'} func={autoFill}/>
       }
-      {error && <h1>{error}</h1>}
+      
       {hasForm && 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name:</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name" 
-            value={formData.name} 
-            onChange={handleChange} 
-            required 
-          />
-          <br />
+        <div className='lake-form-container'>
+          {error && <h4 className='lake-form-error'>{error}</h4>}
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="name" className='lake-form-label'>Name:</label>
+            <input 
+              required 
+              type="text" 
+              id="name" 
+              name="name" 
+              value={formData.name} 
+              onChange={handleChange}
+              className='lake-form-input'
+            />
+            <br />
 
-          <label htmlFor="address1">Address:</label>
-          <input 
-            type="text" 
-            id="address1" 
-            name="address1" 
-            value={formData.address1}
-            onChange={handleChange} 
-            required
-          />
-          <br />
+            <label htmlFor="address1" className='lake-form-label'>Address:</label>
+            <input 
+              required
+              type="text" 
+              id="address1" 
+              name="address1" 
+              onChange={handleChange} 
+              value={formData.address1}
+              className='lake-form-input'
+            />
+            <br />
 
-          <label htmlFor="city">City:</label>
-          <input 
-            type="text" 
-            id="city" 
-            name="city" 
-            value={formData.city}
-            onChange={handleChange} 
-          />
-          <br />
+            <label htmlFor="city" className='lake-form-label'>City:</label>
+            <input 
+              type="text" 
+              id="city" 
+              name="city" 
+              value={formData.city}
+              onChange={handleChange}
+              className='lake-form-input'
+            />
+            <br />
 
-          <label htmlFor="state">State:</label>
-          <input 
-            type="text" 
-            id="state" 
-            name="state" 
-            value={formData.state}
-            onChange={handleChange} 
-          />
-          <br />
+            <label htmlFor="state" className='lake-form-label'>State:</label>
+            <input 
+              type="text" 
+              id="state" 
+              name="state" 
+              value={formData.state}
+              onChange={handleChange}
+              className='lake-form-input' 
+            />
+            <br />
 
-          <label htmlFor="zip_code">Zip Code:</label>
-          <input 
-            type="text" 
-            id="zip_code"
-            name="zip_code"
-            value={formData.zip_code}
-            onChange={handleChange} 
-          />
-          <br />
+            <label htmlFor="zip_code" className='lake-form-label'>Zip Code:</label>
+            <input 
+              type="text" 
+              id="zip_code"
+              name="zip_code"
+              value={formData.zip_code}
+              onChange={handleChange}
+              className='lake-form-input'
+            />
+            <br />
 
-          <button type="submit">Submit</button>
-        </form>
+            <button type="submit" className='lake-form-button'>Submit</button>
+          </form>
+        </div> 
       }
     </div>
+        
   )
 }
 

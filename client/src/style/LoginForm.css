@@ -1,12 +1,12 @@
 /* Style for the form container */
 .login-form-container {
-    max-width: 500px;
-    margin: 350px auto 30px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
+  max-width: 500px;
+  margin: 350px auto 30px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
   
   /* Style for form labels */
   .login-form-label {

@@ -1,0 +1,44 @@
+/* Style for the form container */
+.lake-form-container {
+    max-width: 500px;
+    margin: 300px auto 30px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #ffffff73;
+}
+    
+/* Style for form labels */
+.lake-form-label {
+    display: block;
+    margin-bottom: 5px;
+}
+    
+/* Style for form inputs */
+.lake-form-input {
+    width: 94%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+    
+/* Style for the submit button */
+.lake-form-button {
+    display: block;
+    width: 98.5%;
+    padding: 11px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+    
+/* Style for error message */
+.lake-form-error {
+    color: red;
+    padding: 0 0 0 17%;
+    margin: 0%;
+    font-size: 20px;
+}
