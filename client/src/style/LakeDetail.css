@@ -5,6 +5,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
+    margin-bottom: 5rem;
   }
   
   .lake-details h2 {
@@ -56,10 +57,10 @@
     width: 100%;
   }
 
-  .lake-map-container {
+.lake-map-container {
     min-width: 70%;
     border-top: 3px solid orange;
-  }
+}
 
 .lake-map {
   margin-top: 4rem;
@@ -79,4 +80,23 @@
     position: absolute;
     right: 1px;
     top: 16.5rem
+}
+
+div .fish-component-container h2 {
+  font-size: 50px;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+div .fish-list h2 {
+  font-size: 30px;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.review-container h2 {
+  font-size: 50px;
+  color: #007bff;
+  margin-bottom: 5px;
+  border-bottom: 3px solid orange;
 }

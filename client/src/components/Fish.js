@@ -87,8 +87,8 @@ function Fish({ fishes, lakeId, user, setLake }) {
 
   return (
     <div className='fish-component-container'>
-      <h2>Fish</h2>
-      <div className='fish-list'>
+      {approvedFish[0] && <h2 className='fish-h2'>Fish</h2>}
+      <div className={approvedFish[0] ? 'fish-list' : 'fish-list-none'}>
         {fishArray && approvedFish.map(fish => {
           if (fish.fish) {
             return <div key={fish.fish.id} className='fish-item'>
@@ -102,8 +102,8 @@ function Fish({ fishes, lakeId, user, setLake }) {
         })}
       </div>
       
-      {user.Admin && pendingFish[0] && <h2>Pending Fish</h2>}
-      <div className='fish-list'>
+      {user.Admin && pendingFish[0] && <h2 className='fish-h2'>Pending Fish</h2>}
+      <div className={pendingFish[0] ? 'fish-list' : 'fish-list-none'}>
         {user.Admin && 
           pendingFish[0] && pendingFish.map(fish => {
             if (fish.fish) {

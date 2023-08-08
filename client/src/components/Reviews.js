@@ -1,7 +1,8 @@
+import '../style/Review.css'
 import { useState } from 'react'
 
 function Reviews({ reviews, setLake, lakeId, user }) {
- 
+ // clear input field after submit
   const [error, setError] = useState('')
   const [newReview, setNewReview] = useState({
     text: '',
@@ -49,17 +50,21 @@ function Reviews({ reviews, setLake, lakeId, user }) {
   }
 
   return (
-    <div>
-      <h2>Reviews:</h2>
-      {reviews.map(review => {
-        return <div key={review.id}>
+    <div className='review-container'>
+      <h2>Reviews</h2>
+      <div className='card-container'>
+
+        {reviews.map(review => {
+        return <div className='review-card' key={review.id}>
           <h2>Rating: {review.rating}</h2>
           <h3>{review.text}</h3>
           <h6>{review.user.username}</h6>
         </div>
       })}
+      </div>
+      
       {user.id && 
-        <div>
+        <div className='review-input'>
           <input
             placeholder='Rating'
             type='number'
