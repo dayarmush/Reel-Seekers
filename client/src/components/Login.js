@@ -1,3 +1,4 @@
+import '../style/LoginForm.css'
 import { useState } from 'react'
 
 function Login({ setUser }) {
@@ -42,10 +43,11 @@ function Login({ setUser }) {
   }
 
   return (
-    <div>
+    <div className='login-form-container'>
       <form onSubmit={handleLogin}>
-        <label>Username:
+        <label className='login-form-label'>Username:
           <input 
+          className='login-form-input'
             placeholder="Username"
             type="text"
             name="username"
@@ -54,8 +56,9 @@ function Login({ setUser }) {
             required
           />
         </label>
-        <label>Password:
+        <label className='login-form-label'>Password:
           <input
+          className='login-form-input'
             placeholder="Password"
             type="text"
             name="password"
@@ -64,9 +67,9 @@ function Login({ setUser }) {
             required
           />
         </label>
-        <button type='submit'>Login</button>
+        <button type='submit' className='login-form-button'>Login</button>
       </form>
-      {error && <p>{error}</p>}
+      {error && <p className='login-form-error'>{error}</p>}
     </div>
   )
 }

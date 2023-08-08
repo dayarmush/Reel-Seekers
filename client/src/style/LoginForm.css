@@ -1,0 +1,42 @@
+/* Style for the form container */
+.login-form-container {
+    max-width: 500px;
+    margin: 200px auto 30px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Style for form labels */
+  .login-form-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Style for form inputs */
+  .login-form-input {
+    width: 94%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Style for the submit button */
+  .login-form-button {
+    display: block;
+    width: 100%;
+    padding: 11px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Style for error message */
+  .login-form-error {
+    color: red;
+  }
+  
