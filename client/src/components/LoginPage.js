@@ -35,10 +35,10 @@ function LoginPage({ user, setUser, lakes, setLakes, setSearchCenter }) {
       {!user.username && 
         <div className='login-container'>
           <Login setUser={setUser}/>
-          <p>
+          <p className='signup-message'>
             Don't Have an Account?
-            <button onClick={() => navigate('/new/user')}>Signup</button>
           </p>
+          <button onClick={() => navigate('/new/user')} className='signup-button'>Signup</button>
         </div>
       }
       {user.id &&

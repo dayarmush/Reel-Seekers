@@ -60,7 +60,7 @@ function Login({ setUser }) {
           <input
           className='login-form-input'
             placeholder="Password"
-            type="text"
+            type="password"
             name="password"
             value={form.password}
             onChange={handleChange}
