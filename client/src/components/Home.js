@@ -19,7 +19,7 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
 
       <div className='input-container'>
         <input 
-          placeholder="🔎  Search Lakes"
+          placeholder="🎣 Search Lakes"
           type="text"
           name="search"
           value={search}

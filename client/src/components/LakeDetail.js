@@ -47,7 +47,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
         <AddFavorite lakeId={lake.id} user={user} setUser={setUser}/>
       </div>
       
-      <div className="center-container">
+      {/* <div className="center-container"> */}
         <div className="lake-search-container">
           {isLoaded && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
         </div>
@@ -87,7 +87,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
             </div>
           }
         </div>
-      </div>
+      {/* </div> */}
       
       {lake.lake_fish && 
           <Fish

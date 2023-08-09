@@ -1,47 +1,56 @@
 /* Styles for the Box component */
 .box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  margin: 10px 650px 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.no-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 650px 0;
 }
 
 .search-container {
-    position: relative; /* Set the container as the reference for absolute positioning */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center the contents horizontally */
-    margin: 10px;
-  }
+  position: relative; /* Set the container as the reference for absolute positioning */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the contents horizontally */
+  margin: 15px 0 0px 0;
+}
   
-  /* Styles for the Input component */
-  .address-input {
-    width: 40rem; /* Adjust the width to your desired size */
-    padding: 10px;
-    border: 3px solid #b9b9b9;
-    border-radius: 20px;
-    font-size: 16px;
-    margin-top: 8px;
-  }
+/* Styles for the Input component */
+.address-input {
+  width: 39.5rem; /* Adjust the width to your desired size */
+  padding: 10px;
+  border: 3px solid #b9b9b9;
+  border-radius: 20px;
+  font-size: 16px;
+  margin-top: 8px;
+}
 
-  .address-input:focus {
-    outline: none;
-    border-color: #fff;
-  }  
+.address-input:focus {
+  outline: none;
+  border-color: #fff;
+}  
   
-  /* Styles for the List component */
-  .address-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 50px;
-    width: 41rem; /* Make the list items fill the available width */
-    position: absolute;
-    z-index: 1; /* Set a higher z-index to make sure the results display above other content */
-    background-color: #fff; /* Set the background color to white */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
-    border-radius: 5px; /* Add some border-radius for a nicer appearance */
-    padding: 0 10px;
-  }
+/* Styles for the List component */
+.address-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 50px;
+  width: 40rem; /* Make the list items fill the available width */
+  position: absolute;
+  z-index: 1; /* Set a higher z-index to make sure the results display above other content */
+  background-color: #fff; /* Set the background color to white */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+  border-radius: 0 0 10px 10px; /* Add some border-radius for a nicer appearance */
+  padding: 0 10px;
+}
   
   /* Styles for the ListItem component */
   .list-item {

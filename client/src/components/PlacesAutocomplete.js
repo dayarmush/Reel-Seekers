@@ -24,27 +24,26 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
   }
 
   return (
-    <Box className='box'>
+    <Box className={value ? 'box' : 'no-back'}>
       <Input
         value={value}
         onChange={(e => setValue(e.target.value))} 
         disabled={!ready} 
-        placeholder='Search Address' 
+        placeholder='🎣 Search Address' 
         className='address-input'
       />
-      {/* remove function from list components */}
       <List className='address-list'>
         {status === 'OK' && 
           data.map(({place_id, description}) => {
             return (
               <ListItem 
-                key={place_id} 
+                key={place_id}
+                className='list-item'
                 onClick={from === 'lake' ? () => { 
                 return func(description),
                         clearSuggestions(),
                         setValue(description, false)} : 
-                        () => selectHandler(description)}
-                        className='list-item'>
+                        () => selectHandler(description)}>
                         {description}
               </ListItem>
           )})
