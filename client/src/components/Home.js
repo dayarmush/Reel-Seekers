@@ -4,7 +4,7 @@ import { useState } from "react"
 import LakeCard from './LakeCard'
 import PlacesAutocomplete from './PlacesAutocomplete'
 
-function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter, setSelectedMarker }) {
+function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
 
   const [search, setSearch] = useState('')
 
@@ -14,11 +14,10 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter, setSelect
 
   return (
     <div className='home-container'>
-      {!searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
-      <SimpleMap lakes={searchFilter} searchCenter={searchCenter} setSearchCenter={setSearchCenter} />
+      <PlacesAutocomplete setSearchCenter={setSearchCenter}/>
+      <SimpleMap lakes={searchFilter} searchCenter={searchCenter} />
 
       <div className='input-container'>
-        {/* <label>Search Lakes: */}
         <input 
           placeholder="🔎  Search Lakes"
           type="text"
@@ -27,12 +26,11 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter, setSelect
           className='search-input'
           onChange={(e) => setSearch(e.target.value)}
         />
-        {/* </label> */}
       </div>
 
       <div className='card-container'>
         {searchFilter.filter(lake => lake.status === 'approved').map(lake => {
-          return <LakeCard key={lake.id} lake={lake} setSearchCenter={setSearchCenter}/>
+          return <LakeCard key={lake.id} lake={lake} />
         })}
       </div>
       

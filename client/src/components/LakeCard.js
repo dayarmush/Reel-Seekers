@@ -2,7 +2,7 @@ import '../style/LakeCard.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function LakeCard({ lake, setLakes, setSearchCenter }) {
+function LakeCard({ lake, setLakes }) {
 
   const [error, setError] = useState('')
 
@@ -64,7 +64,7 @@ function LakeCard({ lake, setLakes, setSearchCenter }) {
 
   return (
     <div className='lake-card'>
-      <Link to={`/lake/${lake.id}`} onClick={() => setSearchCenter({})}>
+      <Link to={`/lake/${lake.id}`}>
         <h2>{lake.name}</h2>
         <h3>{lake.state}</h3>
         {lake.reviews && <h4>Ave Rating: {total ? (total / lake.reviews.length).toFixed(1) : 0}</h4>}

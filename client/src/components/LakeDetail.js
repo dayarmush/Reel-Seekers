@@ -49,7 +49,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
       
       <div className="center-container">
         <div className="lake-search-container">
-          {isLoaded && !searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
+          {isLoaded && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
         </div>
 
       
