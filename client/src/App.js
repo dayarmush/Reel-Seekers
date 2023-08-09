@@ -16,8 +16,9 @@ function App() {
   const [lakes, setLakes] = useState([])
   const [error, setError] = useState('')
   const [searchCenter, setSearchCenter] = useState({})
+  // const [selectedMarker, setSelectedMarker] = useState(null)
   const [ libraries ] = useState(['places'])
-
+  // console.log(searchCenter)
   useEffect(() => {
     fetch('/check_session')
     .then(r => {

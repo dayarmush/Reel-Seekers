@@ -15,13 +15,18 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
   const [error, setError] = useState('')
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
+  const [selectedMarker, setSelectedMarker] = useState(null)
 
   useEffect(() => {
     fetch(`/lakes/${id}`)
     .then(r => {
       if (r.ok) {
         r.json()
-        .then(data => setLake(data))
+        .then(data => {
+          setLake(data) 
+          setSelectedMarker(data)
+        })
+
       } else {
         r.json()
         .then(err => setError(err.error))
@@ -60,7 +65,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
                 {searchCenter.lat &&
                 <DirectionsHandler
                   center={searchCenter}
-                  selectedMarker={lake}
+                  selectedMarker={selectedMarker}
                   setDistance={setDistance}
                   setDuration={setDuration}
                 />
