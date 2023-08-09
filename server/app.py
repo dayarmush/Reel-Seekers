@@ -54,7 +54,7 @@ def signup():
     try:
         user = User(
             username=data.get('username'),
-            # Admin=True
+            Admin=True
         )
 
         user.password_hash = data.get('password')
@@ -91,10 +91,10 @@ def lakes_route():
     
     if request.method == 'POST':
         data = request.get_json()
-        print(data)
+
         try:
             lake = Lake(
-                name = data.get('name'),
+                name = data.get('name').title(),
                 address1 = data.get('address1'),
                 lat=data.get('lat'),
                 lng=data.get('lng'),

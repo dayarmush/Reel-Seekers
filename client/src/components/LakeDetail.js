@@ -39,7 +39,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
     <div className="lake-details">
       {error && <h1>{error}</h1>}
       <h2>{lake.name}</h2>
-      {lake.address1 && <h3>{lake.address1}</h3>}
+      {/* {lake.address1 && <h3>{lake.address1}</h3>} */}
       <h3>{lake.city}</h3>
       <h4>{lake.state}</h4>
 
@@ -49,7 +49,7 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
       
       {/* <div className="center-container"> */}
         <div className="lake-search-container">
-          {isLoaded && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
+          {isLoaded && !searchCenter.lat && <PlacesAutocomplete setSearchCenter={setSearchCenter}/>}
         </div>
 
       

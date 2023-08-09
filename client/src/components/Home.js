@@ -14,7 +14,7 @@ function Home({ isLoaded, lakes, error, searchCenter, setSearchCenter }) {
 
   return (
     <div className='home-container'>
-      <PlacesAutocomplete setSearchCenter={setSearchCenter}/>
+      <PlacesAutocomplete setSearchCenter={setSearchCenter} searchCenter={searchCenter}/>
       <SimpleMap lakes={searchFilter} searchCenter={searchCenter} />
 
       <div className='input-container'>

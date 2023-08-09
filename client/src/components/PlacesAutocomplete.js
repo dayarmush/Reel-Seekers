@@ -2,7 +2,7 @@ import '../style/PlacesAuto.css'
 import { Input, Box, List, ListItem } from "@chakra-ui/react";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 
-const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
+const PlacesAutocomplete = ({ from, func, setSearchCenter }) => {
   const {
     ready,
     value,
@@ -43,7 +43,7 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter}) => {
                 return func(description),
                         clearSuggestions(),
                         setValue(description, false)} : 
-                        () => selectHandler(description)}>
+                        () =>  selectHandler(description)}>
                         {description}
               </ListItem>
           )})
