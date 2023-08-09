@@ -111,7 +111,6 @@ function NewLake({ isLoaded, lakes, setLakes }) {
 
             <label htmlFor="address1" className='lake-form-label'>Address:</label>
             <input 
-              required
               type="text" 
               id="address1" 
               name="address1" 

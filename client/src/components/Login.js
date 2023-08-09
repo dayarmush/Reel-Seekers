@@ -44,6 +44,7 @@ function Login({ setUser }) {
 
   return (
     <div className='login-form-container'>
+      {error && <p className='login-form-error'>{error}</p>}
       <form onSubmit={handleLogin}>
         <label className='login-form-label'>Username:</label>
           <input 
@@ -67,7 +68,6 @@ function Login({ setUser }) {
           />
         <button type='submit' className='login-form-button'>Login</button>
       </form>
-      {error && <p className='login-form-error'>{error}</p>}
     </div>
   )
 }

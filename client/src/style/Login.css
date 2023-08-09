@@ -9,12 +9,13 @@
 .signup-message {
     font-size: 14px;
     margin-top: 10px;
+    color: #ffffff;
 }
   
 
 .signup-button {
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #557ca5;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -30,12 +31,12 @@
 .logged-in-container h2 {
     font-size: 50px;
     margin: 0 0 10px 0;
-    color: #007bff;
+    color: #557ca5;
 }
 
 .logged-in-container button:nth-child(2) {
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #557ca5;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -45,7 +46,7 @@
 
 .logged-in-container button:nth-child(3) {
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #557ca5;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -54,7 +55,7 @@
 
 .favorite-lake-container h3:nth-child(1) {
     font-size: 30px;
-    color: #007bff;
+    color: #557ca5;
     margin-bottom: 5px;
     margin-right: 88%;
 }
@@ -63,13 +64,13 @@
     display: flex;
     margin: 0;
     gap: 10px;
-    border-top: 3px solid orange;
+    border-top: 3px solid #557ca5;
     padding-top: 10px;
 }
 
 .pending-lakes-container h1 {
     font-size: 30px;
-    color: #007bff;
+    color: #557ca5;
     margin-bottom: 5px;
     margin-right: 88%;
 }
@@ -78,7 +79,7 @@
     display: flex;
     margin: 0;
     gap: 10px;
-    border-top: 3px solid orange;
+    border-top: 3px solid #557ca5;
     flex-wrap: wrap;
     padding-top: 10px;
 }

@@ -61,14 +61,19 @@
   position: relative;
 }
 
+.lake-map-container p{
+  color: #f9f9f9;
+}
+
+
 .lake-map {
   margin-top: 5rem;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   width: 80%;
   max-width: 80%;
   height: 50vh;
   border-radius: 20px;
-  opacity: 85%;
+  opacity: 95%;
 }
 
 .map-container p{
@@ -79,13 +84,13 @@
 
 .message-container {
   position: absolute;
-  right: 0;
+  right: 20px;
   top: 17.5rem;
 }
 
-.fish-component-container {
+/* .fish-component-container {
   margin-left: 20px;
-}
+} */
 
 div .fish-component-container h2 {
   font-size: 50px;

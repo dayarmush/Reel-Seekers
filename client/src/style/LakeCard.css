@@ -3,7 +3,7 @@
     flex-basis: calc(20% - 200px); /* Adjust the width as per your design, considering 4 cards in a row */
     flex-grow: 0; /* Prevent cards from growing */
     flex-shrink: 0; /* Prevent cards from shrinking */
-    background-color: #f9f9f9b7;
+    background-color: #f9f9f9ec;
     border-radius: 8px;
     padding: 20px;
     margin: 10px;
@@ -41,7 +41,7 @@
   
   /* Styling for the buttons */
   .lake-card button {
-    background-color: #007bff;
+    background-color: #666666ba;
     color: #fff;
     padding: 8px 16px;
     border: none;

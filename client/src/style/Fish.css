@@ -16,7 +16,7 @@
 }
   
 .fish-item {
-    background-color: #f9f9f9ba;
+    background-color: #f9f9f9ec;
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -33,12 +33,13 @@
   
 .fish-list .fish-item button {
     padding: 8px 16px;
-    background-color: #557ca5;
+    background-color: #666666ba;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin: 0 10px 0 0;
+    padding: auto;
     flex-wrap: nowrap;
 }
   

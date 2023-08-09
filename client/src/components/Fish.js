@@ -112,7 +112,7 @@ function Fish({ fishes, lakeId, user, setLake }) {
                 <h4>Min Length: {fish.fish.min_length}</h4>
                 <h4>Max Length: {fish.fish.max_length}</h4>
                 <h4>Limit: {fish.fish.daily_limit}</h4>
-                <div>
+                <div className='pending-buttons'>
                   <button onClick={() => handleApprove(fish.fish.id)}>Approve</button>
                   <button onClick={() => handleDelete(fish.fish.id)}>Delete</button>
                 </div>

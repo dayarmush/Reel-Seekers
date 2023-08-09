@@ -1,7 +1,7 @@
 /* Styles for the review container */
-.review-container {
+/* .review-container {
     margin: 10px 20px;
-}
+} */
 
 .review-card-container {
     display: flex;
@@ -11,12 +11,12 @@
   
   /* Styles for each review card */
 .review-card {
-    background-color: #f9f9f9ba;
+    background-color: #f9f9f9de;
     border-radius: 20px;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 400px;
-    margin: 5px 0px 0px 5px;
+    margin: 5px 0px 5px 0px;
     min-height: 80px;
 }
   

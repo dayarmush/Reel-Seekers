@@ -18,6 +18,7 @@ function NewFish({ setLake, lake }) {
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
   const [form, setForm] = useState(blankForm)
+  const [fishError, setFishError] = useState('')
   const [hasForm, setHasForm] = useState(false)
   const [searchResults, setSearchResults] = useState([])
 
@@ -55,7 +56,7 @@ function NewFish({ setLake, lake }) {
         .then(data => setSearchResults(data))
       } else {
         r.json()
-        .then(err => setError(err.error.message))
+        .then(err => setFishError(err.error.message))
       }
     })
     .catch(err => setError('Network Error. Please try again later.'))
@@ -185,6 +186,7 @@ function NewFish({ setLake, lake }) {
     <div>
       {!hasForm &&
         <div className="new-fish-search-container">
+          {fishError && <h6 className='new-fish-form-error'>{fishError}</h6>}
           <input
             className="new-fish-search-input"
             placeholder="🎣 Search Fish"

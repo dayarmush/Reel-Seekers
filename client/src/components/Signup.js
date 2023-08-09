@@ -46,6 +46,7 @@ function Signup({ setUser }) {
 
   return(
     <div className='signup-form-container'>
+      {error && <h2 className='signup-form-error'>{error}</h2>}
       <form onSubmit={handleSignup}>
         <label className='signup-form-label'>Username:</label>
           <input
@@ -69,7 +70,6 @@ function Signup({ setUser }) {
           />
         <button type='submit' className='signup-form-button'>Signup</button>
       </form>
-      {error && <h2 className='signup-form-error'>{error}</h2>}
     </div>
   )
 }
