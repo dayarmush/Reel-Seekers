@@ -6,7 +6,7 @@
 .input-container {
     display: flex;
     flex-direction: column;
-    border-top: 5px solid #ff5733;
+    border-top: 5px solid #557ca5;
 }
 
 .search-input {
@@ -17,6 +17,7 @@
     font-size: 16px;
     margin-top: 15px;
     align-self: center;
+    background-color: #f9f9f9ba;
 }
 
 .card-container {

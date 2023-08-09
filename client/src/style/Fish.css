@@ -6,7 +6,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    border-top: 3px solid orange;
+    border-top: 3px solid #557ca5;
 }
 
 .fish-list-none {
@@ -16,7 +16,7 @@
 }
   
 .fish-item {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9ba;
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -33,12 +33,13 @@
   
 .fish-list .fish-item button {
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #557ca5;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 0 10px 0 0;
+    flex-wrap: nowrap;
 }
   
 .fish-list .fish-item button:hover {
@@ -49,7 +50,7 @@
 .fish-component-container button {
     margin-top: 20px;
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #557ca5;
     color: #fff;
     border: none;
     border-radius: 5px;

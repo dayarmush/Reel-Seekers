@@ -52,9 +52,8 @@
   display: block;
   position: absolute;
   top: 13.5rem;
-  /* right: 32%; */
   width: 100%;
-  border-top: 3px solid orange;
+  border-top: 3px solid #557ca5;
 }
 
 .lake-map-container {
@@ -63,11 +62,13 @@
 }
 
 .lake-map {
-  margin-top: 4rem;
+  margin-top: 5rem;
+  margin-left: 20px;
   width: 80%;
   max-width: 80%;
   height: 50vh;
   border-radius: 20px;
+  opacity: 85%;
 }
 
 .map-container p{
@@ -78,27 +79,31 @@
 
 .message-container {
   position: absolute;
-  right: 25px;
-  top: 16.5rem;
+  right: 0;
+  top: 17.5rem;
+}
+
+.fish-component-container {
+  margin-left: 20px;
 }
 
 div .fish-component-container h2 {
   font-size: 50px;
-  color: #007bff;
+  color: #557ca5;
   margin-bottom: 5px;
 }
 
 div .fish-list h2 {
   font-size: 30px;
-  color: #007bff;
+  color: #333;
   margin-bottom: 5px;
 }
 
 .review-container h2 {
   font-size: 50px;
-  color: #007bff;
+  color: #557ca5;
   margin-bottom: 5px;
-  border-bottom: 3px solid orange;
+  border-bottom: 3px solid #557ca5;
 }
 
 /* .map-messages {

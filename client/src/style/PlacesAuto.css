@@ -27,10 +27,11 @@
 .address-input {
   width: 39.5rem; /* Adjust the width to your desired size */
   padding: 10px;
-  border: 3px solid #b9b9b9;
+  border: 3px solid white;
   border-radius: 20px;
   font-size: 16px;
   margin-top: 8px;
+  background-color: #f9f9f9ba;
 }
 
 .address-input:focus {
