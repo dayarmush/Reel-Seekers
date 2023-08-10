@@ -18,12 +18,12 @@ function SimpleMap({ lakes, searchCenter }) {
 
   return (
     <div className='map-container'>
-      <GoogleMap 
+      <GoogleMap
         zoom={searchCenter.lat ? 6 : 5} 
         center={searchCenter.lat ? searchCenter : center} 
         mapContainerClassName="map">
         {lakes && pendingFilter.map(lake => {
-          return <MarkerF 
+          return <MarkerF
             position={{lat: lake.lat, lng: lake.lng}} 
             key={lake.id} 
             onClick={() => markerClick(lake)}/>

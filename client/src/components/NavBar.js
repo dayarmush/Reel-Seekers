@@ -8,7 +8,6 @@ function NavBar({ setSearchCenter }) {
             <NavLink to='/user/'>👤</NavLink>
         </div>
     )
-
 }
 
 export default NavBar

@@ -9,6 +9,7 @@
     height: 49vh;
     max-height: 50vh;
     min-width: 95%;
+    overflow: scroll;
 }
 
 .message-board h2 {
