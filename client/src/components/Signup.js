@@ -35,7 +35,7 @@ function Signup({ setUser }) {
       if (r.ok) {
         r.json()
         .then(newUser => setUser(newUser))
-        .then(navigate('/user'))
+        .then(navigate('/'))
       } else {
         r.json()
         .then(err => setError(err.error))
