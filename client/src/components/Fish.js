@@ -2,11 +2,6 @@ import '../style/Fish.css'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-// filter for pending and approved
-// only admin can see the pending
-// the pending and approved should be on the lake_fish table
-// fix the approved .then()
-
 function Fish({ fishes, lakeId, user, setLake }) {
 
   const navigate = useNavigate()

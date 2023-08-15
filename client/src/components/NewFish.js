@@ -2,7 +2,7 @@ import '../style/NewFish.css'
 import { useState, useEffect } from "react";
 import { Box, List, ListItem } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
-// on reload lake state disappears
+
 function NewFish({ setLake, lake }) {
 
   const blankForm = {
@@ -18,8 +18,8 @@ function NewFish({ setLake, lake }) {
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
   const [form, setForm] = useState(blankForm)
-  const [fishError, setFishError] = useState('')
   const [hasForm, setHasForm] = useState(false)
+  const [fishError, setFishError] = useState('')
   const [searchResults, setSearchResults] = useState([])
 
   const fishKey = process.env.REACT_APP_FISH_API_KEY

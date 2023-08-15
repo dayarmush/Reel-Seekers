@@ -1,17 +1,17 @@
 from config import db, SM, validates, re
-# change zip code to be nullable
+
 class Lake(db.Model, SM):
     __tablename__ = 'lakes'
     __table_args__ = (db.CheckConstraint('LENGTH(address1) >= 3'),)
-
+    # images or image?
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
-    address1 = db.Column(db.String, unique=True)
-    lat = db.Column(db.Integer)
-    lng = db.Column(db.Integer)
+    address = db.Column(db.String, unique=True)
+    lat = db.Column(db.Integer, unique=True)
+    lng = db.Column(db.Integer, unique=True)
     city = db.Column(db.String)
     state = db.Column(db.String)
-    zip_code = db.Column(db.String, nullable=False)
+    zip_code = db.Column(db.String)
     status = db.Column(db.String, nullable=False, default='pending')
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
@@ -30,17 +30,19 @@ class Lake(db.Model, SM):
             return status
         raise ValueError('Status must be approved or pending')
 
-    # @validates('name')
-    # def validate_name(self, key, name):
-    #     if re.search('^[a-zA-Z][a-zA-Z\s\-]+[a-zA-Z]$', name) is not None:
-    #         return name
-    #     raise ValueError('Invalid name. Please use only letters from A to Z (both lowercase and uppercase).')
+    @validates('name')
+    def validate_name(self, key, name):
+        if re.search('^[a-zA-Z][a-zA-Z\s\-]+[a-zA-Z]$', name) is not None:
+            return name
+        raise ValueError('Invalid name. Please only use letters.')
     
-    # @validates('zip_code')
-    # def validate_zip(self, key, zip_code):
-    #     if len(zip_code) == 5:
-    #         return zip_code
-    #     raise ValueError('Invalid Zip Code')
-
+    @validates('zip_code')
+    def validate_zip(self, key, zip_code):
+        if zip_code:
+            if len(zip_code) == 5:
+                return zip_code
+            raise ValueError('Invalid Zip Code')
+        return zip_code
+    
     def __repr__(self):
         return f'(Lake: {self.name})'
