@@ -1,6 +1,11 @@
 .fish-component-container {
     margin: 10px 0;
 }
+
+a {
+    text-decoration: none;
+    color: #333;
+}
   
 .fish-list {
     display: flex;

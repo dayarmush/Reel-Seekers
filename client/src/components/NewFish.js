@@ -204,7 +204,7 @@ function NewFish({ setLake, lake }) {
       navigate(`/lake/${lakeId}`)
     }, 1000)
   }
-console.log(form)
+
   return (
     <div>
       {!hasForm &&

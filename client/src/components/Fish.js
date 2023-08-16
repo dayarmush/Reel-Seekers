@@ -8,6 +8,13 @@ function Fish({ fishes, lakeId, user, setLake }) {
   const fishArray = Object.values(fishes);
   const [error, setError] = useState('')
 
+  const months = [
+    null, 'January', 'February', 
+    'March', 'April', 'May', 'June', 
+    'July', 'August', 'September', 
+    'October', 'November', 'December'
+  ];
+
   function handleApprove(id) {
     const conn = [...fishes].find(fish => {
       return fish.fish_id === id
@@ -43,7 +50,7 @@ function Fish({ fishes, lakeId, user, setLake }) {
       }
     })
   }
-
+console.log(fishes)
   function handleDelete(id) {
     const conn = [...fishes].find(fish => {
       return fish.fish_id === id
@@ -87,10 +94,13 @@ function Fish({ fishes, lakeId, user, setLake }) {
         {fishArray && approvedFish.map(fish => {
           if (fish.fish) {
             return <div key={fish.fish.id} className='fish-item'>
-              <h2>{fish.fish.name}</h2>
+              <h2><a href={fish.fish.wiki} target="_blank" rel="noopener noreferrer">{fish.fish.name}</a></h2>
               <h4>Min Length: {fish.fish.min_length !== 0 ? fish.fish.min_length : null}</h4>
               <h4>Max Length: {fish.fish.max_length !== 0 ? fish.fish.max_length : null}</h4>
               <h4>Limit: {fish.fish.daily_limit !== 0 ? fish.fish.daily_limit : null}</h4>
+              <h4>Season Start: {months[fish.fish.start_season]}</h4>
+              <h4>Season End: {months[fish.fish.end_season]}</h4>
+              {fish.fish.image && <img src={fish.fish.image} alt={fish.fish.name}></img>}
             </div>
           }
           return null
@@ -103,10 +113,13 @@ function Fish({ fishes, lakeId, user, setLake }) {
           pendingFish[0] && pendingFish.map(fish => {
             if (fish.fish) {
               return <div key={fish.fish.id} className='fish-item'>
-                <h2>{fish.fish.name}</h2>
-                <h4>Min Length: {fish.fish.min_length}</h4>
-                <h4>Max Length: {fish.fish.max_length}</h4>
-                <h4>Limit: {fish.fish.daily_limit}</h4>
+                <h2><a href={fish.fish.wiki} target="_blank" rel="noopener noreferrer">{fish.fish.name}</a></h2>
+                <h4>Min Length: {fish.fish.min_length !== 0 ? fish.fish.min_length : null}</h4>
+                <h4>Max Length: {fish.fish.max_length !== 0 ? fish.fish.max_length : null}</h4>
+                <h4>Limit: {fish.fish.daily_limit !== 0 ? fish.fish.daily_limit : null}</h4>
+                <h4>Season Start: {months[fish.fish.start_season]}</h4>
+                <h4>Season End: {months[fish.fish.end_season]}</h4>
+                <img src={fish.fish.image} alt={fish.fish.name}></img>
                 <div className='pending-buttons'>
                   <button onClick={() => handleApprove(fish.fish.id)}>Approve</button>
                   <button onClick={() => handleDelete(fish.fish.id)}>Delete</button>
