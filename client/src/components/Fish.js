@@ -88,9 +88,9 @@ function Fish({ fishes, lakeId, user, setLake }) {
           if (fish.fish) {
             return <div key={fish.fish.id} className='fish-item'>
               <h2>{fish.fish.name}</h2>
-              <h4>Min Length: {fish.fish.min_length}</h4>
-              <h4>Max Length: {fish.fish.max_length}</h4>
-              <h4>Limit: {fish.fish.daily_limit}</h4>
+              <h4>Min Length: {fish.fish.min_length !== 0 ? fish.fish.min_length : null}</h4>
+              <h4>Max Length: {fish.fish.max_length !== 0 ? fish.fish.max_length : null}</h4>
+              <h4>Limit: {fish.fish.daily_limit !== 0 ? fish.fish.daily_limit : null}</h4>
             </div>
           }
           return null
