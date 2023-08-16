@@ -1,18 +1,20 @@
 import '../style/NewLake.css'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom';
 import PlacesAutocomplete from "./PlacesAutocomplete"
+import { GoogleMap, MarkerF } from '@react-google-maps/api'
 import { getGeocode, getLatLng } from 'use-places-autocomplete';
 
 function NewLake({ isLoaded, lakes, setLakes }) {
 
   const navigate = useNavigate()
+  let center = useMemo(() => ({lat: 39, lng: -98}), [])
 
   const [error, setError] = useState('')
   const [hasForm, setHasForm] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
-    address1: '',
+    address: '',
     lat: '',
     lng: '',
     city: '',
@@ -36,7 +38,7 @@ function NewLake({ isLoaded, lakes, setLakes }) {
         // get the lat lng out of result
         const { lat, lng } = await getLatLng(results[0]);
         setFormData({
-          address1: results[0].address_components[0].long_name + ' ' + results[0].address_components[1].long_name,
+          address: results[0].address_components[0].long_name + ' ' + results[0].address_components[1].long_name,
           lat: lat,
           lng: lng,
           city: results[0].address_components[3].long_name,
@@ -48,6 +50,13 @@ function NewLake({ isLoaded, lakes, setLakes }) {
     } catch (error) {
       console.log('Error getting geocode:', error);
     }
+  }
+
+  function handleMapClick(e) {
+    const lat = e.latLng.lat()
+    const lng = e.latLng.lng()
+    setFormData({'lat': lat, 'lng': lng})
+    setHasForm(pre => !pre)
   }
 
   // Add to pending array
@@ -85,12 +94,20 @@ function NewLake({ isLoaded, lakes, setLakes }) {
       navigate('/user')
     }, 1000)
   }
-
+  
   return (
     <div className='new-lake-container'>
       {isLoaded &&
         !hasForm &&
-        <PlacesAutocomplete from={'lake'} func={autoFill}/>
+        <div>
+          <PlacesAutocomplete from={'lake'} func={autoFill}/>
+          <GoogleMap
+            zoom={5}
+            center={center} 
+            onClick={handleMapClick}
+            mapContainerClassName="lake-map">
+          </GoogleMap>
+        </div>
       }
       
       {hasForm && 
@@ -109,13 +126,13 @@ function NewLake({ isLoaded, lakes, setLakes }) {
             />
             <br />
 
-            <label htmlFor="address1" className='lake-form-label'>Address:</label>
+            <label htmlFor="address" className='lake-form-label'>Address:</label>
             <input 
               type="text" 
-              id="address1" 
-              name="address1" 
+              id="address" 
+              name="address" 
               onChange={handleChange} 
-              value={formData.address1}
+              value={formData.address}
               className='lake-form-input'
             />
             <br />
