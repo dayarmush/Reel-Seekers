@@ -156,7 +156,10 @@ def add_fish():
             min_length = data.get('min_length'),
             max_length = data.get('max_length'),
             daily_limit = data.get('daily_limit'),
-            wiki=data.get('wiki')
+            wiki=data.get('wiki'),
+            image=data.get('image'),
+            start_season=data.get('start_season'),
+            end_season=data.get('end_season')
         )
 
         db.session.add(fish)
