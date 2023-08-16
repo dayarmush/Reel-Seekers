@@ -2,7 +2,7 @@ import '../style/NewFish.css'
 import { useState, useEffect } from "react";
 import { Box, List, ListItem } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
-// on reload lake state disappears
+
 function NewFish({ setLake, lake }) {
 
   const blankForm = {
@@ -10,16 +10,35 @@ function NewFish({ setLake, lake }) {
     'min_length': 0,
     'max_length': 0,
     'daily_limit': 0,
-    'wiki': ''
+    'start_season': 0,
+    'end_season': 0,
+    'wiki': '',
+    'image': ''
   }
+
+  const months = [
+    { value: 0, label: 'None'},
+    { value: 1, label: 'January' },
+    { value: 2, label: 'February' },
+    { value: 3, label: 'March' },
+    { value: 4, label: 'April' },
+    { value: 5, label: 'May' },
+    { value: 6, label: 'June' },
+    { value: 7, label: 'July' },
+    { value: 8, label: 'August' },
+    { value: 9, label: 'September' },
+    { value: 10, label: 'October' },
+    { value: 11, label: 'November' },
+    { value: 12, label: 'December' },
+  ];
 
   const navigate = useNavigate()
   const { lakeId } = useParams()
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
   const [form, setForm] = useState(blankForm)
-  const [fishError, setFishError] = useState('')
   const [hasForm, setHasForm] = useState(false)
+  const [fishError, setFishError] = useState('')
   const [searchResults, setSearchResults] = useState([])
 
   const fishKey = process.env.REACT_APP_FISH_API_KEY
@@ -65,7 +84,11 @@ function NewFish({ setLake, lake }) {
   // set the selected fish name as name on form
   function setSelected(result) { 
     setForm(pre => {
-      return {...pre, 'name': result.name, 'wiki': result.url}
+      return {...pre, 
+       'name': result.name,
+       'wiki': result.url, 
+       'image': result.img_src_set['1.5x']
+      }
     })
     setHasForm(pre => !pre)
   }
@@ -94,15 +117,13 @@ function NewFish({ setLake, lake }) {
 
     if (hasFish) return setError('Fish already added')
 
-    const min_length = Number(form.min_length);
-    const max_length = Number(form.max_length);
-
-    // Check if both fields are blank
-    if ((!form.min_length && !form.max_length)) {
-      setError(null);
-    } else if (min_length >= max_length) {
+    if (Number(form.min_length) > Number(form.max_length)) {
       setError('Minimum must be less than Maximum');
       return;
+    }
+
+    if (Number(form.start_season) >= Number(form.end_season)) {
+      return setError('Start of the season must be before the end')
     }
 
     fetch(`/fish_by_name/${form.name}`)
@@ -130,8 +151,10 @@ function NewFish({ setLake, lake }) {
         'min_length': Number(form.min_length),
         'max_length': Number(form.max_length),
         'daily_limit': Number(form.daily_limit),
-        'wiki': form.wiki
-
+        'wiki': form.wiki,
+        'image': form.image,
+        'start_season': Number(form.start_season),
+        'end_season': Number(form.end_season)
       })
     })
     .then(r => {
@@ -215,17 +238,69 @@ function NewFish({ setLake, lake }) {
         {error && <h6 className='new-fish-form-error'>{error}</h6>}
         {hasForm &&
           <form onSubmit={handleSubmit}>
-          <label className='new-fish-form-label'>Name:</label>
-          <input type="text" name="name" value={form.name}  readOnly required className='new-fish-form-input'/>
+          <label className='new-fish-form-label'>Name:*</label>
+          <input 
+            type="text" name="name" 
+            value={form.name}  
+            readOnly 
+            required 
+            className='new-fish-form-input'
+          />
           <br />
           <label className='new-fish-form-label'>Minimum Length:</label>
-          <input type="number" name="min_length" value={form.min_length} onChange={handleChange} className='new-fish-form-input'/>
+          <input 
+            min='0'
+            type="number" 
+            name="min_length" 
+            value={form.min_length} 
+            onChange={handleChange} 
+            className='new-fish-form-input'
+          />
           <br />
           <label className='new-fish-form-label'>Maximum Length:</label>
-          <input type="number" name="max_length" value={form.max_length} onChange={handleChange} className='new-fish-form-input'/>
+          <input 
+            min='0'
+            type="number" 
+            name="max_length" 
+            value={form.max_length} 
+            onChange={handleChange} 
+            className='new-fish-form-input'
+          />
           <br />
           <label className='new-fish-form-label'>Daily Limit:</label>
-          <input type="number" name="daily_limit" value={form.daily_limit} onChange={handleChange} className='new-fish-form-input'/>
+          <input 
+            min='0'
+            type="number" 
+            name="daily_limit" 
+            value={form.daily_limit} 
+            onChange={handleChange} 
+            className='new-fish-form-input'/>
+          <br />
+          <label className='new-fish-form-label'>Start of Season:</label>
+          <select
+            name="start_season"
+            value={form.start_season}
+            onChange={handleChange}
+            className='new-fish-form-input'>
+            {months.map(month => (
+              <option key={month.value} value={month.value}>
+                {month.label}
+              </option>
+            ))}
+          </select>
+          <br />
+          <label className='new-fish-form-label'>End of Season:</label>
+          <select
+            name="end_season"
+            value={form.end_season}
+            onChange={handleChange}
+            className='new-fish-form-input'>
+            {months.map(month => (
+              <option key={month.value} value={month.value}>
+                {month.label}
+              </option>
+            ))}
+          </select>
           <br />
           <button type="submit" className='new-fish-form-button'>Submit</button>
         </form>

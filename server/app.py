@@ -95,7 +95,7 @@ def lakes_route():
         try:
             lake = Lake(
                 name = data.get('name').title(),
-                address1 = data.get('address1'),
+                address = data.get('address1'),
                 lat=data.get('lat'),
                 lng=data.get('lng'),
                 city = data.get('city'),
@@ -156,7 +156,10 @@ def add_fish():
             min_length = data.get('min_length'),
             max_length = data.get('max_length'),
             daily_limit = data.get('daily_limit'),
-            wiki=data.get('wiki')
+            wiki=data.get('wiki'),
+            image=data.get('image'),
+            start_season=data.get('start_season'),
+            end_season=data.get('end_season')
         )
 
         db.session.add(fish)
@@ -312,8 +315,6 @@ def delete_lake_fish(id):
 
         return connection.to_dict(), 200
 
-
-
 @app.get('/check_session')   
 def check_session():
 
@@ -340,7 +341,7 @@ def add_favorite():
     
     except (ValueError, IntegrityError) as e:
         return {'error': [str(e)]}, 400
-    
+   
 @app.delete('/favorites/<int:id>')
 def remove_favorite(id):
     fave = Favorite.query.filter_by(id=id).first()
