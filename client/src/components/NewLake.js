@@ -101,13 +101,17 @@ function NewLake({ isLoaded, lakes, setLakes }) {
         !hasForm &&
         <div>
           <PlacesAutocomplete from={'lake'} func={autoFill}/>
-          <GoogleMap
-            zoom={5}
-            center={center} 
-            onClick={handleMapClick}
-            mapContainerClassName="lake-map">
-          </GoogleMap>
         </div>
+      }
+
+      {isLoaded && 
+        <GoogleMap
+          zoom={5}
+          center={center} 
+          onClick={handleMapClick}
+          mapContainerClassName="lake-map">
+            {formData.lat && <MarkerF position={{lat: formData.lat, lng: formData.lng}}/>}
+        </GoogleMap>
       }
       
       {hasForm && 
