@@ -57,7 +57,7 @@ function App() {
 
   return (
     <>
-      <NavBar setSearchCenter={setSearchCenter}/>
+      <NavBar/>
       <div>
         <Routes>
           

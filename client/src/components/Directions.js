@@ -16,7 +16,6 @@ function DirectionsHandler({ center, selectedMarker, setDuration, setDistance })
         destination: new window.google.maps.LatLng(
           selectedMarker.lat,
           selectedMarker.lng,
-          console.log(selectedMarker)
         ),
         travelMode: 'DRIVING',
       },

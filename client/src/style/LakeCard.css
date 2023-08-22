@@ -49,6 +49,10 @@
     margin-right: 10px;
     cursor: pointer;
   }
+
+.lake-card button:hover {
+  background-color: #0056b3;
+}
   
   /* Styling for the error message */
   .lake-card p {

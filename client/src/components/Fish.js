@@ -50,7 +50,7 @@ function Fish({ fishes, lakeId, user, setLake }) {
       }
     })
   }
-console.log(fishes)
+
   function handleDelete(id) {
     const conn = [...fishes].find(fish => {
       return fish.fish_id === id
