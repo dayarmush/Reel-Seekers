@@ -70,7 +70,9 @@ def signup():
         return user.to_dict(), 201
     
     except (ValueError, IntegrityError) as e:
-        return {'error': [str(e)]}, 400
+        error_message = str(e)
+        error_name = type(e).__name__
+        return {'error': error_message, 'name': error_name}, 400
 
 @app.delete('/logout')
 def logout():
