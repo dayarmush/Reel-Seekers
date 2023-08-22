@@ -38,12 +38,12 @@ function NewLake({ isLoaded, lakes, setLakes }) {
         // get the lat lng out of result
         const { lat, lng } = await getLatLng(results[0]);
         setFormData({
-          address: results[0].address_components[0].long_name + ' ' + results[0].address_components[1].long_name,
+          // address: results[0].address_components[0].long_name + ' ' + results[0].address_components[1].long_name,
           lat: lat,
           lng: lng,
-          city: results[0].address_components[3].long_name,
-          state: results[0].address_components.length >= 5 ? results[0].address_components[5].long_name : '',
-          zip_code: results[0].address_components.length >= 7 ? results[0].address_components[7].short_name : '',
+          // city: results[0].address_components[3].long_name,
+          // state: results[0].address_components.length >= 5 ? results[0].address_components[5].long_name : '',
+          // zip_code: results[0].address_components.length >= 7 ? results[0].address_components[7].short_name : '',
         });
         setHasForm(pre => !pre)
       }
@@ -59,8 +59,8 @@ function NewLake({ isLoaded, lakes, setLakes }) {
     setHasForm(pre => !pre)
   }
 
-  // Add to pending array
-  const handleSubmit = (e) => {
+  // Add to pending lakes array
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const alreadyExists = lakes.filter(lake => {
@@ -69,30 +69,28 @@ function NewLake({ isLoaded, lakes, setLakes }) {
 
     if (alreadyExists[0]) return setError('Lake Already Exists. (May Be Pending)')
 
-    fetch('/lakes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(r => {
-      if (r.ok) {
-        r.json()
-        .then(data => {
-          setLakes(pre => [...pre, data])
-          setError('Thanks For Contributing')
-        })
-      } else {
-        r.json()
-        .then(err => setError(err.error))
-      }
-    })
-    .catch(err => console.error('Network Error. Please try again later.'))
+    try {
+      const response = await fetch('/lakes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
 
-    return setTimeout(() => {
-      navigate('/user')
-    }, 1000)
+      if (response.ok) { 
+        const data = await response.json()
+        setLakes(pre => [...pre, data]);
+        setError('Thanks For Contributing');
+        setTimeout(() => navigate('/user'), 1000);
+      } else {
+        const err = await response.json()
+        if (err.name === 'IntegrityError') return setError('A lake with this name or coordinates already exists')
+        setError(err.error)
+      }
+    } catch (err) {
+      setError('Network Error. Please try again later.')
+    }
   }
   
   return (
