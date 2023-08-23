@@ -18,7 +18,8 @@ function Reviews({ reviews, setLake, lakeId, user }) {
     })
   }
 
-  async function handlePost() {
+  async function handlePost(e) {
+    e.preventDefault()
     if (!user.username) return setError('Please sign in')
 
     try {

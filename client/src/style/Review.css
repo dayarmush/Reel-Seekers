@@ -1,8 +1,3 @@
-/* Styles for the review container */
-/* .review-container {
-    margin: 10px 20px;
-} */
-
 .review-card-container {
     display: flex;
     margin: 0;
@@ -10,7 +5,7 @@
     overflow-x: scroll;
 }
   
-  /* Styles for each review card */
+/* Styles for each review card */
 .review-card {
     background-color: #f9f9f9de;
     border-radius: 20px;
@@ -45,15 +40,19 @@
     justify-content: center;
 }
 
+.review-input-container form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .review-input {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    align-items: center;
     padding: 10px;
     background-color: #f9f9f9ba;
     width: 30%;
-    align-self: center;
     border-radius: 20px;
 }
 
@@ -62,7 +61,7 @@
     padding: 5px;
 }
   
-.review-input input:nth-child(2) {
+form input:nth-child(1) {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -92,7 +91,7 @@
 }
   
   /* Styles for the error message */
-.review-container h2.error {
+.review-container p {
     color: red;
     font-size: 18px;
     margin-top: 10px;
