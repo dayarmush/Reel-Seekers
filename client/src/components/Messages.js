@@ -10,36 +10,37 @@ function Messages({ messages, setLake, user, lakeId }) {
     setText(e.target.value)
   }
 
-  function sendMessage(e) {
+  const sendMessage = async (e) => {
     e.preventDefault()
     if (!user.id) return setError('Please sign in.')
-    fetch('/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        text: text,
-        user_id: user.id,
-        lake_id: lakeId
+
+    try {
+      const response = await fetch('/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          text: text,
+          user_id: user.id,
+          lake_id: lakeId
+        })
       })
-    })
-    .then(r => {
-      if (r.ok) {
-        r.json()
-        .then(data => {
-          setText('')
-          setLake(pre => {
-            const newMessages = [...pre.messages, data]
-            return {...pre, messages: newMessages}
-          })
+
+      if (response.ok) {
+        const data = await response.json()
+        setText('')
+        setLake(pre => {
+          const newMessages = [...pre.messages, data]
+          return {...pre, messages: newMessages}
         })
       } else {
-        r.json()
-        .then(err => setError(err.error))
+        const err = await response.json()
+        setError(err.error)
       }
-    })
-    .catch(err => setError('Network error. Please try again later.'))
+    } catch (err) {
+      setError('Network error. Please try again later.')
+    }
   }
 
   return (
@@ -66,7 +67,7 @@ function Messages({ messages, setLake, user, lakeId }) {
           </form>
         </div>
       }
-      {error && <h2>{error}</h2>}
+      {error && <p>{error}</p>}
     </div>
   )
 }
