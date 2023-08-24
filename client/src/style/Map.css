@@ -11,4 +11,8 @@
     border-radius: 20px;
     opacity: 95%;
   }
+
+  :hover {
+    cursor: pointer;
+  }
   

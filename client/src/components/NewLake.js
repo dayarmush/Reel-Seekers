@@ -48,7 +48,7 @@ function NewLake({ isLoaded, lakes, setLakes }) {
         setHasForm(pre => !pre)
       }
     } catch (error) {
-      console.log('Error getting geocode:', error);
+      setError('Error getting geocode:', error);
     }
   }
 
@@ -56,7 +56,14 @@ function NewLake({ isLoaded, lakes, setLakes }) {
     const lat = e.latLng.lat()
     const lng = e.latLng.lng()
     setFormData({'lat': lat, 'lng': lng})
-    setHasForm(pre => !pre)
+    setHasForm(true)
+    setTimeout(() => {
+      window.scroll({
+        top: 1000,
+        left: 100,
+        behavior: "smooth",
+      });
+  }, 0);
   }
 
   // Add to pending lakes array
@@ -107,7 +114,7 @@ function NewLake({ isLoaded, lakes, setLakes }) {
           zoom={5}
           center={center} 
           onClick={handleMapClick}
-          mapContainerClassName="lake-map">
+          mapContainerClassName="new-lake-map">
             {formData.lat && <MarkerF position={{lat: formData.lat, lng: formData.lng}}/>}
         </GoogleMap>
       }
@@ -116,6 +123,7 @@ function NewLake({ isLoaded, lakes, setLakes }) {
         <div className='lake-form-container'>
           {error && <h4 className='lake-form-error'>{error}</h4>}
           <form onSubmit={handleSubmit}>
+            <h2>New lake Form</h2>
             <label htmlFor="name" className='lake-form-label'>Name:</label>
             <input 
               required 
