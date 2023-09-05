@@ -1,5 +1,5 @@
 import '../style/Home.css'
-import SimpleMap from "./Map"
+import SimpleMap from "./map"
 import { useState } from "react"
 import LakeCard from './LakeCard'
 import PlacesAutocomplete from './PlacesAutocomplete'
