@@ -1,11 +1,25 @@
+.new-lake-map {
+    margin: 30px 12rem;
+    width: 80%;
+    max-width: 80%;
+    height: 60vh;
+    border-radius: 20px;
+    opacity: 95%;
+}
+
 /* Style for the form container */
 .lake-form-container {
     max-width: 500px;
-    margin: 300px auto 30px auto;
+    margin: 100px auto 100px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9de;
+}
+
+.lake-form-container h2 {
+    font-size: 30px;
+    margin: 0 0 5px 0;
 }
     
 /* Style for form labels */

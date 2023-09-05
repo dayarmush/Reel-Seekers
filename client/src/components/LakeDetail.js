@@ -18,21 +18,23 @@ function LakeDetail({ user, isLoaded, setUser, lake, setLake, searchCenter, setS
   const [selectedMarker, setSelectedMarker] = useState(null)
 
   useEffect(() => {
-    fetch(`/lakes/${id}`)
-    .then(r => {
-      if (r.ok) {
-        r.json()
-        .then(data => {
-          setLake(data) 
-          setSelectedMarker(data)
-        })
-
+    const fetchData = async () => {
+      const response = await fetch(`/lakes/${id}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        setLake(data);
+        setSelectedMarker(data);
       } else {
-        r.json()
-        .then(err => setError(err.error))
+        const err = await response.json()
+        setError(err.error)
       }
-    })
-    .catch(err => setError('Network Error. Please try again later.'))
+    };
+  
+    fetchData().catch(error => {
+      setError('Network Error. Please try again later.');
+      setLake([])
+    });
   }, [id, setLake])
 
   return (

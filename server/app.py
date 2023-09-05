@@ -12,23 +12,28 @@ import os
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='/',
+    static_folder='../client/build',
+    template_folder='../client/build'
+    )
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Change to true before deployment
-app.json.compact = False
+app.json.compact = True
 
 migrate = Migrate(app, db)
 
 db.init_app(app)
 
 # Uncomment before deployment (route for react)
-# @app.route('/')
-# def index():
-#     return render_template()
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.post('/login')
 def login():
@@ -70,7 +75,9 @@ def signup():
         return user.to_dict(), 201
     
     except (ValueError, IntegrityError) as e:
-        return {'error': [str(e)]}, 400
+        error_message = str(e)
+        error_name = type(e).__name__
+        return {'error': error_message, 'name': error_name}, 400
 
 @app.delete('/logout')
 def logout():
@@ -109,7 +116,9 @@ def lakes_route():
             return lake.to_dict(), 201
         
         except (ValueError, IntegrityError) as e:
-            return {'error': [str(e)]}, 400
+            error_message = str(e)
+            error_name = type(e).__name__
+            return {'error': error_message, 'name': error_name}, 400
 
 @app.route('/lakes/<int:id>', methods=['PATCH', 'DELETE', 'GET'])
 def lakes_by_id(id):

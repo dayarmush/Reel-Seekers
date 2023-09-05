@@ -18,7 +18,7 @@ class Review(db.Model, SM):
     def valid_rating(self, key, rating):
         if 0 <= rating <= 5:
             return rating
-        raise ValueError('Rating can only be between 0 and 5')
+        raise ValueError('Rating must be between 0 and 5')
 
     def __repr__(self):
         return f'(Review: {self.id})'

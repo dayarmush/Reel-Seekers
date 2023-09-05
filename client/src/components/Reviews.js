@@ -18,39 +18,41 @@ function Reviews({ reviews, setLake, lakeId, user }) {
     })
   }
 
-  function handlePost() {
+  async function handlePost(e) {
+    e.preventDefault()
     if (!user.username) return setError('Please sign in')
-    fetch('/reviews', {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        text: newReview.text,
-        rating: Number(newReview.rating),
-        user_id: user.id,
-        lake_id: lakeId
+
+    try {
+      const response = await fetch('/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify({
+          text: newReview.text,
+          rating: Number(newReview.rating),
+          user_id: user.id,
+          lake_id: lakeId
+        })
       })
-    })
-    .then(r => {
-      if (r.ok) {
-        r.json()
-        .then(data => {
-          setNewReview({
-            text: '',
-            rating: 0
-          })
-          setLake(pre => {
-            const newReviews = [...pre.reviews, data]
-            return {...pre, reviews: newReviews}
-          })
+
+      if (response.ok) {
+        const data = await response.json()
+        setNewReview({
+          text: '',
+          rating: 0
+        })
+        setLake(pre => {
+          const newReviews = [...pre.reviews, data]
+          return {...pre, reviews: newReviews}
         })
       } else {
-        r.json()
-        .then(err => setError(err.error))
+        const err = await response.json()
+        setError(err.error)
       }
-    })
-    .catch(err => setError('Network error. Please try again later.'))
+    } catch {
+      setError('Network error. Please try again later.')
+    }
   }
 
   return (
@@ -69,29 +71,29 @@ function Reviews({ reviews, setLake, lakeId, user }) {
         {user.id && 
           <div className='review-input'>
             <h3>Write a Review</h3>
-            <input
-              type='number'
-              min='0'
-              max='5'
-              name='rating'
-              value={newReview.rating}
-              onChange={handleChange}
-              required
-            />
-            <input
-              placeholder='Review'
-              type='text'
-              name='text'
-              value={newReview.text}
-              onChange={handleChange}
-            />
-            <button onClick={handlePost}>Post</button>
+            <form onSubmit={handlePost}>
+              <input
+                type='number'
+                min='0'
+                max='5'
+                name='rating'
+                value={newReview.rating}
+                onChange={handleChange}
+                required
+              />
+              <input
+                placeholder='Review'
+                type='text'
+                name='text'
+                value={newReview.text}
+                onChange={handleChange}
+              />
+              <button type='submit'>Post</button>
+            </form>
+            {error && <p>{error}</p>}
           </div>
         }
       </div>
-      
-      
-      {error && <h2>{error}</h2>}
     </div>
   )
 }

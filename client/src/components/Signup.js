@@ -20,28 +20,31 @@ function Signup({ setUser }) {
     })
   }
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     setError('')
     e.preventDefault()
 
-    fetch('/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(form)
-    })
-    .then(r => {
-      if (r.ok) {
-        r.json()
-        .then(newUser => setUser(newUser))
-        .then(navigate('/'))
+    try {
+      const response = await fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(form)
+      })
+
+      if (response.ok) {
+        const newUser = await response.json()
+        setUser(newUser)
+        navigate('/')
       } else {
-        r.json()
-        .then(err => setError(err.error))
+        const err = await response.json()
+        if (err.name === 'IntegrityError') return setError('Username already exist. Please enter a different username')
+        setError(err.error)
       }
-    })
-    .catch(err => setError('Network Error. Please try again later.'))
+    } catch {
+      setError('Network Error. Please try again later.')
+    }
   }
 
   return(
