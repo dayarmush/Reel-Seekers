@@ -12,23 +12,28 @@ import os
 
 load_dotenv()
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='/',
+    static_folder='../client/build',
+    template_folder='../client/build'
+    )
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Change to true before deployment
-app.json.compact = False
+app.json.compact = True
 
 migrate = Migrate(app, db)
 
 db.init_app(app)
 
 # Uncomment before deployment (route for react)
-# @app.route('/')
-# def index():
-#     return render_template()
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.post('/login')
 def login():
