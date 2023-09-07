@@ -2,13 +2,13 @@ from config import db, SM, validates, re
 
 class Lake(db.Model, SM):
     __tablename__ = 'lakes'
-    __table_args__ = (db.CheckConstraint('LENGTH(address1) >= 3'),)
+    __table_args__ = (db.CheckConstraint('LENGTH(address) >= 3'),)
     # images or image?
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
     address = db.Column(db.String, unique=True)
-    lat = db.Column(db.Integer, unique=True)
-    lng = db.Column(db.Integer, unique=True)
+    lat = db.Column(db.Integer, nullable=False)
+    lng = db.Column(db.Integer, nullable=False)
     city = db.Column(db.String)
     state = db.Column(db.String)
     zip_code = db.Column(db.String)
@@ -32,7 +32,7 @@ class Lake(db.Model, SM):
 
     @validates('name')
     def validate_name(self, key, name):
-        if re.search('^[a-zA-Z][a-zA-Z\s\-]+[a-zA-Z]$', name) is not None:
+        if re.search("^[a-zA-Z][a-zA-Z\s\-'.]*[a-zA-Z]$", name) is not None:
             return name
         raise ValueError('Invalid name. Please only use letters.')
     
