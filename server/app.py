@@ -1,4 +1,4 @@
-from config import Flask, session, db, request, render_template, Migrate, IntegrityError
+from server.config import Flask, session, db, request, render_template, Migrate, IntegrityError
 from models.favorite import Favorite
 # from models.edit import Edit
 from models.fish import Fish

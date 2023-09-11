@@ -1,4 +1,4 @@
-from config import db, SM, validates, re
+from server.config import db, SM, validates, re
 
 class Fish(db.Model, SM):
     __tablename__ = 'fish'

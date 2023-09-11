@@ -1,4 +1,4 @@
-from config import session, db
+from server.config import session, db
 from app import app
 from models.favorite import Favorite
 # from models.edit import Edit
