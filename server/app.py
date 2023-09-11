@@ -33,7 +33,7 @@ db.init_app(app)
 # Uncomment before deployment (route for react)
 @app.route('/')
 def index():
-    return render_template('../client/public/index.html')
+    return app.send_static_file("index.html")
 
 @app.post('/login')
 def login():
