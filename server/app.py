@@ -66,7 +66,7 @@ def signup():
     try:
         user = User(
             username=data.get('username'),
-            # Admin=True
+            Admin=True
         )
 
         user.password_hash = data.get('password')
