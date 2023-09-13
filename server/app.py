@@ -12,10 +12,16 @@ import os
 
 load_dotenv()
 
+# app = Flask(__name__, static_url_path='', static_folder='../client/build', template_folder='../client/build')
+# @app.route('/')
+# @app.route('/<int:id>')
+# def index(id=0):
+#     return render_template("index.html")
+
 app = Flask(
     __name__,
-    static_url_path='/',
-    static_folder='../client/public',
+    static_url_path='',
+    static_folder='../client/build',
     template_folder='../client/build'
     )
 
@@ -32,8 +38,9 @@ db.init_app(app)
 
 # Uncomment before deployment (route for react)
 @app.route('/')
-def index():
-    return app.send_static_file("index.html")
+@app.route('/<int:id>')
+def index(id=0):
+    return render_template("index.html")
 
 @app.post('/login')
 def login():
