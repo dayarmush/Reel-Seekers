@@ -12,12 +12,6 @@ import os
 
 load_dotenv()
 
-# app = Flask(__name__, static_url_path='', static_folder='../client/build', template_folder='../client/build')
-# @app.route('/')
-# @app.route('/<int:id>')
-# def index(id=0):
-#     return render_template("index.html")
-
 app = Flask(
     __name__,
     static_url_path='/',
@@ -369,6 +363,11 @@ def remove_favorite(id):
     db.session.commit()
 
     return {}, 204
+
+# @app.get('/api_keys')
+# def get_api_keys():
+#     return {"map_key" : os.environ.get("REACT_APP_API_KEY"),
+#             "fish_key": os.environ.get("REACT_APP_FISH_API_KEY")}, 200
 
 # excluded_endpoints = ['logout', 'lakes_route', 'lakes_by_id',
 #                        'add_fish', 'fish_by_id', 'add_review', 
