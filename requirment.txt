@@ -25,3 +25,5 @@ SQLAlchemy-serializer==1.4.1
 typing_extensions==4.7.1
 Werkzeug==2.3.7
 zipp==3.16.2
+typing-extensions==3.10.0.0
+
