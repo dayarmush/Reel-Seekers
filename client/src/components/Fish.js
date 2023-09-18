@@ -1,6 +1,7 @@
 import '../style/Fish.css'
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+// Dont push build folders
 
 function Fish({ fishes, lakeId, user, setLake }) {
 
