@@ -41,7 +41,7 @@ function NewFish({ setLake, lake }) {
   const [fishError, setFishError] = useState('')
   const [searchResults, setSearchResults] = useState([])
 
-  const fishKey = process.env.REACT_APP_FISH_API_KEY
+  const fishKey = process.env.REACT_APP_FISH_API_KEY || ''
 
   useEffect(() => {
     if (!lake.id) {
