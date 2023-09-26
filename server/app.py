@@ -9,6 +9,7 @@ from server.models.user import User
 from server.models.lake_fish import FishLake
 from dotenv import load_dotenv
 import os
+import requests
 
 load_dotenv()
 
@@ -60,7 +61,7 @@ def signup():
     try:
         user = User(
             username=data.get('username'),
-            # Admin=True
+            Admin=True
         )
 
         user.password_hash = data.get('password')
@@ -364,10 +365,24 @@ def remove_favorite(id):
 
     return {}, 204
 
-# @app.get('/api_keys')
-# def get_api_keys():
-#     return {"map_key" : os.environ.get("REACT_APP_API_KEY"),
-#             "fish_key": os.environ.get("REACT_APP_FISH_API_KEY")}, 200
+@app.get('/fish_search/<string:fish>')
+def search_fish_api(fish):
+
+    URL = f'https://fish-species.p.rapidapi.com/fish_api/fish/{fish}'
+    headers = {
+        'X-RapidAPI-Key': os.environ.get('FISH_API_KEY'),
+		'X-RapidAPI-Host': 'fish-species.p.rapidapi.com'
+    }
+
+    try:
+        r = requests.get(URL, headers=headers)
+        data = r.json()
+        if r.status_code == 200:
+            return {'fish': data}, 200
+        else:
+            return {'err': 'No Fish Found'}, 404
+    except () as e:
+        return {'err': e}, 403
 
 # excluded_endpoints = ['logout', 'lakes_route', 'lakes_by_id',
 #                        'add_fish', 'fish_by_id', 'add_review', 
