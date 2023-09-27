@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   background: #fff;
-  margin: 10px 650px 0;
+  margin: 10px 27.1% 0;
   border-radius: 10px 10px 0 0;
 }
 
@@ -25,7 +25,7 @@
   
 /* Styles for the Input component */
 .address-input {
-  width: 39.5rem; /* Adjust the width to your desired size */
+  width: 39.5rem; 
   padding: 10px;
   border: 3px solid white;
   border-radius: 20px;
@@ -66,3 +66,14 @@
   .list-item:hover {
     background-color: #f7f7f7;
   }
+
+  @media screen and (max-width: 400px) {
+    .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: aquamarine;
+      margin: 10px 650px 0;
+      border-radius: 10px 10px 0 0;
+    }
+}

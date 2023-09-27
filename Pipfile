@@ -15,6 +15,7 @@ faker = "*"
 gunicorn = "*"
 psycopg2 = "*"
 typing-extensions = "*"
+requests = "*"
 
 [dev-packages]
 

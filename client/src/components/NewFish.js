@@ -17,7 +17,7 @@ function NewFish({ setLake, lake }) {
   }
 
   const months = [
-    { value: 0, label: '--Choose Month--'},
+    { value: 0, label: '-- Choose Month --'},
     { value: 1, label: 'January' },
     { value: 2, label: 'February' },
     { value: 3, label: 'March' },
@@ -41,8 +41,6 @@ function NewFish({ setLake, lake }) {
   const [fishError, setFishError] = useState('')
   const [searchResults, setSearchResults] = useState([])
 
-  const fishKey = process.env.REACT_APP_FISH_API_KEY || ''
-
   useEffect(() => {
     if (!lake.id) {
       fetch(`/lakes/${lakeId}`)
@@ -60,25 +58,21 @@ function NewFish({ setLake, lake }) {
   }, [lakeId, setLake, lake.id])
 
   // Search api for for input fish
-  function apiSearch() {
+  async function apiSearch() {
     setError('')
-    fetch(`https://fish-species.p.rapidapi.com/fish_api/fish/${search}`, {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': fishKey,
-		    'X-RapidAPI-Host': 'fish-species.p.rapidapi.com'
-      }
-    })
-    .then(r => {
-      if (r.ok) {
-        r.json()
-        .then(data => setSearchResults(data))
+    setFishError('')
+    try {
+      const response = await fetch(`/fish_search/${search}`)
+      if (response.ok) {
+        const data = await response.json()
+        setSearchResults(data.fish)
       } else {
-        r.json()
-        .then(err => setFishError(err.error.message))
+        const err = await response.json()
+        setFishError(err.err)
       }
-    })
-    .catch(err => setError('Network Error. Please try again later.'))
+    } catch (err) {
+      setFishError('Network Error. Please try again later.')
+    }
   }
 
   // set the selected fish name as name on form
@@ -218,7 +212,7 @@ function NewFish({ setLake, lake }) {
             onChange={(e) => setSearch(e.target.value)}
           />
           <button className="new-fish-search-button" onClick={apiSearch}>Search</button>
-          <Box className="new-fish-results-box">
+          {!fishError && <Box className="new-fish-results-box">
             <List className='new-fish-list'>
               {!error && 
                 searchResults.map(result => {
@@ -231,7 +225,7 @@ function NewFish({ setLake, lake }) {
                 })
               }
             </List>
-          </Box>
+          </Box>}
         </div>
       }
       <div className={hasForm ? 'new-fish-form-container' : null}>

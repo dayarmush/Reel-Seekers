@@ -1,14 +1,12 @@
 /* Styling for the lake card container */
 .lake-card {
-    flex-basis: calc(20% - 200px); /* Adjust the width as per your design, considering 4 cards in a row */
-    flex-grow: 0; /* Prevent cards from growing */
-    flex-shrink: 0; /* Prevent cards from shrinking */
     background-color: #f9f9f9ec;
     border-radius: 8px;
     padding: 20px;
     margin: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 250px;
+    max-width: 180px;
+    min-width: 180px;
     display: flex;
     flex-direction: column;
   }
