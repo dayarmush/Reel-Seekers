@@ -5,8 +5,8 @@
     background-color: #f9f9f9de; /* Set the background color for the entire message board */
     border-radius: 20px;
     border: 5px solid #ccc;
-    width: 35vh;
-    height: 49vh;
+    width: 33vh;
+    height: 49.5vh;
     max-height: 50vh;
     min-width: 95%;
     overflow: scroll;
@@ -43,34 +43,48 @@
 .message p {
     font-size: 20px;
     margin: 0;
+    overflow-wrap: break-word;
 }
   
 .message-form {
     margin-top: auto;
-    padding-top: 0%;
     border-top: 5px solid #ccc;
 }
   
 .message-form input {
-    width: 80%;
-    margin: 0;
+    width: 79%;
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 5px 0px 0px 5px;
-    margin-bottom: 8px;
-    margin-left: 9px;
+    border-radius: 0px 0px 0px 15px;
+    overflow-x: scroll;
 }
   
 .message-form button {
     margin-top: 10px;
-    padding: 8px 10px;
+    padding: 9px 10px;
     background-color: #557ca5;
     color: #fff;
     border: none;
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 0px 15px 0px;
     cursor: pointer;
 }
   
 .message-form button:hover {
     background-color: #0056b3;
-}  
+} 
+
+@media screen and (max-width: 400px) {
+    .message-board {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        background-color: #f9f9f9de; /* Set the background color for the entire message board */
+        border-radius: 20px;
+        border: 5px solid #ccc;
+        width: 60%;
+        height: 49.5vh;
+        max-height: 50vh;
+        min-width: 95%;
+        overflow: scroll;
+    }
+}

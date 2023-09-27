@@ -1,5 +1,5 @@
 .fish-component-container {
-    margin: 10px 0;
+    margin: 10px 10px;
 }
 
 a {
@@ -24,11 +24,24 @@ a {
     background-color: #f9f9f9ec;
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     margin: 10px 0;
+    border: red;
+    max-width: 200px;
+    min-width: 180px;
+    max-height: 500px;
+}
+
+.fish-item-h2 {
+    font-size: 20px;
+}
+
+.fish-item img {
+    min-width: 175px;
+    max-width: 175px;
+    min-height: 175px;
+    max-height: 175px;
 }
   
 .fish-list .fish-item h4 {
@@ -66,4 +79,9 @@ a {
 .fish-component-container button:hover {
     background-color: #0056b3;
 }
-  
+
+@media screen and (max-width: 450px) {
+    #fish-h2 {
+        margin-top: 115%;
+    }
+}

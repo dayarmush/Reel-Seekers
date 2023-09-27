@@ -57,7 +57,7 @@ function Reviews({ reviews, setLake, lakeId, user }) {
 
   return (
     <div className='review-container'>
-      <h2>Reviews</h2>
+      <h2 id='fish-h2'>Reviews</h2>
       <div className='review-card-container'>
         {reviews.map(review => {
         return <div className='review-card' key={review.id}>
