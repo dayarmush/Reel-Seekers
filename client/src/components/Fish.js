@@ -90,12 +90,14 @@ function Fish({ fishes, lakeId, user, setLake }) {
 
   return (
     <div className='fish-component-container'>
-      {approvedFish[0] && <h2 className='fish-h2'>Fish</h2>}
+      {approvedFish[0] && <h2 id='fish-h2'>Fish</h2>}
       <div className={approvedFish[0] ? 'fish-list' : 'fish-list-none'}>
         {fishArray && approvedFish.map(fish => {
           if (fish.fish) {
             return <div key={fish.fish.id} className='fish-item'>
-              <h2><a href={fish.fish.wiki} target="_blank" rel="noopener noreferrer">{fish.fish.name}</a></h2>
+              <h2 class='fish-item-h2'>
+                <a class='fish-item-h2' href={fish.fish.wiki} target="_blank" rel="noopener noreferrer">{fish.fish.name}</a>
+              </h2>
               <h4>Min Length: {fish.fish.min_length !== 0 ? fish.fish.min_length : null}</h4>
               <h4>Max Length: {fish.fish.max_length !== 0 ? fish.fish.max_length : null}</h4>
               <h4>Limit: {fish.fish.daily_limit !== 0 ? fish.fish.daily_limit : null}</h4>
@@ -108,30 +110,33 @@ function Fish({ fishes, lakeId, user, setLake }) {
         })}
       </div>
       
-      {user.Admin && pendingFish[0] && <h2 className='fish-h2'>Pending Fish</h2>}
-      <div className={pendingFish[0] ? 'fish-list' : 'fish-list-none'}>
-        {user.Admin && 
-          pendingFish[0] && pendingFish.map(fish => {
-            if (fish.fish) {
-              return <div key={fish.fish.id} className='fish-item'>
-                <h2><a href={fish.fish.wiki} target="_blank" rel="noopener noreferrer">{fish.fish.name}</a></h2>
-                <h4>Min Length: {fish.fish.min_length !== 0 ? fish.fish.min_length : null}</h4>
-                <h4>Max Length: {fish.fish.max_length !== 0 ? fish.fish.max_length : null}</h4>
-                <h4>Limit: {fish.fish.daily_limit !== 0 ? fish.fish.daily_limit : null}</h4>
-                <h4>Season Start: {months[fish.fish.start_season]}</h4>
-                <h4>Season End: {months[fish.fish.end_season]}</h4>
-                <img src={fish.fish.image} alt={fish.fish.name}></img>
-                <div className='pending-buttons'>
-                  <button onClick={() => handleApprove(fish.fish.id)}>Approve</button>
-                  <button onClick={() => handleDelete(fish.fish.id)}>Delete</button>
-                </div>
-              </div>
-            }
-            return null
-          })
-        }
-      </div>
+      {user.Admin && pendingFish[0] && <h2 id='fish-h2'>Pending Fish</h2>}
       
+        {user.Admin && pendingFish[0] && 
+          <div className={pendingFish[0] ? 'fish-list' : 'fish-list-none'}>
+            {pendingFish.map(fish => {
+              if (fish.fish) {
+                return <div key={fish.fish.id} className='fish-item'>
+                  <h2 class='fish-item-h2'>
+                    <a class='fish-item-h2' href={fish.fish.wiki} target="_blank" rel="noopener noreferrer">{fish.fish.name}</a>
+                  </h2>
+                  <h4>Min Length: {fish.fish.min_length !== 0 ? fish.fish.min_length : null}</h4>
+                  <h4>Max Length: {fish.fish.max_length !== 0 ? fish.fish.max_length : null}</h4>
+                  <h4>Limit: {fish.fish.daily_limit !== 0 ? fish.fish.daily_limit : null}</h4>
+                  <h4>Season Start: {months[fish.fish.start_season]}</h4>
+                  <h4>Season End: {months[fish.fish.end_season]}</h4>
+                  <img src={fish.fish.image} alt={fish.fish.name}></img>
+                  <div className='pending-buttons'>
+                    <button onClick={() => handleApprove(fish.fish.id)}>Approve</button>
+                    <button onClick={() => handleDelete(fish.fish.id)}>Delete</button>
+                  </div>
+                </div>
+              }
+              return null
+            })}
+         </div> 
+        }
+        
       {error && <h2>{error}</h2>}
       {user.id && <button onClick={() => navigate(`/new/fish/${lakeId}`)}>Add Fish</button>}
     </div>

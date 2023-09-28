@@ -1,6 +1,6 @@
 .review-card-container {
     display: flex;
-    margin: 0;
+    margin: 10px;
     gap: 10px;
     overflow-x: scroll;
 }
@@ -52,7 +52,6 @@
     margin-top: 20px;
     padding: 10px;
     background-color: #f9f9f9ba;
-    width: 30%;
     border-radius: 20px;
 }
 

@@ -1,51 +1,47 @@
 .lake-details {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-    margin-bottom: 5rem;
-  }
-  
-  .lake-details h2 {
-    font-size: 5rem;
-    margin: 0;
-    color: #333;
-    align-self: center;
-  }
-  
-  .lake-details h3 {
-    font-size: 3rem;
-    margin: 0;
-    color: #555;
-    align-self: center;
-  }
-  
-  .lake-details h4 {
-    padding-top: 2px;
-    font-size: 2rem;
-    margin: 0;
-    color: #777;
-    align-self: center;
-    margin-bottom: 5px;
-  }
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-bottom: 5rem;
+}
 
-  .favorite-container {
-    top: 1.5rem; /* Adjust the top position as per your desired vertical distance */
-    right: 15px;
-    position: absolute;
-  }
-  
-  .lake-details h1 {
-    font-size: 48px;
-    margin: 0;
-    color: #ff0000;
-    align-self: center;
-  }
+.lake-details h2 {
+  font-size: 5rem;
+  margin: 0;
+  color: #333;
+  align-self: center;
+}
 
-.center-container {
+.lake-details h3 {
+  font-size: 3rem;
+  margin: 0;
+  color: #555;
+  align-self: center;
+}
+
+.lake-details h4 {
+  padding-top: 2px;
+  font-size: 2rem;
+  margin: 0;
+  color: #777;
+  align-self: center;
   margin-bottom: 5px;
+}
+
+.favorite-container {
+  top: 1.5rem; /* Adjust the top position as per your desired vertical distance */
+  right: 15px;
+  position: absolute;
+}
+
+.lake-details h1 {
+  font-size: 48px;
+  margin: 0;
+  color: #ff0000;
+  align-self: center;
 }
   
 .lake-search-container {
@@ -57,18 +53,13 @@
 }
 
 .lake-map-container {
-  width: 96%;
+  width: 93%;
   position: relative;
+  padding: 10px;
 }
-
-.lake-map-container p{
-  color: #f9f9f9;
-}
-
 
 .lake-map {
   margin-top: 5rem;
-  /* margin-left: 20px; */
   width: 80%;
   max-width: 80%;
   height: 50vh;
@@ -88,11 +79,8 @@
   top: 17.5rem;
 }
 
-/* .fish-component-container {
-  margin-left: 20px;
-} */
-
-div .fish-component-container h2 {
+#fish-h2 {
+  padding-left: 10px;
   font-size: 50px;
   color: #557ca5;
   margin-bottom: 5px;
@@ -100,8 +88,6 @@ div .fish-component-container h2 {
 
 div .fish-list h2 {
   font-size: 30px;
-  color: #333;
-  margin-bottom: 5px;
 }
 
 .review-container h2 {
@@ -111,8 +97,16 @@ div .fish-list h2 {
   border-bottom: 3px solid #557ca5;
 }
 
-/* .map-messages {
-  border-top: 3px solid orange;
-  display: flex;
-  flex-direction: row;
-} */
+@media screen and (max-width: 400px) {
+
+  .message-container {
+    left: 10px;
+    top: 45rem;
+  }
+
+  .lake-map-container {
+    width: 100%;
+  }
+
+
+}

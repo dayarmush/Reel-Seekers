@@ -48,7 +48,7 @@ function App() {
     })
   }, [])
 
-  let key = process.env.REACT_APP_API_KEY || ''
+  let key = process.env.REACT_APP_API_KEY
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: key,

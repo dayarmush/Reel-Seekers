@@ -1,12 +1,12 @@
 /* Style for the form container */
 .signup-form-container {
-    max-width: 500px;
-    margin: 400px auto 30px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9ec;
-  }
+  max-width: 500px;
+  margin: 210px auto 30px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9ec;
+}
   
   /* Style for form labels */
   .signup-form-label {
@@ -26,7 +26,7 @@
   /* Style for the submit button */
   .signup-form-button {
     display: block;
-    padding: 11px 20px;
+    padding: 10px;
     background-color: #557ca5;
     color: #fff;
     border: none;

@@ -1,6 +1,6 @@
-from server.config import Flask, session, db, request, render_template, Migrate, IntegrityError
+from config import Flask, session, db, request, render_template, Migrate, IntegrityError
 from server.models.favorite import Favorite
-# from models.edit import Edit
+# from server.models.edit import Edit
 from server.models.fish import Fish
 from server.models.lake import Lake
 from server.models.message import Message
