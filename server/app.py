@@ -1,12 +1,12 @@
 from config import Flask, session, db, request, render_template, Migrate, IntegrityError
-from models.favorite import Favorite
-# from models.edit import Edit
-from models.fish import Fish
-from models.lake import Lake
-from models.message import Message
-from models.review import Review
-from models.user import User
-from models.lake_fish import FishLake
+from server.models.favorite import Favorite
+# from server.models.edit import Edit
+from server.models.fish import Fish
+from server.models.lake import Lake
+from server.models.message import Message
+from server.models.review import Review
+from server.models.user import User
+from server.models.lake_fish import FishLake
 from dotenv import load_dotenv
 import os
 import requests
