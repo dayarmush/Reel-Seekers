@@ -44,7 +44,7 @@
   list-style: none;
   padding: 0;
   margin-top: 50px;
-  width: 40rem; /* Make the list items fill the available width */
+  width: 40.8rem; /* Make the list items fill the available width */
   position: absolute;
   z-index: 1; /* Set a higher z-index to make sure the results display above other content */
   background-color: #fff; /* Set the background color to white */
