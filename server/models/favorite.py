@@ -1,4 +1,4 @@
-from server.config import db, SM
+from config import db, SM
 
 class Favorite(db.Model, SM):
     __tablename__ = 'favorites'

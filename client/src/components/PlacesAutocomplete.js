@@ -24,7 +24,7 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter }) => {
   }
 
   return (
-    <Box className={value ? 'box' : 'no-back'}>
+    <Box className='no-back'>
       <Input
         value={value}
         onChange={(e => setValue(e.target.value))} 
@@ -32,7 +32,7 @@ const PlacesAutocomplete = ({ from, func, setSearchCenter }) => {
         placeholder='🎣 Search Address' 
         className='address-input'
       />
-      <List className='address-list'>
+      <List id='address-list'>
         {status === 'OK' && 
           data.map(({place_id, description}) => {
             return (

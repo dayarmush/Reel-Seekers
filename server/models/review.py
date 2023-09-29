@@ -1,4 +1,4 @@
-from server.config import db, SM, validates
+from config import db, SM, validates
 
 class Review(db.Model, SM):
     __tablename__ = 'reviews'

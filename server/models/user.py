@@ -1,4 +1,4 @@
-from server.config import db, Bcrypt, SM, validates
+from config import db, Bcrypt, SM, validates
 from sqlalchemy.ext.hybrid import hybrid_property
 
 bcrypt = Bcrypt()
